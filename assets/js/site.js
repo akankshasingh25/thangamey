@@ -208,6 +208,22 @@
     return C.dressCodeIsOptional ? "Optional dress code" : "Dress code";
   }
 
+  /* An optional sign-up sheet bolted onto one event — the Sangeet song list.
+     Any event with a `sheet` block in config.js gets one; the rest get
+     nothing, so this is safe to leave switched on for all four. */
+  function evSheet(e) {
+    var s = e.sheet || {};
+    var url = String(s.url || "");
+    if (!url || url.indexOf("\u00ab") > -1) return "";
+    return '<div class="ev-sheet">' +
+      (s.heading ? "<h3>" + todo(s.heading) + "</h3>" : "") +
+      (s.text ? "<p>" + todo(s.text) + "</p>" : "") +
+      '<a class="btn btn--gold" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+        esc(s.label || "Open the sheet") + "</a>" +
+      (s.note ? '<p class="ev-sheet__note">' + todo(s.note) + "</p>" : "") +
+      "</div>";
+  }
+
   function eventPanels() {
     var box = qs("#event-panels");
     if (!box) return;
@@ -253,6 +269,7 @@
               "</dd></div>" +
               "<div><dt>" + dressLabel() + "</dt><dd>" + esc(e.dress) + "</dd></div>" +
             "</dl>" +
+            evSheet(e) +
             (e.photo
               ? '<figure class="painted-from">' +
                   '<img src="' + esc(e.photo) + '" alt="' + esc(e.photoPlace || "") +

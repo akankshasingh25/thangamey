@@ -132,6 +132,29 @@ window.WEDDING = {
       mapUrl: "https://maps.google.com/?q=Fortune+Beachfront+Puri",
       note:
         "Performances are welcome, encouraged, and gently capped at five minutes. We love you. Five minutes.",
+      /* ---- An optional sign-up sheet, shown inside this event's panel ----
+         Any event can have one: give it a `sheet` block like this and it
+         appears; delete the block and it disappears. This points at the
+         Sangeet tab of the same workbook the gift registry lives in — the
+         #gid is what opens it on that tab rather than on the registry.
+
+         IMPORTANT: the workbook is currently shared "anyone with the link
+         can VIEW", so guests can read the song list but cannot add to it.
+         To let them add rows, open it in Sheets -> Share -> Anyone with
+         the link -> Editor. That makes the gift registry tab editable by
+         anyone too, so keep a copy if that worries you.                  */
+      sheet: {
+        url: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?usp=sharing#gid=393904024",
+        heading: "Pick a song, add your name",
+        text:
+          "The running order lives in a spreadsheet. Add a song, put your name in the " +
+          "last column, and drop in one or two choreography links. No song twice \u2014 if " +
+          "yours is already there, add your name to that row and dance together.",
+        label: "Open the Sang-it sheet",
+        note:
+          "Rate each choreography out of 5 for an absolute beginner, 1 easy and 5 hard, " +
+          "so we can pick the one everybody learns together.",
+      },
     },
     {
       slug: "haldi",

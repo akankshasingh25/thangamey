@@ -325,6 +325,18 @@ anywhere.
 | Mission one, the photographs | A Google Form → **one Drive folder per prompt** | `collect.photos` |
 | Mission two, the scores | A Google Form → Sheet | `collect.quiz` |
 | The gift registry | A Google Sheet people read | `gifts.sheetUrl` |
+| The Sang-it song list | The same workbook, Sangeet tab, people **write** to | `events[].sheet` |
+
+The song list is the one thing guests are meant to type into rather than read,
+so the workbook has to be shared **"anyone with the link can edit"**, not view.
+That makes the gift registry tab editable by anyone too — it's the same file —
+so keep a duplicate of the registry somewhere if that bothers you. The `#gid=`
+on the end of the URL is what opens it on the Sangeet tab instead of the first
+one; it is not optional.
+
+Any event can carry a sheet. Give it a `sheet` block in `data/config.js` —
+`url`, `heading`, `text`, `label`, `note` — and a panel appears inside that
+event, under the when/where/dress facts. Delete the block and it's gone.
 
 **[GOOGLE-SETUP.md](GOOGLE-SETUP.md) has the questions to put in each form, in
 order, with the settings that matter.** It takes about twenty minutes.
