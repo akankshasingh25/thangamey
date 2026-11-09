@@ -390,13 +390,24 @@ serving it over http is closer to the real thing.
   Delete it if you disagree.
 - **Dark mode** follows the reader's system setting, on every page.
 - **Works without JavaScript**, degraded: backdrops fall back to flat colour and
-  the forms post normally instead of in-place.
+  the forms post normally instead of in-place. The story carousel is the one
+  thing that needs it — it's built from `story.photos`, so with scripting off
+  the text simply takes the full width and no photographs appear.
+- **The story carousel** is a scroll-snap track: a swipe is the browser's own
+  scrolling, the arrows and dots only scroll it, and it wraps at both ends.
+  Photographs keep their own shape against a blurred copy of themselves rather
+  than being cropped to a common ratio. Add or reorder them in `story.photos`
+  and everything else follows. Put the files in `assets/photos/story/` at about
+  1400px on the long side; they were stripped of their camera metadata on the
+  way in, which is worth repeating for any you add, since the repo is public.
 
 ### About the weight
 
-The site is about **21 MB**, and 19 MB of that is `save-the-date.mp4`. The video
+The site is about **22 MB**, and 19 MB of that is `save-the-date.mp4`. The video
 is set to `preload="none"`, so it costs a visitor nothing until they press play —
-the page itself is roughly 700 KB, and most of that is lazy-loaded artwork.
+the home page itself is roughly 1 MB, and most of that is lazy-loaded artwork:
+only the first carousel photograph is fetched up front, the other four wait
+until you scroll to them.
 
 If you want it lighter, re-encode the video (30 seconds at 1080×1920 should
 compress to 4–6 MB without visible loss) or host it on YouTube/Vimeo and embed it.

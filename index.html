@@ -58,11 +58,18 @@
 
   <!-- ---------- the story ---------- -->
   <section class="section shell">
-    <div class="section__head">
-      <p class="eyebrow">Us, apparently</p>
-      <h2 data-cfg="story.heading"></h2>
+    <div class="split">
+      <div>
+        <div class="section__head section__head--tight">
+          <p class="eyebrow">Us, apparently</p>
+          <h2 data-cfg="story.heading"></h2>
+        </div>
+        <div id="story-body" class="lede"></div>
+      </div>
+      <!-- Filled from story.photos in data/config.js. Stays hidden if the
+           list is empty, so the text just takes the full width again. -->
+      <div class="carousel" id="story-photos" hidden></div>
     </div>
-    <div id="story-body" class="lede"></div>
   </section>
 
   <!-- ---------- the logo, and where it came from ---------- -->

@@ -428,6 +428,102 @@
     }).join("");
   }
 
+  /* The carousel beside the story. One horizontal scroller with snap points,
+     so a swipe on a phone is the browser's own scroll — no drag handling, no
+     library. The arrows and dots just scroll it, which keeps the two input
+     methods from ever disagreeing about which photo is showing. */
+  function storyPhotos() {
+    var box = qs("#story-photos");
+    if (!box) return;
+
+    var shots = (((C.story || {}).photos) || []).filter(function (p) {
+      return p && p.src && p.src.indexOf("\u00ab") < 0;
+    });
+    if (!shots.length) return;            /* stays hidden, text goes full width */
+    box.hidden = false;
+
+    box.setAttribute("aria-roledescription", "carousel");
+    box.setAttribute("aria-label", "Photographs of us");
+    box.innerHTML =
+      '<ul class="carousel__track" id="story-track" tabindex="0" ' +
+          'aria-label="Photographs of us, ' + shots.length + ' in all. Use the arrow keys.">' +
+        shots.map(function (p, i) {
+          return '<li class="slide" aria-label="' + (i + 1) + " of " + shots.length + '">' +
+            /* A blurred copy of the same file fills the frame behind the
+               photo. Same URL, so the browser fetches it once. */
+            '<span class="slide__back" style="background-image:url(&quot;' + esc(p.src) + '&quot;)"></span>' +
+            '<img src="' + esc(p.src) + '" alt="' + esc(p.alt || "") + '"' +
+              (i ? ' loading="lazy"' : "") + ' decoding="async">' +
+          "</li>";
+        }).join("") +
+      "</ul>" +
+      '<button class="carousel__btn carousel__btn--prev" type="button" aria-label="Previous photograph">' +
+        '<span aria-hidden="true">\u2039</span></button>' +
+      '<button class="carousel__btn carousel__btn--next" type="button" aria-label="Next photograph">' +
+        '<span aria-hidden="true">\u203a</span></button>' +
+      '<div class="carousel__dots">' +
+        shots.map(function (p, i) {
+          return '<button class="carousel__dot" type="button" data-go="' + i + '" ' +
+            'aria-label="Photograph ' + (i + 1) + '"></button>';
+        }).join("") +
+      "</div>";
+
+    var track = qs("#story-track", box);
+    var dots = qsa(".carousel__dot", box);
+    var smooth = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto" : "smooth";
+
+    function index() {
+      /* Round rather than floor: half a slide past the line counts as there. */
+      var w = track.clientWidth || 1;
+      return Math.max(0, Math.min(shots.length - 1, Math.round(track.scrollLeft / w)));
+    }
+
+    /* Where the arrows think we are. A smooth scroll takes a few hundred
+       milliseconds, and scrollLeft lies for all of them, so two quick taps
+       on the arrow would otherwise both read "slide 0" and the second would
+       go nowhere. This is updated the instant you click. */
+    var want = 0;
+
+    function go(i) {
+      want = (i + shots.length) % shots.length;   /* wrap: no dead ends */
+      track.scrollTo({ left: want * track.clientWidth, behavior: smooth });
+    }
+    function sync() {
+      var at = index();
+      dots.forEach(function (d, i) {
+        d.setAttribute("aria-current", i === at ? "true" : "false");
+      });
+    }
+
+    /* `want` only catches up once the scrolling has actually stopped — during
+       a smooth scroll the events keep arriving and keep pushing this back, so
+       an in-flight animation can't reset the arrows to where they started.
+       A swipe settles the same way, so a finger and the arrows stay agreed. */
+    var settle;
+    function settled() {
+      clearTimeout(settle);
+      settle = setTimeout(function () { want = index(); }, 140);
+    }
+
+    qs(".carousel__btn--prev", box).addEventListener("click", function () { go(want - 1); });
+    qs(".carousel__btn--next", box).addEventListener("click", function () { go(want + 1); });
+    dots.forEach(function (d) {
+      d.addEventListener("click", function () { go(+d.getAttribute("data-go")); });
+    });
+
+    /* One rAF, not one handler call per scroll event. */
+    var queued = false;
+    track.addEventListener("scroll", function () {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () { queued = false; sync(); });
+      settled();
+    }, { passive: true });
+    window.addEventListener("resize", sync);
+    sync();
+  }
+
   /* ---------- 7b. logo + save the date ---------- */
   function media() {
     var M = C.media || {};
@@ -974,6 +1070,7 @@
     travel();
     sustain();
     story();
+    storyPhotos();
     media();
     if (gameGate()) missions();
     wireForms();

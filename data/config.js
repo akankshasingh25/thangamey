@@ -492,6 +492,27 @@ window.WEDDING = {
     paragraphs: [
       "Depends on who is asking. Maybe ask us at the wedding and we will let you know",
     ],
+    /* The carousel beside the story. Add, remove or reorder freely — the
+       arrows and dots follow this list, and if you empty it the carousel
+       disappears and the text goes back to full width.
+
+       Drop new files in assets/photos/story/. Anything portrait and about
+       1400px tall is right; the frame letterboxes whatever shape you give
+       it against a blurred copy of itself, so nothing gets its head cut
+       off. `alt` is read aloud to anyone using a screen reader, and shows
+       if the photo fails to load — describe it, don't label it.          */
+    photos: [
+      { src: "assets/photos/story/01.jpg",
+        alt: "The two of us running a marathon hand in hand, race bibs pinned on, both grinning" },
+      { src: "assets/photos/story/02.jpg",
+        alt: "Under festoon lights in a garden at night, leaning into each other" },
+      { src: "assets/photos/story/03.jpg",
+        alt: "Dressed up by a river with hills behind — one in a turban and cream kurta, one in a yellow saree" },
+      { src: "assets/photos/story/04.jpg",
+        alt: "At a concert, song lyrics lit up on the screen behind the crowd" },
+      { src: "assets/photos/story/05.jpg",
+        alt: "A hug in a plant-filled café courtyard, both in off-white" },
+    ],
   },
 
   /* ---------- FORM BACKEND ----------

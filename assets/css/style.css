@@ -581,6 +581,71 @@ mark.todo{
 .logo-src{ width:min(40%,9rem); height:auto; border-radius:10px; box-shadow:var(--shadow); }
 .media-block--logo{ direction:ltr; }
 
+/* Text one side, something to look at on the other. Same shape as
+   .media-block, kept separate so its paragraph rules stay out of the way. */
+.split{
+  display:grid; gap:clamp(1.5rem,4vw,3rem); align-items:center;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));
+}
+.section__head--tight{ margin-bottom:1rem; }
+
+/* =============================================================
+   14b. CAROUSEL
+   A scroll-snap track: swiping is the browser's own scrolling, and the
+   arrows and dots only ever scroll it, so touch and clicks can't end up
+   disagreeing about which photograph is showing.
+   ============================================================= */
+.carousel{ position:relative; width:min(100%,23rem); justify-self:center; }
+.carousel__track{
+  display:flex; margin:0; padding:0; list-style:none;
+  overflow-x:auto; overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+  border-radius:var(--radius); box-shadow:var(--shadow); background:var(--ink);
+  scrollbar-width:none;
+}
+.carousel__track::-webkit-scrollbar{ display:none; }
+.carousel__track:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
+
+.slide{
+  position:relative; flex:0 0 100%; aspect-ratio:2/3;
+  scroll-snap-align:center; scroll-snap-stop:always; overflow:hidden;
+}
+/* The photographs are all different shapes. Rather than crop heads off to
+   force one ratio, each sits whole against a blurred copy of itself. */
+.slide__back{
+  position:absolute; inset:0; background-size:cover; background-position:center;
+  filter:blur(22px) saturate(.75) brightness(.5); transform:scale(1.2);
+}
+.slide img{
+  position:relative; display:block; width:100%; height:100%; object-fit:contain;
+}
+
+.carousel__btn{
+  position:absolute; top:50%; translate:0 -50%; z-index:2;
+  width:2.3rem; height:2.3rem; border-radius:50%; cursor:pointer;
+  border:1px solid rgba(255,255,255,.3); background:rgba(8,15,33,.55);
+  color:#fff; font-size:1.4rem; line-height:1; padding:0;
+  display:grid; place-items:center; backdrop-filter:blur(4px);
+  transition:background .14s, transform .14s;
+}
+.carousel__btn:hover{ background:rgba(8,15,33,.8); }
+.carousel__btn:active{ transform:translateY(-50%) scale(.94); }
+.carousel__btn--prev{ left:.55rem; }
+.carousel__btn--next{ right:.55rem; }
+.carousel__btn span{ display:block; margin-top:-.15em; }
+
+.carousel__dots{ display:flex; gap:.45rem; justify-content:center; margin-top:.8rem; }
+.carousel__dot{
+  width:.5rem; height:.5rem; padding:0; border-radius:50%; cursor:pointer;
+  border:1px solid var(--gold-deep); background:transparent;
+  transition:background .14s, transform .14s;
+}
+.carousel__dot[aria-current="true"]{ background:var(--gold-deep); transform:scale(1.25); }
+
+@media (prefers-reduced-motion: reduce){
+  .carousel__btn, .carousel__dot{ transition:none; }
+}
+
 .brand__logo{ width:1.75rem; height:auto; flex:none; align-self:center; }
 .brand{ align-items:center; }
 
