@@ -741,20 +741,6 @@
     });
   }
 
-  /* The to-do list stands apart from the gate: it is there before the
-     missions open and still there while they are, because it is the only
-     part of this page that is any use in advance. */
-  function missionTodos() {
-    var sec = qs("#todos");
-    var list = qs("#todo-list");
-    if (!sec || !list) return;
-    var items = (((C.games || {}).todos) || {}).items || [];
-    items = items.filter(function (t) { return t; });
-    if (!items.length) return;
-    list.innerHTML = items.map(function (t) { return "<li>" + todo(t) + "</li>"; }).join("");
-    sec.hidden = false;
-  }
-
   function missions() {
     var G = C.games || {};
     var cards = qs("#mission-cards");
@@ -992,7 +978,6 @@
     storyPhotos();
     media();
     if (gameGate()) missions();
-    missionTodos();
     wireForms();
     paintAll(document);
   }

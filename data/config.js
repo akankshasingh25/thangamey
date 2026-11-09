@@ -399,10 +399,10 @@ window.WEDDING = {
       "Both are open NOW. We didn't tell you this before but there is an actual prize for the winners.",
 
     /* ---- Your TO-DOs ----
-       Shown whether or not the missions are open, and the only thing on
-       the page that hints at what they are. Keep them oblique: each line
-       should be useful on its own and only make sense in hindsight.
-       Empty the list and the whole section disappears. */
+       NOT SHOWN ANYWHERE at the moment. It was built onto the missions
+       page and taken off again — the home page is where it belongs. Say
+       where it should sit there and it can go back up; nothing renders
+       `todos` until it does. */
     todos: {
       heading: "Your TO-DOs",
       intro:
