@@ -420,6 +420,12 @@ serving it over http is closer to the real thing.
   bottom of the events page. `class="snap"` on `<html>` and `.snap-s` on
   each section do it; the footer rides along at the end of the last screen
   rather than being a fifth stop of its own.
+- **The events page snaps too.** The painted title band is gone; the page
+  opens on the jump bar and gives each party a full screen. Everything in
+  a snapped panel is trimmed a little — the painting is sized from the
+  window, the "painted from" thumbnail shrinks, the Sang-it sheet tightens
+  — so all four come out the same height. If you add a sign-up sheet to
+  another event, check that panel still fits on a laptop.
 - **Snapping only switches on above 900px wide and 680px tall.** Below that
   it is an ordinary scrolling page, because a snapped section taller than
   the window strands whatever doesn't fit. If you add much to a section,

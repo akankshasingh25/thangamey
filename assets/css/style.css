@@ -742,6 +742,34 @@ mark.todo{
   /* A painted band brings its own generous padding. Inside a snapped
      screen the section supplies that, and both together overflow it. */
   html.snap .snap-s > .sky__in{ padding-block:0; }
+  /* On the events page a sticky jump bar sits under the header, so a
+     panel's content needs to clear both of them. The panels are the one
+     place where the content is fixed and tall — the painting, the facts
+     and the photograph it was painted from — so the painting is sized
+     from the window as well, the way the trio is. */
+  html.snap .ev-panel{ --portrait: min(20rem, calc(66svh * 9 / 16)); }
+  /* The header is 60px and the jump bar sits under it; the panel's own
+     padding clears both, so the 110px scroll-margin that pushes an
+     anchored panel clear of them would double up here — and, because a
+     snap point honours scroll-margin too, it would park every panel
+     110px down the screen and hide its last line. */
+  html.snap .ev-panel.snap-s{ padding-block:7.4rem 1.5rem; scroll-margin-top:0; }
+  html.snap .ev-panel .painted-from img{ width:3rem; }
+  html.snap .ev-panel .painted-from{ margin-top:.9rem; padding-top:.8rem; font-size:.78rem; }
+  html.snap .ev-panel .painted-from span{ margin-top:.15rem; }
+  html.snap .ev-panel__note{ font-size:1rem; margin-bottom:.2rem; }
+  html.snap .ev-panel .ev-facts{ margin-top:1rem; gap:.7rem 1.4rem; }
+  html.snap .ev-panel .ev-facts div{ padding-top:.55rem; }
+
+  /* Only the Sang-it panel carries a sign-up sheet, and at full size it
+     pushes that panel past one screen. Everything in a snapped panel is
+     trimmed a little so all four come out the same height. */
+  html.snap .ev-panel__logo{ width:min(100%,14rem); margin-bottom:.7rem; }
+  html.snap .ev-sheet{ margin-top:.9rem; padding:.8rem 1rem; }
+  html.snap .ev-sheet h3{ font-size:1rem; margin-bottom:.25rem; }
+  html.snap .ev-sheet p{ font-size:.88rem; margin-bottom:.7rem; }
+  html.snap .ev-sheet__note{ font-size:.78rem; margin-top:.55rem !important; }
+
   /* The footer is the tail of the last screen rather than a stop of its
      own — on its own it would be four lines in an empty window. */
   html.snap .site-foot{ scroll-snap-align:end; }

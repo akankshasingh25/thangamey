@@ -238,7 +238,7 @@
     }
 
     (C.events || []).forEach(function (e, i) {
-      var s2 = el("section", "sky sky--scrim ev-panel");
+      var s2 = el("section", "sky sky--scrim ev-panel snap-s");
       s2.id = slugOf(e);
       s2.setAttribute("data-sky", e.sky);
       s2.setAttribute("data-painted", "1");
