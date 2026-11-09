@@ -778,20 +778,23 @@ mark.todo{
 /* =============================================================
    15. GIFT REGISTRY
    ============================================================= */
-.gift-list{ list-style:none; margin:0; padding:0; max-width:44rem;
-            border-top:1px solid var(--rule); }
-.gift{
-  display:grid; gap:.1rem 1.2rem; padding:1rem 0;
-  grid-template-columns:1fr auto; align-items:baseline;
-  border-bottom:1px solid var(--rule);
-}
+/* A bulleted list rather than a ruled table: fourteen rows of mostly
+   gift cards read better as something you scan than as a ledger. */
+.gift-list{ list-style:disc; margin:0; padding-left:1.3rem; max-width:44rem; }
+/* display:list-item, not grid — a grid item is no longer a list item and
+   loses its bullet, which was the whole point. */
+.gift{ display:list-item; padding:.45rem 0; }
+.gift::marker{ color:var(--gold-deep); }
 .gift__name{ font-weight:700; font-size:1.05rem; }
 .gift__name a{ font-weight:600; font-size:.85rem; margin-left:.5rem; color:var(--gold-deep); }
-.gift__brand{ display:block; font-weight:400; font-size:.85rem; color:var(--fg-soft);
+/* Inline beside the name now — on its own line every bullet was three
+   deep and the list stopped looking like a list. */
+.gift__brand{ font-weight:400; font-size:.85rem; color:var(--fg-soft);
               letter-spacing:.02em; }
+.gift__brand::before{ content:" · "; }
 .gift__price{ font-variant-numeric:tabular-nums; color:var(--fg-soft);
-              font-weight:600; white-space:nowrap; }
-.gift__note{ grid-column:1/-1; color:var(--fg-soft); font-size:.92rem; margin-top:.15rem; }
+              font-weight:600; white-space:nowrap; margin-left:.5rem; }
+.gift__note{ display:block; color:var(--fg-soft); font-size:.92rem; margin-top:.15rem; }
 
 .brand-list{ list-style:none; margin:0; padding:0; display:flex; gap:.6rem; flex-wrap:wrap; }
 .brand-chip{
