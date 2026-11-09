@@ -560,10 +560,11 @@ window.WEDDING = {
 
        Drop new files in assets/photos/story/. The frame is 9:16, the shape
        a phone shoots in; anything portrait and about 1400px tall is right.
-       Whatever shape you give it sits whole against a blurred copy of
-       itself, so nothing gets its head cut off. `alt` is read aloud to
-       anyone using a screen reader, and shows if the photo fails to load —
-       describe it, don't label it.                                        */
+       A photo that isn't 9:16 is cropped at the sides to fit — `focus:
+       "60% center"` on it moves which part survives, and `fit: "contain"`
+       keeps one whole against a blurred copy of itself if it can't take a
+       crop at all. `alt` is read aloud to anyone using a screen reader, and
+       shows if the photo fails to load — describe it, don't label it.     */
     /* How long each photograph holds before the next one slides in, in
        milliseconds. Set it to 0 to switch the rotation off and leave the
        arrows and dots to do the work. It pauses while the pointer is over
@@ -573,7 +574,7 @@ window.WEDDING = {
     rotateEvery: 5000,
     photos: [
       { src: "assets/photos/story/01.jpg",
-        alt: "The two of us running a marathon hand in hand, race bibs pinned on, both grinning" },
+        alt: "Running a race hand in hand on a grey morning, numbers pinned on, both laughing" },
       { src: "assets/photos/story/02.jpg",
         alt: "Under festoon lights in a garden at night, leaning into each other" },
       { src: "assets/photos/story/03.jpg",

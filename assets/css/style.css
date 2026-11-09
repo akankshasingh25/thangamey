@@ -32,6 +32,10 @@
   --script:  "Noto Sans Tamil", "Tamil MN", "Tamil Sangam MN", var(--body);
 
   --measure: 34rem;
+  /* Every tall 9:16-ish block — the invitation postcards, the story
+     carousel, the save-the-date film — is this wide, so they read as one
+     family of objects rather than three different sizes. */
+  --portrait: 20rem;
   --gutter:  clamp(1.15rem, 4vw, 3rem);
   --shell:   72rem;
   --radius:  14px;
@@ -202,7 +206,6 @@ p{ margin:0 0 1.1em; }
 
 /* ---------- 7. SECTIONS & CARDS ---------- */
 .section{ padding-block:clamp(3.2rem,7vw,5.5rem); }
-.section--rule{ border-top:1px solid var(--rule); }
 .section__head{ max-width:var(--measure); margin-bottom:2.5rem; }
 
 .grid{ display:grid; gap:1.15rem; }
@@ -361,7 +364,6 @@ mark.todo{
   box-shadow:0 0 0 1.5px currentColor inset;
 }
 
-
 /* ---------- hero ---------- */
 .hero__names{
   width:min(100%,34rem); margin:0 auto .4rem; height:auto;
@@ -432,7 +434,6 @@ mark.todo{
   .sky--scrim::before{ background:linear-gradient(to top, var(--s-scrim), var(--s-scrim) 42%, transparent 92%); }
 }
 
-
 .feed-empty{ color:var(--fg-soft); font-style:italic; max-width:var(--measure); }
 
 /* =============================================================
@@ -441,6 +442,9 @@ mark.todo{
    at its own proportions, rather than cropped into a banner.
    ============================================================= */
 .postcard{ margin:0; }
+/* The hero's postcard sets its own width; every other one matches the
+   carousel and the film. */
+.postcard:not(.postcard--hero){ width:min(100%,var(--portrait)); margin-inline:auto; }
 .postcard img{
   /* No forced aspect-ratio: the paintings and the save-the-date card are not
      quite the same shape, and cropping either of them to match would be a
@@ -472,7 +476,7 @@ mark.todo{
    swapping sides each time so four in a row has a rhythm rather than a
    column of identical slabs. */
 .ev-panel .sky__in{
-  grid-template-columns:minmax(0,20rem) minmax(0,1fr);
+  grid-template-columns:minmax(0,var(--portrait)) minmax(0,1fr);
   align-items:center; gap:clamp(1.8rem,4.5vw,4rem);
 }
 .ev-panel--flip .sky__in{ grid-template-columns:minmax(0,1fr) minmax(0,20rem); }
@@ -571,7 +575,7 @@ mark.todo{
 .media-block p{ margin-bottom:0; color:var(--fg-soft); max-width:var(--measure); }
 
 .std{
-  display:block; width:min(100%,17rem); height:auto; border-radius:14px;
+  display:block; width:min(100%,var(--portrait)); height:auto; border-radius:14px;
   aspect-ratio:1080/1920; background:var(--ink); object-fit:cover;
   box-shadow:var(--shadow); justify-self:center;
 }
@@ -620,7 +624,7 @@ mark.todo{
    arrows and dots only ever scroll it, so touch and clicks can't end up
    disagreeing about which photograph is showing.
    ============================================================= */
-.carousel{ position:relative; width:min(100%,23rem); justify-self:center; }
+.carousel{ position:relative; width:min(100%,var(--portrait)); justify-self:center; }
 .carousel__track{
   display:flex; margin:0; padding:0; list-style:none;
   overflow-x:auto; overscroll-behavior-x:contain;
@@ -668,17 +672,6 @@ mark.todo{
   transition:background .14s, transform .14s;
 }
 .carousel__dot[aria-current="true"]{ background:var(--gold-deep); transform:scale(1.25); }
-
-/* Stop/start for the rotation. Small, because it is a courtesy rather than
-   the main control — but a real button, so a keyboard can reach it. */
-.carousel__play{
-  margin-left:.5rem; width:1.35rem; height:1.35rem; padding:0; cursor:pointer;
-  display:grid; place-items:center; border-radius:50%;
-  border:1px solid var(--rule); background:transparent;
-  color:var(--fg-soft); font-size:.6rem; line-height:1;
-  transition:color .14s, border-color .14s;
-}
-.carousel__play:hover{ color:var(--fg); border-color:var(--gold-deep); }
 
 @media (prefers-reduced-motion: reduce){
   .carousel__btn, .carousel__dot{ transition:none; }

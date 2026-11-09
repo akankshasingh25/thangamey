@@ -516,10 +516,6 @@
           return '<button class="carousel__dot" type="button" data-go="' + i + '" ' +
             'aria-label="Photograph ' + (i + 1) + '"></button>';
         }).join("") +
-        /* Anything that moves on its own needs a way to stop it — this is the
-           one a keyboard or screen reader can reach. Hidden unless the
-           carousel is actually rotating. */
-        '<button class="carousel__play" type="button" hidden></button>' +
       "</div>";
 
     var track = qs("#story-track", box);
@@ -579,45 +575,31 @@
 
     /* ---- rotating on its own ----
        `story.rotateEvery` is milliseconds; 0 or missing means it doesn't.
-       It stops for anyone who has asked their system for less motion, stops
-       while the pointer is over it or the keyboard is in it, stops when the
-       carousel is scrolled off screen or the tab is in the background, and
-       stops for good the moment someone takes control of it themselves. */
+       There is no play/pause button, so the rotation has to be the kind that
+       never fights anybody: it holds still under the pointer or the keyboard,
+       while it is scrolled off screen or the tab is in the background, for a
+       while after a guest moves it themselves, and permanently for anyone
+       whose system asks for less motion. */
     var every = Number(((C.story || {}).rotateEvery) || 0);
     var reduce = window.matchMedia &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (!(every > 0) || shots.length < 2) return;
+    if (!(every > 0) || shots.length < 2 || reduce) return;
 
-    var play = qs(".carousel__play", box);
-    var running = !reduce;
     var hover = false;
     var onScreen = true;
+    var held = 0;        /* time until which a guest's own move holds it still */
 
-    function label() {
-      play.setAttribute("aria-label", running ? "Pause the slideshow" : "Play the slideshow");
-      play.setAttribute("title", running ? "Pause" : "Play");
-      play.innerHTML = running
-        ? '<span aria-hidden="true">\u2016</span>'
-        : '<span aria-hidden="true">\u25b6</span>';
-    }
-    play.hidden = false;
-    label();
+    /* Long enough to read the photograph you went back for, short enough that
+       the thing still rotates afterwards. A tap mustn't kill it for good —
+       without a button there would be no way to start it again. */
+    var HOLD = 15000;
+    function hold() { held = Date.now() + HOLD; }
 
-    play.addEventListener("click", function () { running = !running; label(); });
-
-    /* Taking control stops it. Coming back is a deliberate press of play —
-       a carousel that resumes by itself is a carousel that moves the photo
-       out from under you while you are looking at it. */
-    function surrender() {
-      if (!running) return;
-      running = false;
-      label();
-    }
-    qs(".carousel__btn--prev", box).addEventListener("click", surrender);
-    qs(".carousel__btn--next", box).addEventListener("click", surrender);
-    dots.forEach(function (d) { d.addEventListener("click", surrender); });
-    track.addEventListener("pointerdown", surrender);
-    track.addEventListener("keydown", surrender);
+    qs(".carousel__btn--prev", box).addEventListener("click", hold);
+    qs(".carousel__btn--next", box).addEventListener("click", hold);
+    dots.forEach(function (d) { d.addEventListener("click", hold); });
+    track.addEventListener("pointerdown", hold);
+    track.addEventListener("keydown", hold);
 
     box.addEventListener("pointerenter", function () { hover = true; });
     box.addEventListener("pointerleave", function () { hover = false; });
@@ -631,7 +613,7 @@
     }
 
     setInterval(function () {
-      if (!running || hover || !onScreen || document.hidden) return;
+      if (hover || !onScreen || document.hidden || Date.now() < held) return;
       go(want + 1);
     }, every);
   }
@@ -647,8 +629,9 @@
           '<img class="logo-mark" src="' + esc(M.logo) + '" alt="The Akanksha and Prateek logo: ' +
             'two figures holding hands, one with a dragon head, one with a whale head" ' +
             'width="720" height="676" loading="lazy" decoding="async">' +
-          '<img class="logo-src" src="' + esc(M.logoInspiration) + '" alt="Two crocheted toys, ' +
-            'a green dragon and a blue whale, sitting on a sofa" loading="lazy" decoding="async">' +
+          '<img class="logo-src" src="' + esc(M.logoInspiration) + '" alt="The two crocheted ' +
+            'toys the logo was drawn from: a green dragon and a blue whale" ' +
+            'loading="lazy" decoding="async">' +
         "</div>" +
         "<div><h2>" + todo(M.logoHeading || "") + "</h2><p>" + todo(M.logoBody || "") + "</p></div>";
     }

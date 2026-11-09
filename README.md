@@ -408,13 +408,18 @@ serving it over http is closer to the real thing.
   stripped of their camera metadata on the way in, which is worth repeating
   for any you add, since the repo is public.
 - **It rotates by itself** every `story.rotateEvery` milliseconds — set that to
-  0 to stop it. It pauses under the pointer, while it is off screen or the tab
-  is in the background, and entirely for anyone whose system asks for reduced
-  motion. The first time a guest uses the arrows, the dots or a swipe it stops
-  for good and the small pause button becomes a play button: a carousel that
-  resumes on its own moves the photograph out from under whoever is looking at
-  it. That button is also what makes the rotation accessible — moving content
-  needs a control a keyboard can reach.
+  0 to stop it. There is no pause button, so the rotation is written not to
+  fight anyone: it holds still under the pointer or the keyboard, while it is
+  scrolled off screen or the tab is in the background, for fifteen seconds
+  after a guest moves it themselves, and permanently for anyone whose system
+  asks for reduced motion. The fifteen seconds matter — with no button, a tap
+  that stopped it for good would leave no way to start it again.
+- **One width for everything tall.** `--portrait` in the CSS (20rem) sizes the
+  invitation postcards, the carousel and the save-the-date film together, so
+  they read as one family of objects. Change it once and all three follow. The
+  paintings are 681×1150 rather than true 9:16, so a postcard comes out about
+  5% shorter than the other two; cropping them to match would cut into the
+  artwork.
 
 ### About the weight
 
