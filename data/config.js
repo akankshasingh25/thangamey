@@ -315,16 +315,43 @@ window.WEDDING = {
        the quickest way to finish this page.                                 */
     sheetUrl: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?usp=sharing",
 
-    /* Optional. Rows you want shown on the page itself rather than only in the
-       sheet. Leave it empty and nothing is shown. To add one, uncomment the
-       template and copy it:
+    /* The list, copied from the Gift Registry tab of the sheet above. The
+       sheet is still where people claim things — the Contribute and Buy Out
+       columns are there and this page can't be written to — so when you add
+       or change a row there, change it here too or the two drift apart.
 
-         { name: "Cast iron kadhai", price: "₹3,400",
+         { name: "Cast iron kadhai", brand: "Meyer", price: "₹3,400",
            note: "The big one. We will use it twice a week.",
            url: "https://..." },
 
-       `price`, `note` and `url` are each optional.                          */
-    items: [],
+       `brand`, `price`, `note` and `url` are each optional.                 */
+    items: [
+      { name: "Contribute towards a cause", brand: "Vespa",
+        note: "Enable Akanksha. Highest contributor gets to decide a JHATANG colour. We accept UPI, don't feel shy." },
+      { name: "Non-toxic, gift-ready cookware", brand: "Cumin Co",
+        note: "Enable Prateek." },
+      { name: "Air fryer", brand: "Cosori",
+        note: "We are only allowed 1 tsp oil per meal per person." },
+      { name: "Aeropress", brand: "Aeropress",
+        note: "In case there is an apocalypse." },
+      { name: "A trek voucher", brand: "Indiahikes",
+        note: "To touch grass ;) ;)" },
+      { name: "Gift card", brand: "Cult.fit",
+        note: "Can't touch grass unprepared, part one." },
+      { name: "Gift card", brand: "Decathlon / Trekkit India",
+        note: "Can't touch grass unprepared, part two." },
+      { name: "Spa voucher", brand: "Meraki",
+        note: "Love language: physical touch." },
+      { name: "Gift card", brand: "Dyson",
+        note: "For Prateek or Akanksha, depends on what we buy." },
+      { name: "Gift card", brand: "Crossword",
+        note: "Home decor." },
+      { name: "Gift card", brand: "Nike",
+        note: "Second only to samosa for Prateek." },
+      { name: "Annual membership", brand: "Spotify" },
+      { name: "Premium subscription", brand: "YouTube" },
+      { name: "Subscription", brand: "Netflix" },
+    ],
 
     /* Gift-card shops, shown as chips. Empty hides the whole section —
        add names like: ["Fabindia", "IKEA", "Amazon"]                        */

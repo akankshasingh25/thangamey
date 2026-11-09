@@ -699,6 +699,8 @@ mark.todo{
 }
 .gift__name{ font-weight:700; font-size:1.05rem; }
 .gift__name a{ font-weight:600; font-size:.85rem; margin-left:.5rem; color:var(--gold-deep); }
+.gift__brand{ display:block; font-weight:400; font-size:.85rem; color:var(--fg-soft);
+              letter-spacing:.02em; }
 .gift__price{ font-variant-numeric:tabular-nums; color:var(--fg-soft);
               font-weight:600; white-space:nowrap; }
 .gift__note{ grid-column:1/-1; color:var(--fg-soft); font-size:.92rem; margin-top:.15rem; }

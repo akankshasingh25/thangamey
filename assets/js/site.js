@@ -336,7 +336,9 @@
             var link = it.url && it.url.indexOf("\u00ab") < 0
               ? ' <a href="' + esc(it.url) + '" rel="noopener">see it</a>' : "";
             return '<li class="gift">' +
-              '<span class="gift__name">' + todo(it.name) + link + "</span>" +
+              '<span class="gift__name">' + todo(it.name) +
+                (it.brand ? '<span class="gift__brand">' + todo(it.brand) + "</span>" : "") +
+                link + "</span>" +
               (it.price ? '<span class="gift__price">' + todo(it.price) + "</span>" : "") +
               (it.note && it.note.replace(/[\u00ab\u00bb]/g, "").trim()
                 ? '<span class="gift__note">' + todo(it.note) + "</span>" : "") +
