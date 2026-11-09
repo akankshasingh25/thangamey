@@ -235,7 +235,7 @@ pick the one with the most generous bandwidth, because of the video.
 
 ### GitHub Pages — where it actually lives
 
-**Live at [akankshasingh25.github.io/balleballe](https://akankshasingh25.github.io/balleballe/)**,
+**Live at [akankshasingh25.github.io/thangamey](https://akankshasingh25.github.io/thangamey/)**,
 served from `main` at the repo root. Every `git push` rebuilds it; allow a
 minute or two.
 
@@ -264,16 +264,23 @@ take ten minutes to reach somebody who visited recently. Cloudflare Pages
 honoured all three files; if you want the security headers and the cache rules
 back, that is where they work.
 
-### A custom domain
+### No custom domain
 
-Whatever domain you settle on — the old working name,
-`balleballetheweeding.com`, was never registered, and the site is called
-Thangamey now — the steps are: buy it, add a `CNAME` file to this repo
+There isn't one and none is planned, so the address is the github.io one above
+and the site lives in a subfolder rather than at a domain root. Two things
+follow from that, and both are already handled:
+
+- **`robots.txt` will never apply.** It only works at a domain root. The
+  `noindex, nofollow` meta tag on every page is what keeps the site out of
+  search results — the file in this repo is decorative. Don't remove the tags.
+- **Every link in the site is relative** (`events.html`, `assets/…`), which is
+  what lets it work from a subfolder at all. Don't change any of them to start
+  with `/`.
+
+If a domain ever does turn up: buy it, add a `CNAME` file to this repo
 containing just the domain, then Settings → Pages → Custom domain. GitHub
-issues the HTTPS certificate itself.
-
-Once a custom domain is in place the site is at a domain root, so `robots.txt`
-starts working again and becomes a second layer alongside the meta tags.
+issues the certificate itself, and `robots.txt` starts working as a second
+layer alongside the meta tags.
 
 ### Netlify — also fine
 

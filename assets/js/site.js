@@ -157,7 +157,7 @@
        the "you are here" marker never fires once it's deployed. */
     function bare(u) {
       var v = String(u || "").split(/[?#]/)[0];
-      /* A path ending in "/" is a directory index — "/balleballe/" on a
+      /* A path ending in "/" is a directory index — "/thangamey/" on a
          project Pages site, or "/" at a domain root. Both mean home. */
       if (v === "" || /\/$/.test(v)) return "index";
       return v.split("/").pop().replace(/\.html$/, "") || "index";
