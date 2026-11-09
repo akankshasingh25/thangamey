@@ -820,6 +820,22 @@ mark.todo{
    MISSION ONE — TEN PHOTOGRAPHS  (missions.html)
    ============================================================= */
 .mission{ scroll-margin-top:110px; }
+
+/* The two names, which is all the page gives away before the window. */
+.mission-names{ list-style:none; margin:0 0 2rem; padding:0; display:grid;
+                gap:.9rem; max-width:var(--measure); }
+.mission-names li{ display:flex; gap:1rem; align-items:baseline;
+                   border-top:1px solid var(--rule); padding-top:.9rem; }
+.mission-names__no{ font-size:.78rem; letter-spacing:.12em; text-transform:uppercase;
+                    color:var(--fg-soft); flex:none; width:6.5rem; }
+.mission-names__name{ font-family:var(--display); font-weight:700;
+                      font-size:clamp(1.3rem,1.1rem + 1vw,1.9rem); }
+
+/* Once they are open: one card each, each one a link to its form. */
+.mission-cards{ list-style:none; margin:0; padding:0; align-items:start; }
+.mission-card h2{ font-size:clamp(1.3rem,1.1rem + 1vw,1.8rem); margin:.1rem 0 .4rem; }
+.mission-card p{ color:var(--fg-soft); }
+.mission-card .btn-row{ margin-bottom:0; }
 .form--wide{ max-width:44rem; }
 .mission-aside{
   max-width:44rem; margin-top:2rem; padding-top:1.4rem;

@@ -186,9 +186,8 @@ Two places to keep in step:
 
 - **Your Google Form.** Add the matching file-upload question (titled the same
   as the prompt) or multiple-choice question. The site doesn't do this for you.
-- **`netlify-forms.html`**, only if you're still on the fallback forms. It
-  declares the field names Netlify would otherwise not see (`shot_01…`,
-  `q0…`). Once the Google links are in, it does nothing.
+That is the only place. The missions page itself just names each mission and
+links to its form, so adding a prompt is a change in two files and no code.
 
 ## The feed
 
@@ -360,10 +359,11 @@ on working as the practice round.
 
 ### The fallback forms
 
-`netlify-forms.html` and the built-in itinerary form are still in the project.
-They cost nothing, nothing links to them once the Google links are in, and they
-are what shows if a link is ever missing. If you want them gone once Google is
-set up, say so.
+The built-in itinerary form is still in the project. It costs nothing, nothing
+links to it while `collect.itinerary` holds a real link, and it is what shows
+if that link ever goes missing. The missions no longer have a fallback: each
+one is its Google Form, and a card whose link is empty says so rather than
+offering a dead button.
 
 ## Working on it locally
 
@@ -457,7 +457,6 @@ compress to 4–6 MB without visible loss) or host it on YouTube/Vimeo and embed
 ```
 index.html  events.html  travel.html  gifts.html  404.html
 missions.html            ← the two missions; see `games` in config
-netlify-forms.html       ← fallback form declarations. Unlinked. Harmless.
 GOOGLE-SETUP.md          ← how to build the three Forms and the Sheet
 data/config.js      ← you edit this
 data/posts.js       ← the feed's posts; nothing loads it while the feed is off

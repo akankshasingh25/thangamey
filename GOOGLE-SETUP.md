@@ -52,9 +52,9 @@ by a button through to this.
 
 ---
 
-## 2. Mission one — the photographs
+## 2. Mission one — I Spy
 
-Title it **Thangamey — ten photographs**. This is the one that needs care,
+Title it **Thangamey — I Spy**. This is the one that needs care,
 because the question titles become your folder names.
 
 Start with:
@@ -103,24 +103,32 @@ but worth watching, and worth not being at 14.8 GB already.
 
 ---
 
-## 3. Mission two — the quiz
+## 3. Mission two — Gather Intel
 
-Title it **Thangamey — the scoreboard**. Short, because the quiz itself is
-played on the website: it asks the questions and marks them in the browser, and
-this form only records the result.
+Title it **Thangamey — Gather Intel**. The quiz is played *in the form* now,
+not on the website, so the questions have to live here.
+
+1. Make it a **Quiz**: Settings → Make this a quiz → *Release grade immediately
+   after each submission*. That is what shows a guest their score.
+2. Add each question from `games.quiz.questions` in `data/config.js` as
+   **Multiple choice**, with its four options in the same order.
+3. On each one, **Answer key** → mark the right option → give it 1 point. The
+   `answer` number in the config is the position counting from zero, so
+   `answer: 0` is the first option.
+4. Add **Your name** (short answer, required) at the top. Leave "Collect email
+   addresses" off unless you want it.
 
 | # | Question | Type | Notes |
 |---|---|---|---|
 | 1 | Your name | Short answer | Required |
-| 2 | Your score | Short answer | Required. The site shows them the number |
-| 3 | Anything to declare? | Paragraph | Optional. For the cheats |
+| 2… | Each question from the config | Multiple choice | 1 point, answer key set |
 
-Set `collect.quiz` and a **Put your score on the board** button appears under
-the result as soon as someone finishes.
+Four of the questions in the config are still templates in «guillemets».
+Write them or leave them out — the form is the quiz, so only what you build
+here counts.
 
-> Prefer every answer rather than just the score? Rebuild all ten questions in
-> this form as multiple choice and point `collect.quiz` at it. The on-site quiz
-> still works and still marks itself — it just becomes the practice round.
+Set `collect.quiz` and the **Open Gather Intel** button appears on the
+missions page inside the window.
 
 ---
 

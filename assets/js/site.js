@@ -692,7 +692,8 @@
   /* The nav is plain HTML on every page, so the link is put in here — which
      means it genuinely isn't in the page until the missions are on. */
   function gamesNav() {
-    if (!gamesLive()) return;
+    /* The link is always there. Before the window opens the page says so;
+       a nav item that appears overnight is stranger than one that waits. */
     var nav = qs(".nav");
     if (!nav || qs('.nav a[href^="missions.html"]')) return;
     var a = el("a", null, esc((C.games || {}).navLabel || "Missions"));
@@ -709,8 +710,12 @@
     game.hidden = !on;
     if (gate) {
       gate.hidden = on;
+      var G = C.games || {};
       var when = qs("#game-open-label", gate);
-      if (when) when.innerHTML = todo((C.games || {}).openLabel || "");
+      if (when) when.innerHTML = todo(G.openLabel || "");
+      /* The names are the only thing given away in advance. */
+      setText("#gate-name-one", (G.photos || {}).heading);
+      setText("#gate-name-two", (G.quiz || {}).heading);
     }
     if (on && previewing() && !qs(".preview-flag", game)) {
       game.insertBefore(
@@ -729,232 +734,32 @@
 
   function missions() {
     var G = C.games || {};
-    if (!qs("#game")) return;
+    var cards = qs("#mission-cards");
 
     setText("#missions-heading", G.heading);
     setText("#missions-intro", G.intro);
+    if (!cards) return;
 
-    var jump = qs("#mission-jump");
-    if (jump) {
-      jump.innerHTML =
-        '<a href="#mission-photos">' + esc((G.photos || {}).heading || "Photographs") + "</a>" +
-        '<a href="#mission-quiz">' + esc((G.quiz || {}).heading || "Quiz") + "</a>";
-    }
-
-    missionPhotos();
-    missionQuiz();
-  }
-
-  /* --- mission one: ten photographs, one file field each --- */
-  function missionPhotos() {
-    var P = (C.games || {}).photos || {};
-    var prompts = P.prompts || [];
-
-    setText("#photos-eyebrow", P.eyebrow);
-    setText("#photos-heading", P.heading);
-    setText("#photos-intro", P.intro);
-
-    /* The photographs go to a Google Form: it is the only option that files
-       each answer in its own Drive folder, and the only one that doesn't fall
-       over at 8 MB. Until that link exists the built-in form stands in. */
-    var url = cfgLink("collect.photos");
-    var useGoogle = !!url;
-    var here = qs("#photos-here");
-    var away = qs("#photos-elsewhere");
-    if (here) here.hidden = useGoogle;
-    if (away) {
-      away.hidden = !useGoogle;
-      var link = qs("#photos-elsewhere-link", away);
-      if (link && useGoogle) link.href = url;
-    }
-
-    /* The ten are rendered either way. Sending people to a Google Form is
-       no reason to stop telling them what they are looking for; it just
-       means the list loses its attach buttons. */
-    var list = useGoogle ? qs("#shot-list-readonly") : qs("#shot-list");
-    if (list) {
-      list.innerHTML = prompts.map(function (t, i) {
-        var n = i + 1;
-        var no = n < 10 ? "0" + n : n;
-        var id = "shot" + n;
-        return '<li class="shot' + (useGoogle ? " shot--plain" : "") + '">' +
-          '<div class="shot__head">' +
-            '<span class="shot__no">' + no + "</span>" +
-            '<span class="shot__text">' + todo(t) + "</span>" +
-          "</div>" +
-          (useGoogle ? "" :
-            '<div class="shot__drop">' +
-              '<input class="shot__input" type="file" id="' + id + '" name="shot_' + no +
-                '" accept="image/*">' +
-              '<label class="shot__btn" for="' + id + '">Attach a photo</label>' +
-              '<span class="shot__name" id="' + id + '-name">nothing yet</span>' +
-            "</div>") +
-          "</li>";
-      }).join("");
-    }
-
-    if (!useGoogle) {
-      var tally = qs("#shot-count");
-      function count() {
-        if (!tally) return;
-        var n = qsa(".shot__input").filter(function (i) { return i.files.length; }).length;
-        tally.textContent = n === prompts.length && prompts.length
-          ? "All " + prompts.length + " attached. Go and lie down."
-          : n + " of " + prompts.length + " attached";
-      }
-      qsa(".shot__input").forEach(function (inp) {
-        inp.addEventListener("change", function () {
-          var f = inp.files[0];
-          var name = qs("#" + inp.id + "-name");
-          if (name) name.textContent = f ? f.name : "nothing yet";
-          inp.closest(".shot").classList.toggle("shot--done", !!f);
-          count();
-        });
-      });
-      count();
-    }
-
-    /* The optional shared album for everything that isn't one of the ten. */
-    var albumUrl = cfgLink("games.photos.albumUrl");
-    var haveAlbum = !!albumUrl;
-    var note = qs("#photos-album-note");
-    if (note) {
-      note.hidden = !(haveAlbum && P.albumNote);
-      setText("#photos-album-text", P.albumNote);
-      var al = qs("#photos-album-link");
-      if (al) { al.hidden = !haveAlbum; if (haveAlbum) al.href = albumUrl; }
-    }
-  }
-
-  /* --- mission two: the quiz, marked here and sent to you --- */
-  function missionQuiz() {
-    var list = qs("#q-list");
-    if (!list) return;
-    var Q = (C.games || {}).quiz || {};
-    var all = Q.questions || [];
-
-    setText("#quiz-eyebrow", Q.eyebrow);
-    setText("#quiz-heading", Q.heading);
-    setText("#quiz-intro", Q.intro);
-
-    /* A question still carrying «guillemets» is one you haven't written yet.
-       Guests get the finished ones only — a live page asking "«Option one»"
-       is worse than a shorter quiz. ?preview shows them all, gold marks and
-       all, so you can see what is still outstanding. Each keeps its original
-       position in its field name, so filling one in later doesn't shuffle
-       the answers you have already collected. */
-    function unfinished(q) {
-      var bits = [q.q].concat(q.options || []);
-      return bits.some(function (t) { return /[\u00ab\u00bb]/.test(String(t || "")); });
-    }
-    var questions = all.map(function (q, i) { return { q: q, i: i }; })
-      .filter(function (x) { return previewing() || !unfinished(x.q); })
-      .map(function (x) { var c = x.q; c.__i = x.i; return c; });
-
-    list.innerHTML = questions.map(function (q) {
-      var i = q.__i;
-      var name = "q" + i;
-      return '<li class="q" id="' + name + '">' +
-        '<p class="q__text">' + todo(q.q) + "</p>" +
-        '<div class="choices">' +
-          (q.options || []).map(function (o, j) {
-            return '<label class="choice"><input type="radio" name="' + name +
-              '" value="' + j + '" required><span>' + todo(o) + "</span></label>";
-          }).join("") +
-        "</div>" +
-        /* "«»" is a blank you haven't filled in yet — no empty line for it. */
-        (String(q.because || "").replace(/[«»]/g, "").trim()
-          ? '<p class="q__why" hidden>' + todo(q.because) + "</p>" : "") +
+    /* Each mission is one Google Form. If its link isn't filled in yet the
+       card still appears and says so, rather than offering a dead button —
+       a guest standing in Puri with a phone needs to know which it is. */
+    cards.innerHTML = [G.photos, G.quiz].map(function (m, i) {
+      if (!m) return "";
+      var url = cfgLink(i === 0 ? "collect.photos" : "collect.quiz");
+      return '<li class="card mission-card">' +
+        '<p class="card__meta">' + todo(m.eyebrow || ("Mission " + (i + 1))) + "</p>" +
+        "<h2>" + todo(m.heading || "") + "</h2>" +
+        (m.intro ? "<p>" + todo(m.intro) + "</p>" : "") +
+        (url
+          ? '<p class="btn-row" style="justify-content:flex-start;margin-top:1.2rem">' +
+              '<a class="btn btn--gold" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+              esc(m.openLabel || "Open the form") + "</a></p>"
+          : '<p class="form-note">The form for this one isn\'t up yet. ' +
+            "Ask us and we will send it to you.</p>") +
         "</li>";
     }).join("");
 
-    var form = qs("#quiz-form");
-    var out = qs("#quiz-result");
-    if (!form || !out) return;
-
-    form.addEventListener("submit", function (ev) {
-      ev.preventDefault();
-      var hp = qs('[name="bot-field"]', form);
-      if (hp && hp.value) return;                     // a bot filled the honeypot
-      if (!form.reportValidity()) return;
-
-      /* Mark it first, so the score is instant even if the network isn't. */
-      var score = 0;
-      questions.forEach(function (q) {
-        var i = q.__i;
-        var picked = qs('input[name="q' + i + '"]:checked', form);
-        var right = picked && Number(picked.value) === Number(q.answer);
-        if (right) score++;
-        var li = qs("#q" + i, form);
-        if (!li) return;
-        li.setAttribute("data-mark", right ? "right" : "wrong");
-        var why = qs(".q__why", li);
-        if (why) why.hidden = false;
-        qsa('input[name="q' + i + '"]', li).forEach(function (inp) {
-          if (Number(inp.value) === Number(q.answer)) {
-            inp.parentNode.classList.add("choice--answer");
-          }
-          inp.disabled = true;
-        });
-      });
-
-      /* Spread the verdicts over the range, keeping the last for full marks —
-         9 out of 10 shouldn't read as flawless. */
-      var verdicts = Q.verdicts || [];
-      var band = "";
-      if (verdicts.length === 1) band = verdicts[0];
-      else if (verdicts.length && questions.length) {
-        band = score === questions.length
-          ? verdicts[verdicts.length - 1]
-          : verdicts[Math.min(verdicts.length - 2,
-              Math.floor(score / questions.length * (verdicts.length - 1)))];
-      }
-
-      /* The marking needs no server, so it happens here and it happens
-         instantly. Recording the score is the only part that leaves the
-         page, and that goes to a Google Form. */
-      var logUrl = cfgLink("collect.quiz");
-      out.innerHTML = '<p class="quiz-score"><b>' + score + "</b> out of " +
-        questions.length + "</p>" + (band ? "<p>" + todo(band) + "</p>" : "") +
-        (logUrl
-          ? '<p class="btn-row" style="justify-content:flex-start;margin-top:1.2rem">' +
-              '<a class="btn btn--gold" id="quiz-log" href="' + esc(logUrl) +
-              '" rel="noopener">Put your score on the board</a></p>' +
-            '<p class="quiz-sent">Two boxes … your name, and the number above.</p>'
-          : '<p class="quiz-sent" id="quiz-sent">Sending your answers to us…</p>');
-      out.hidden = false;
-      out.setAttribute("role", "status");
-      out.scrollIntoView({ block: "center", behavior: "smooth" });
-
-      var btn = qs('[type="submit"]', form);
-      if (btn) btn.hidden = true;
-
-      /* Disabled inputs are left out of FormData, so read the answers back
-         off the config-shaped names we already have rather than the form. */
-      var data = { "form-name": "quiz", score: score + "/" + questions.length };
-      var nameField = qs('[name="guest_name"]', form);
-      var mailField = qs('[name="email"]', form);
-      if (nameField) data.guest_name = nameField.value;
-      if (mailField) data.email = mailField.value;
-      questions.forEach(function (q) {
-        var picked = qs('input[name="q' + q.__i + '"]:checked', form);
-        var j = picked ? Number(picked.value) : -1;
-        data["q" + q.__i] = j < 0 ? "" : String((q.options || [])[j] || j);
-      });
-
-      if (logUrl) return;            // Google has it; nothing to post
-
-      var sent = qs("#quiz-sent");
-      sendTo(form, data).then(function (r) {
-        if (!sent) return;
-        sent.textContent = r.demo
-          ? "Saved in this browser only — there's no form backend running."
-          : r.ok
-            ? "Sent. We can see how you did."
-            : "Your score is yours, but the answers didn't reach us: " + r.msg;
-        sent.setAttribute("data-ok", r.ok ? "1" : "0");
-      });
-    });
+    setText("#missions-close", G.closeLabel);
   }
 
   /* ---------- 9. forms ---------- */

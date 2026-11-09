@@ -377,25 +377,31 @@ window.WEDDING = {
      and the quiz answers sit in this file where anyone can read them. For a
      wedding game that is the right trade — it is not a sealed exam. */
   games: {
-    live: true,
-    liveFrom:  "2026-12-08T09:00:00+05:30",
-    liveUntil: "2026-12-10T12:00:00+05:30",
-    openLabel: "The missions open on the morning of 8 December, in Puri.",
+    /* `live` overrides the window: true forces them open, false forces them
+       shut, and leaving it out — as it is now — lets the two dates decide.
+       Add ?preview to the URL to see them open before the window. */
+    // live: true,
+    liveFrom:  "2026-12-08T10:00:00+05:30",
+    liveUntil: "2026-12-10T10:00:00+05:30",
+    openLabel: "Both missions open at 10am on 8 December and close at 10am on 10 December.",
+    closeLabel: "Both close at 10am on 10 December. Nothing sent after that counts, which is the only rule.",
 
     navLabel: "Missions",
     heading: "Two missions",
+    /* Only shown once the window is open — before that the page gives the
+       two names and the opening time and nothing else. */
     intro:
-      "Two things to do while you are here, neither of them compulsory and " +
-      "both of them scored. One needs your camera. The other needs you to have " +
-      "been paying attention.",
+      "Both are open now, neither is compulsory, and both are scored. " +
+      "One needs your camera. The other needs you to have been paying attention.",
 
     photos: {
       eyebrow: "Mission one",
-      heading: "Ten photographs",
+      heading: "I Spy",
+      openLabel: "Open I Spy",
       intro:
         "There will be a photographer. They will be excellent, and they will miss " +
-        "all of this. Five things to go and find over day, on your phone, " +
-        "badly lit, whatever. Attach what you get and send the lot.",
+        "all of this. A list of things to go and find over the two days — on your " +
+        "phone, badly lit, whatever. The form takes them one at a time.",
 
       /* Reorder, reword or cut a few — the form follows whatever is here.
          If you change the NUMBER of prompts, update the hidden detection
@@ -422,9 +428,10 @@ window.WEDDING = {
 
     quiz: {
       eyebrow: "Mission two",
-      heading: "How well do you know us?",
+      heading: "Gather Intel",
+      openLabel: "Open Gather Intel",
       intro:
-        "Ten questions. You get your score the moment you send it, and so do we.",
+        "Questions about the two of us. You get your score when you send it, and so do we.",
 
       /* `answer` is the position of the right option, counting from 0.
          The four still in «guillemets» need real answers from you — write the
