@@ -315,6 +315,10 @@ select{ appearance:none;
   border-radius:50%; background:var(--gold); box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 28%,transparent);
 }
 
+/* The to-do list: closer set than the tick lists elsewhere, because each
+   line is a sentence rather than a heading and a paragraph. */
+.todo-list{ max-width:var(--measure); gap:.75rem; font-size:1rem; }
+
 .faq{ max-width:var(--measure); }
 .faq__head{ font-size:.82rem; letter-spacing:.12em; text-transform:uppercase;
             color:var(--fg-soft); margin:0 0 .4rem; }

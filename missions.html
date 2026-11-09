@@ -40,6 +40,9 @@
   <nav class="event-jump" id="mission-bar" aria-label="The two missions">
     <span data-mission="i-spy">I Spy</span>
     <span data-mission="gather-intel">Gather Intel</span>
+    <!-- A real link from the start: unlike the two missions, this section
+         is on the page whether the window is open or not. -->
+    <a href="#todos">Your TO-DOs</a>
   </nav>
 
   <!-- Before the window opens this is the whole page. See `games` in
@@ -61,6 +64,17 @@
       <p class="mission-aside" id="missions-close"></p>
     </section>
   </div>
+
+  <!-- Shown in both states. Built from `games.todos` in data/config.js;
+       if the list is empty the section hides itself. -->
+  <section class="section shell jump-target" id="todos" hidden>
+    <div class="section__head section__head--tight">
+      <p class="eyebrow">Before the 8th</p>
+      <h2 data-cfg="games.todos.heading"></h2>
+      <p class="lede" data-cfg="games.todos.intro"></p>
+    </div>
+    <ul class="ticks todo-list" id="todo-list"></ul>
+  </section>
 </main>
 
 <footer class="site-foot">

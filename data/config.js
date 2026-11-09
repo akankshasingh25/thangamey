@@ -398,6 +398,25 @@ window.WEDDING = {
     intro:
       "Both are open NOW. We didn't tell you this before but there is an actual prize for the winners.",
 
+    /* ---- Your TO-DOs ----
+       Shown whether or not the missions are open, and the only thing on
+       the page that hints at what they are. Keep them oblique: each line
+       should be useful on its own and only make sense in hindsight.
+       Empty the list and the whole section disappears. */
+    todos: {
+      heading: "Your TO-DOs",
+      intro:
+        "We are not telling you what the missions are. We are telling you how " +
+        "not to be caught out by them.",
+      items: [
+        "Clear a gigabyte on your phone. You will want the room.",
+        "Charge it overnight. Charge it again at lunch.",
+        "Sit with the people you have only ever heard about.",
+        "Listen to the aunties, particularly when they are talking about us.",
+        "Set one alarm earlier than you would like.",
+      ],
+    },
+
     photos: {
       eyebrow: "Mission 1",
       heading: "I Spy",
