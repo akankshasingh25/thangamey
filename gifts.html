@@ -29,25 +29,28 @@
 </header>
 
 <main id="main">
-  <section class="sky sky--band sky--scrim" data-sky="shades-of-sunset" data-art="assets/art/sangeet.jpg">
-    <div class="sky__in">
-      <p class="eyebrow">If you insist</p>
-      <h1>Gift Registry</h1>
-      <p class="lede" data-cfg="gifts.intro"></p>
-    </div>
-  </section>
+  <!-- No painted band: the page opens on the bar. The heading stays for
+       screen readers and the document outline. -->
+  <h1 class="vh">Gift Registry</h1>
+
+  <nav class="event-jump" aria-label="Jump to a section">
+    <a href="#how">How to Gift?</a>
+    <a href="#what">What to Gift?</a>
+  </nav>
 
   <!-- ---------- three ways ---------- -->
-  <section class="section shell">
+  <section class="section shell jump-target" id="how">
     <div class="section__head">
       <p class="eyebrow">However suits you</p>
       <h2>Three ways to do it</h2>
+      <!-- The band used to carry this line. It reads just as well here. -->
+      <p class="lede" data-cfg="gifts.intro"></p>
     </div>
     <ul class="ticks grid grid--3" id="gift-ways"></ul>
   </section>
 
   <!-- ---------- the list ---------- -->
-  <section class="section shell">
+  <section class="section shell jump-target" id="what">
     <div class="section__head">
       <p class="eyebrow">The list</p>
       <h2>Things we'd actually use</h2>

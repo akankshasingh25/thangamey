@@ -837,6 +837,10 @@ mark.todo{
    ============================================================= */
 .mission{ scroll-margin-top:110px; }
 
+/* A section a sticky jump bar points at has to clear the header and the
+   bar, or its heading lands underneath them. */
+.jump-target{ scroll-margin-top:124px; }
+
 /* Before the window the bar's two names are labels, not links. */
 .event-jump span{ padding:.42rem .85rem; font-weight:700; font-size:.9rem;
                   color:var(--fg-soft); }
