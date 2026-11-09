@@ -393,13 +393,27 @@ serving it over http is closer to the real thing.
   the forms post normally instead of in-place. The story carousel is the one
   thing that needs it — it's built from `story.photos`, so with scripting off
   the text simply takes the full width and no photographs appear.
-- **The story carousel** is a scroll-snap track: a swipe is the browser's own
-  scrolling, the arrows and dots only scroll it, and it wraps at both ends.
-  Photographs keep their own shape against a blurred copy of themselves rather
-  than being cropped to a common ratio. Add or reorder them in `story.photos`
-  and everything else follows. Put the files in `assets/photos/story/` at about
-  1400px on the long side; they were stripped of their camera metadata on the
-  way in, which is worth repeating for any you add, since the repo is public.
+- **The short version** — the three cards under the hero — is `quick` in the
+  config. Every card points at a link that already exists elsewhere on the
+  site, so there is no second copy to keep in step; a card whose link isn't
+  filled in yet leaves itself out, and if none of them resolve the whole
+  section disappears.
+- **The story carousel** is a scroll-snap track in a 9:16 frame: a swipe is the
+  browser's own scrolling, the arrows and dots only scroll it, and it wraps at
+  both ends. Photographs keep their own shape against a blurred copy of
+  themselves rather than being cropped, so a landscape one would letterbox
+  rather than lose its edges. Add or reorder them in `story.photos`. Put the
+  files in `assets/photos/story/` at about 1400px on the long side; they were
+  stripped of their camera metadata on the way in, which is worth repeating
+  for any you add, since the repo is public.
+- **It rotates by itself** every `story.rotateEvery` milliseconds — set that to
+  0 to stop it. It pauses under the pointer, while it is off screen or the tab
+  is in the background, and entirely for anyone whose system asks for reduced
+  motion. The first time a guest uses the arrows, the dots or a swipe it stops
+  for good and the small pause button becomes a play button: a carousel that
+  resumes on its own moves the photograph out from under whoever is looking at
+  it. That button is also what makes the rotation accessible — moving content
+  needs a control a keyboard can reach.
 
 ### About the weight
 

@@ -56,8 +56,20 @@
     </div>
   </section>
 
+  <!-- ---------- the short version ----------
+       For anyone who will never scroll this far down a wedding website.
+       Built from `quick` in data/config.js; each card hides itself if its
+       link isn't filled in yet, and the section hides if none are. -->
+  <section class="section shell" id="quick" hidden>
+    <div class="section__head section__head--tight">
+      <p class="eyebrow" data-cfg="quick.eyebrow"></p>
+      <h2 data-cfg="quick.heading"></h2>
+    </div>
+    <ul class="grid grid--3 quick-list" id="quick-list"></ul>
+  </section>
+
   <!-- ---------- the story ---------- -->
-  <section class="section shell">
+  <section class="section section--rule shell">
     <div class="split">
       <div>
         <div class="section__head section__head--tight">

@@ -420,6 +420,44 @@
     }).join("");
   }
 
+  /* ---------- 6b. the short version ---------- */
+  /* Three cards under the hero that jump straight to the things we actually
+     need from people. Every link already exists somewhere else on the site;
+     this just saves a guest the scroll. */
+  function quick() {
+    var sec = qs("#quick");
+    var list = qs("#quick-list");
+    if (!sec || !list) return;
+
+    var Q = C.quick || {};
+    var cards = (Q.items || []).map(function (it) {
+      var url = "";
+      if (it.event) {
+        /* By slug, not by position — reordering the events mustn't quietly
+           point this at the wrong party. */
+        var ev = (C.events || []).filter(function (e) { return slugOf(e) === it.event; })[0];
+        var raw = String((ev && ev.sheet && ev.sheet.url) || "");
+        if (raw && raw.indexOf("\u00ab") < 0) url = raw;
+      } else if (it.from) {
+        url = cfgLink(it.from);
+      } else if (it.url && String(it.url).indexOf("\u00ab") < 0) {
+        url = String(it.url);
+      }
+      if (!url) return "";                   /* no link yet: leave it out */
+      return '<li class="quick-card">' +
+        '<a href="' + esc(url) + '" target="_blank" rel="noopener">' +
+          "<h3>" + todo(it.title || "") + "</h3>" +
+          "<p>" + todo(it.body || "") + "</p>" +
+          '<span class="quick-card__go">' + todo(it.label || "Open") +
+            '<span class="vh"> (opens in a new tab)</span></span>' +
+        "</a></li>";
+    }).filter(function (html) { return html; });
+
+    if (!cards.length) return;               /* nothing to point at: stay hidden */
+    list.innerHTML = cards.join("");
+    sec.hidden = false;
+  }
+
   function story() {
     var box = qs("#story-body");
     if (!box || !C.story) return;
@@ -466,6 +504,10 @@
           return '<button class="carousel__dot" type="button" data-go="' + i + '" ' +
             'aria-label="Photograph ' + (i + 1) + '"></button>';
         }).join("") +
+        /* Anything that moves on its own needs a way to stop it — this is the
+           one a keyboard or screen reader can reach. Hidden unless the
+           carousel is actually rotating. */
+        '<button class="carousel__play" type="button" hidden></button>' +
       "</div>";
 
     var track = qs("#story-track", box);
@@ -522,6 +564,64 @@
     }, { passive: true });
     window.addEventListener("resize", sync);
     sync();
+
+    /* ---- rotating on its own ----
+       `story.rotateEvery` is milliseconds; 0 or missing means it doesn't.
+       It stops for anyone who has asked their system for less motion, stops
+       while the pointer is over it or the keyboard is in it, stops when the
+       carousel is scrolled off screen or the tab is in the background, and
+       stops for good the moment someone takes control of it themselves. */
+    var every = Number(((C.story || {}).rotateEvery) || 0);
+    var reduce = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!(every > 0) || shots.length < 2) return;
+
+    var play = qs(".carousel__play", box);
+    var running = !reduce;
+    var hover = false;
+    var onScreen = true;
+
+    function label() {
+      play.setAttribute("aria-label", running ? "Pause the slideshow" : "Play the slideshow");
+      play.setAttribute("title", running ? "Pause" : "Play");
+      play.innerHTML = running
+        ? '<span aria-hidden="true">\u2016</span>'
+        : '<span aria-hidden="true">\u25b6</span>';
+    }
+    play.hidden = false;
+    label();
+
+    play.addEventListener("click", function () { running = !running; label(); });
+
+    /* Taking control stops it. Coming back is a deliberate press of play —
+       a carousel that resumes by itself is a carousel that moves the photo
+       out from under you while you are looking at it. */
+    function surrender() {
+      if (!running) return;
+      running = false;
+      label();
+    }
+    qs(".carousel__btn--prev", box).addEventListener("click", surrender);
+    qs(".carousel__btn--next", box).addEventListener("click", surrender);
+    dots.forEach(function (d) { d.addEventListener("click", surrender); });
+    track.addEventListener("pointerdown", surrender);
+    track.addEventListener("keydown", surrender);
+
+    box.addEventListener("pointerenter", function () { hover = true; });
+    box.addEventListener("pointerleave", function () { hover = false; });
+    box.addEventListener("focusin", function () { hover = true; });
+    box.addEventListener("focusout", function () { hover = false; });
+
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function (es) {
+        onScreen = es[0].isIntersecting;
+      }, { threshold: 0.4 }).observe(box);
+    }
+
+    setInterval(function () {
+      if (!running || hover || !onScreen || document.hidden) return;
+      go(want + 1);
+    }, every);
   }
 
   /* ---------- 7b. logo + save the date ---------- */
@@ -1069,6 +1169,7 @@
     gifts();
     travel();
     sustain();
+    quick();
     story();
     storyPhotos();
     media();

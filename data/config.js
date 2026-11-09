@@ -14,7 +14,7 @@ window.WEDDING = {
   couple: {
     one: "Akanksha",
     two: "Prateek",
-    siteTitle: "Thangamey, The Weeding",
+    siteTitle: "Thangamey",
     tagline: "In the city of Lord Jagannath and by the coast of Puri. Two days, four parties. A respite from the cold.",
     /* The name in its own script, shown small beside the wordmark in the
        header and footer. Uncomment to switch it on. Thangamey is Tamil. */
@@ -31,7 +31,7 @@ window.WEDDING = {
     logoInspiration: "assets/photos/bully-dino.jpg",
     logoHeading: "About the logo",
     logoBody:
-      "That's us, more or less. Two crocheted animals — a dragon and a whale — who " +
+      "That's us, more or less. Two crocheted animals — a dinosaur and a whale — who " +
       "live on a sofa and, somewhere along the way, became the two people getting married. " +
       "The illustrator took them entirely at their word.",
     videoHeading: "Save the Date",
@@ -486,6 +486,44 @@ window.WEDDING = {
     },
   },
 
+  /* ---------- THE SHORT VERSION ----------
+     The strip of cards under the hero, for the guest who opens the site on
+     a phone, reads two lines and closes it again. Everything here is a link
+     that already exists elsewhere on the site — this is a shortcut, not a
+     second copy, so there is nothing extra to keep in step.
+
+     Each card takes its link from one of:
+       from:  "collect.itinerary"   a path into this file
+       event: "sangeet"             that event's `sheet` block
+       url:   "https://..."         anything else
+
+     A card whose link is missing or still in «guillemets» leaves itself
+     out, and if all of them are missing the whole section disappears.   */
+  quick: {
+    eyebrow: "If you do nothing else",
+    heading: "Three links and you're done",
+    items: [
+      {
+        title: "Tell us your travel plans",
+        body: "When you land, when you leave, and how. It is how we know who needs a car and when.",
+        from: "collect.itinerary",
+        label: "Open the form",
+      },
+      {
+        title: "The gift registry",
+        body: "A list, not an expectation. Several of them are meant to be gone in on together.",
+        from: "gifts.sheetUrl",
+        label: "See the list",
+      },
+      {
+        title: "Dance at the Sang-it",
+        body: "Pick a song, add your name, leave a choreography link. No song gets danced twice.",
+        event: "sangeet",
+        label: "Open the sheet",
+      },
+    ],
+  },
+
   /* ---------- THE STORY ---------- */
   story: {
     heading: "How this happened",
@@ -496,11 +534,19 @@ window.WEDDING = {
        arrows and dots follow this list, and if you empty it the carousel
        disappears and the text goes back to full width.
 
-       Drop new files in assets/photos/story/. Anything portrait and about
-       1400px tall is right; the frame letterboxes whatever shape you give
-       it against a blurred copy of itself, so nothing gets its head cut
-       off. `alt` is read aloud to anyone using a screen reader, and shows
-       if the photo fails to load — describe it, don't label it.          */
+       Drop new files in assets/photos/story/. The frame is 9:16, the shape
+       a phone shoots in; anything portrait and about 1400px tall is right.
+       Whatever shape you give it sits whole against a blurred copy of
+       itself, so nothing gets its head cut off. `alt` is read aloud to
+       anyone using a screen reader, and shows if the photo fails to load —
+       describe it, don't label it.                                        */
+    /* How long each photograph holds before the next one slides in, in
+       milliseconds. Set it to 0 to switch the rotation off and leave the
+       arrows and dots to do the work. It pauses while the pointer is over
+       it, while it is off screen, and for anyone whose system asks for
+       less motion — and it stops for good the moment a guest touches the
+       arrows, the dots or the photographs themselves.                     */
+    rotateEvery: 5000,
     photos: [
       { src: "assets/photos/story/01.jpg",
         alt: "The two of us running a marathon hand in hand, race bibs pinned on, both grinning" },
