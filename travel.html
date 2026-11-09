@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="snap">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,15 +21,15 @@
     </a>
     <nav class="nav" aria-label="Main">
       <a href="index.html">Home</a>
+      <a href="travel.html">Travel &amp; Stay</a>
       <a href="events.html">Events</a>
       <a href="gifts.html">Gift Registry</a>
-      <a href="travel.html">Travel &amp; Stay</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
-  <section class="sky sky--band sky--scrim" data-sky="tints-of-sunflower" data-art="assets/art/haldi.jpg">
+  <section class="sky sky--band sky--scrim snap-s" data-sky="tints-of-sunflower" data-art="assets/art/haldi.jpg">
     <div class="sky__in">
       <p class="eyebrow">Getting there</p>
       <h1>Travel &amp; Stay</h1>
@@ -38,7 +38,7 @@
   </section>
 
   <!-- ---------- 1. getting to Puri ---------- -->
-  <section class="section shell">
+  <section class="section shell snap-s">
     <div class="section__head">
       <p class="eyebrow">Step one</p>
       <h2>Getting to Puri</h2>
@@ -57,53 +57,13 @@
         <p data-cfg="travel.rail.note"></p>
       </div>
     </div>
-  </section>
 
-  <!-- ---------- 2. where to stay ---------- -->
-  <section class="section shell">
-    <div class="section__head">
-      <p class="eyebrow">Step two</p>
-      <h2>Where to stay</h2>
-      <p class="lede">The two venues are also the two hotels, so staying at either one puts
-      you inside half the wedding and a short hop from the other half.</p>
-    </div>
-    <div class="grid grid--2" id="hotel-grid"></div>
-    <div class="callout" data-cfg-box>
-      <p data-cfg-row><strong>Getting between them.</strong> <span data-cfg="travel.shuttle"></span></p>
-      <p data-cfg-row><strong>Visas.</strong> <span data-cfg="travel.visaNote"></span></p>
-    </div>
-  </section>
-
-  <!-- ---------- 3. while you're here ---------- -->
-  <section class="section shell">
-    <div class="section__head">
-      <p class="eyebrow">Step three</p>
-      <h2>While you're here</h2>
-      <p class="lede">Both afternoons are free between roughly two and five. Puri rewards
-      an idle afternoon more than most places.</p>
-    </div>
-    <ul class="ticks grid grid--2">
-      <li><h3>The beach is right there</h3>
-        <p>Swimming is best early, before the sun turns unreasonable. The sunrise over the
-        water is the thing people come for, and it is genuinely worth setting an alarm.</p></li>
-      <li><h3>The Jagannath temple</h3>
-        <p>Ten minutes from either hotel and the reason Puri exists. Non-Hindu visitors
-        can't go inside, but the roof of the library across the road is the view everyone
-        photographs anyway.</p></li>
-      <li><h3>Raghurajpur</h3>
-        <p>A village of pattachitra painters about half an hour out, where nearly every
-        house is a studio. If you liked the paintings on your invitation, go here.</p></li>
-      <li><h3>Eat the obvious things</h3>
-        <p>Fish, prawns, and whatever the hotel is calling the local thali. Ask anyone
-        about the sweets — you'll get a forty-minute answer and a strong recommendation.</p></li>
-    </ul>
-  </section>
-
-  <!-- ---------- 4. your itinerary — the one form on the site ---------- -->
-  <section class="section shell" id="plans">
-    <div class="form-wrap">
+    <!-- The itinerary used to be a step of its own at the bottom of the
+         page. It belongs with getting here: by the time you have read the
+         two cards you know what you are going to tell us. -->
+    <div id="plans">
+<div class="form-wrap">
       <div class="section__head">
-        <p class="eyebrow">Step four</p>
         <h2>Tell us your plans</h2>
         <p class="lede">Mostly so we can put four of you in one car from Bhubaneswar instead
         of four cars. Partly so somebody is at the gate holding a sign with your name
@@ -210,7 +170,49 @@
         times land in your inbox nearer the date.</p>
       </div>
     </div>
+    </div>
   </section>
+
+  <!-- ---------- 2. where to stay ---------- -->
+  <section class="section shell snap-s">
+    <div class="section__head">
+      <p class="eyebrow">Step two</p>
+      <h2>Where to stay</h2>
+      <p class="lede">The two venues are also the two hotels, so staying at either one puts
+      you inside half the wedding and a short hop from the other half.</p>
+    </div>
+    <div class="grid grid--2" id="hotel-grid"></div>
+    <div class="callout" data-cfg-box>
+      <p data-cfg-row><strong>Getting between them.</strong> <span data-cfg="travel.shuttle"></span></p>
+      <p data-cfg-row><strong>Visas.</strong> <span data-cfg="travel.visaNote"></span></p>
+    </div>
+  </section>
+
+  <!-- ---------- 3. while you're here ---------- -->
+  <section class="section shell snap-s">
+    <div class="section__head">
+      <p class="eyebrow">Step three</p>
+      <h2>While you're here</h2>
+      <p class="lede">Both afternoons are free between roughly two and five. Puri rewards
+      an idle afternoon more than most places.</p>
+    </div>
+    <ul class="ticks grid grid--2">
+      <li><h3>The beach is right there</h3>
+        <p>Swimming is best early, before the sun turns unreasonable. The sunrise over the
+        water is the thing people come for, and it is genuinely worth setting an alarm.</p></li>
+      <li><h3>The Jagannath temple</h3>
+        <p>Ten minutes from either hotel and the reason Puri exists. Non-Hindu visitors
+        can't go inside, but the roof of the library across the road is the view everyone
+        photographs anyway.</p></li>
+      <li><h3>Raghurajpur</h3>
+        <p>A village of pattachitra painters about half an hour out, where nearly every
+        house is a studio. If you liked the paintings on your invitation, go here.</p></li>
+      <li><h3>Eat the obvious things</h3>
+        <p>Fish, prawns, and whatever the hotel is calling the local thali. Ask anyone
+        about the sweets — you'll get a forty-minute answer and a strong recommendation.</p></li>
+    </ul>
+  </section>
+
 </main>
 
 <footer class="site-foot">

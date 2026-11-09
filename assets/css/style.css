@@ -739,6 +739,13 @@ mark.todo{
     display:grid; align-content:center;
     padding-block:clamp(4.5rem,9vh,7rem) clamp(2rem,5vh,4rem);
   }
+  /* An ordinary snapped section tightens up a little so a step that
+     carries cards and a form still lands inside one screen. */
+  html.snap .section.snap-s{ padding-block:clamp(4.5rem,8vh,6rem) clamp(1.6rem,4vh,2.5rem); }
+  html.snap .section.snap-s .section__head{ margin-bottom:1rem; }
+  html.snap .section.snap-s .card{ padding:1rem 1.2rem; }
+  html.snap .section.snap-s .form-note{ font-size:.82rem; margin-top:.5rem; }
+
   /* A painted band brings its own generous padding. Inside a snapped
      screen the section supplies that, and both together overflow it. */
   html.snap .snap-s > .sky__in{ padding-block:0; }

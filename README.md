@@ -426,6 +426,10 @@ serving it over http is closer to the real thing.
   window, the "painted from" thumbnail shrinks, the Sang-it sheet tightens
   — so all four come out the same height. If you add a sign-up sheet to
   another event, check that panel still fits on a laptop.
+- **Travel & Stay snaps as well**: the band, then the three steps, with the
+  itinerary form folded into step one. Snapped sections run tighter than
+  normal ones (smaller heading margins, smaller card padding) so a step
+  that carries cards and a form still lands inside one screen.
 - **Snapping only switches on above 900px wide and 680px tall.** Below that
   it is an ordinary scrolling page, because a snapped section taller than
   the window strands whatever doesn't fit. If you add much to a section,
