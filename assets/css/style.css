@@ -206,6 +206,9 @@ p{ margin:0 0 1.1em; }
 
 /* ---------- 7. SECTIONS & CARDS ---------- */
 .section{ padding-block:clamp(3.2rem,7vw,5.5rem); }
+/* Put on a section by hand where a divider earns its place, rather than
+   between every section on every page. */
+.section--rule{ border-top:1px solid var(--rule); }
 .section__head{ max-width:var(--measure); margin-bottom:2.5rem; }
 
 .grid{ display:grid; gap:1.15rem; }
