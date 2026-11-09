@@ -619,21 +619,17 @@
   }
 
   /* ---------- 7b. logo + save the date ---------- */
+  /* The captions are plain markup bound by data-cfg; this only puts the
+     media itself into the two frames beside the carousel. */
   function media() {
     var M = C.media || {};
 
-    var logo = qs("#logo-block");
+    var logo = qs("#logo-figure");
     if (logo && M.logo) {
       logo.innerHTML =
-        '<div class="logo-pair">' +
-          '<img class="logo-mark" src="' + esc(M.logo) + '" alt="The Akanksha and Prateek logo: ' +
-            'two figures holding hands, one with a dragon head, one with a whale head" ' +
-            'width="720" height="676" loading="lazy" decoding="async">' +
-          '<img class="logo-src" src="' + esc(M.logoInspiration) + '" alt="The two crocheted ' +
-            'toys the logo was drawn from: a green dragon and a blue whale" ' +
-            'loading="lazy" decoding="async">' +
-        "</div>" +
-        "<div><h2>" + todo(M.logoHeading || "") + "</h2><p>" + todo(M.logoBody || "") + "</p></div>";
+        '<img class="logo-mark" src="' + esc(M.logo) + '" alt="The Akanksha and ' +
+          'Prateek logo: two figures holding hands, one with a dragon head, one ' +
+          'with a whale head" width="720" height="676" loading="lazy" decoding="async">';
     }
 
     /* index.html carries the hero image statically so it loads first and
@@ -653,11 +649,10 @@
       }
     }
 
-    var vid = qs("#video-block");
+    var vid = qs("#video-figure");
     if (vid && M.video) {
       /* preload="none" — 19 MB should cost nothing until somebody presses play. */
       vid.innerHTML =
-        "<div><h2>" + todo(M.videoHeading || "") + "</h2><p>" + todo(M.videoBody || "") + "</p></div>" +
         '<video class="std" controls playsinline preload="none" width="1080" height="1920"' +
           (M.videoPoster ? ' poster="' + esc(M.videoPoster) + '"' : "") + ">" +
           '<source src="' + esc(M.video) + '" type="video/mp4">' +

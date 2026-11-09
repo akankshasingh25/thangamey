@@ -414,6 +414,16 @@ serving it over http is closer to the real thing.
   after a guest moves it themselves, and permanently for anyone whose system
   asks for reduced motion. The fifteen seconds matter — with no button, a tap
   that stopped it for good would leave no way to start it again.
+- **The home page is four screens.** Hero, the three links, the trio
+  (carousel + logo + film, each in the same 9:16 frame with its caption
+  under it), then Ask us anything with the FAQ that used to sit at the
+  bottom of the events page. `class="snap"` on `<html>` and `.snap-s` on
+  each section do it; the footer rides along at the end of the last screen
+  rather than being a fifth stop of its own.
+- **Snapping only switches on above 900px wide and 680px tall.** Below that
+  it is an ordinary scrolling page, because a snapped section taller than
+  the window strands whatever doesn't fit. If you add much to a section,
+  check it still fits on a laptop screen.
 - **One width for everything tall.** `--portrait` in the CSS (20rem) sizes the
   invitation postcards, the carousel and the save-the-date film together, so
   they read as one family of objects. Change it once and all three follow. The

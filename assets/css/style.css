@@ -580,10 +580,7 @@ mark.todo{
   box-shadow:var(--shadow); justify-self:center;
 }
 
-.logo-pair{ display:flex; gap:1.2rem; align-items:center; flex-wrap:wrap; justify-content:center; }
-.logo-mark{ width:min(52%,13rem); height:auto; }
-.logo-src{ width:min(40%,9rem); height:auto; border-radius:10px; box-shadow:var(--shadow); }
-.media-block--logo{ direction:ltr; }
+.logo-mark{ width:min(100%,14rem); height:auto; }
 
 /* Text one side, something to look at on the other. Same shape as
    .media-block, kept separate so its paragraph rules stay out of the way. */
@@ -679,6 +676,70 @@ mark.todo{
 
 .brand__logo{ width:1.75rem; height:auto; flex:none; align-self:center; }
 .brand{ align-items:center; }
+
+/* =============================================================
+   14c. THE TRIO, AND FULL-SECTION SCROLLING
+   Three things in the same 9:16 frame — the carousel, the logo and the
+   film — side by side with their captions underneath.
+   ============================================================= */
+.trio{
+  display:grid; gap:clamp(1.6rem,3.5vw,2.8rem);
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));
+  align-items:start;
+}
+.trio__item{ display:flex; flex-direction:column; gap:1rem; min-width:0; }
+.trio__caption{ max-width:26rem; margin-inline:auto; text-align:center; }
+.trio__caption h2{ font-size:clamp(1.15rem,1rem + .5vw,1.5rem); margin-bottom:.35em; }
+.trio__caption p, .trio__caption #story-body{ color:var(--fg-soft); font-size:.95rem; }
+.trio__caption p:last-child, .trio__caption #story-body p:last-child{ margin-bottom:0; }
+.trio__caption .eyebrow{ margin-bottom:.3rem; }
+
+/* The carousel's dots would push its caption a line lower than the other
+   two. Inside the trio they sit over the bottom of the photograph instead,
+   so all three captions start on the same line. */
+.trio .carousel__dots{
+  position:absolute; left:50%; translate:-50% 0; bottom:.55rem; margin:0;
+  padding:.32rem .6rem; border-radius:99px;
+  background:rgba(8,15,33,.5); backdrop-filter:blur(4px);
+}
+.trio .carousel__dot{ border-color:rgba(255,255,255,.8); }
+.trio .carousel__dot[aria-current="true"]{ background:#fff; }
+
+/* The logo isn't 9:16 — nothing square is. It sits in a frame of that
+   shape so it lines up with the carousel and the film either side. */
+.frame{
+  width:min(100%,var(--portrait)); aspect-ratio:9/16; margin-inline:auto;
+  border-radius:14px; box-shadow:var(--shadow);
+  display:grid; place-items:center; padding:1.2rem;
+  background:var(--card); border:1px solid var(--card-edge);
+}
+.frame .std{ width:100%; }
+.frame--logo{ background:var(--card); }
+
+/* ---- full-section scrolling ----
+   One screen per section, on screens with the room for it. Below that it
+   is an ordinary page again: snapping a section taller than the window
+   strands whatever doesn't fit. */
+@media (min-width:900px) and (min-height:680px){
+  html.snap{ scroll-snap-type:y mandatory; }
+  /* Side by side on one screen, the frames are sized from the viewport
+     height as well as the usual width so all three always fit. Redefining
+     --portrait does it: the carousel, the film and the logo frame all
+     follow without knowing anything about each other. Stacked on a phone
+     they go back to the normal width. */
+  .trio{ --portrait: min(20rem, calc(54svh * 9 / 16)); }
+  html.snap .snap-s{
+    min-height:100svh; scroll-snap-align:start; scroll-snap-stop:always;
+    display:grid; align-content:center;
+    padding-block:clamp(4.5rem,9vh,7rem) clamp(2rem,5vh,4rem);
+  }
+  /* A painted band brings its own generous padding. Inside a snapped
+     screen the section supplies that, and both together overflow it. */
+  html.snap .snap-s > .sky__in{ padding-block:0; }
+  /* The footer is the tail of the last screen rather than a stop of its
+     own — on its own it would be four lines in an empty window. */
+  html.snap .site-foot{ scroll-snap-align:end; }
+}
 
 /* =============================================================
    15. GIFT REGISTRY

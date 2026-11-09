@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="snap">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,7 +35,7 @@
 <main id="main">
 
   <!-- ---------- hero: the postcard cover ---------- -->
-  <section class="sky sky--scrim hero" id="hero-cover" data-sky="puri-night" data-art="assets/art/cover.jpg">
+  <section class="sky sky--scrim hero snap-s" id="hero-cover" data-sky="puri-night" data-art="assets/art/cover.jpg">
     <div class="sky__in hero__in">
       <div class="hero__text">
         <h1 class="vh">Akanksha &amp; Prateek</h1>
@@ -60,7 +60,7 @@
        For anyone who will never scroll this far down a wedding website.
        Built from `quick` in data/config.js; each card hides itself if its
        link isn't filled in yet, and the section hides if none are. -->
-  <section class="section shell" id="quick" hidden>
+  <section class="section shell snap-s" id="quick" hidden>
     <div class="section__head section__head--tight">
       <p class="eyebrow" data-cfg="quick.eyebrow"></p>
       <h2 data-cfg="quick.heading"></h2>
@@ -68,30 +68,43 @@
     <ul class="grid grid--3 quick-list" id="quick-list"></ul>
   </section>
 
-  <!-- ---------- the story ---------- -->
-  <section class="section shell">
-    <div class="split">
-      <div>
-        <div class="section__head section__head--tight">
+  <!-- ---------- the three of them, side by side ----------
+       One snap stop: the carousel, the logo and the film, each in the same
+       9:16 frame with its caption underneath. The frames are sized from the
+       viewport height in `.trio` so all three always fit on one screen. -->
+  <section class="section shell snap-s">
+    <div class="trio">
+
+      <article class="trio__item">
+        <!-- Filled from story.photos in data/config.js. Hidden while the
+             list is empty, which leaves the caption on its own. -->
+        <div class="carousel" id="story-photos" hidden></div>
+        <div class="trio__caption">
           <p class="eyebrow">Us, apparently</p>
           <h2 data-cfg="story.heading"></h2>
+          <div id="story-body"></div>
         </div>
-        <div id="story-body" class="lede"></div>
-      </div>
-      <!-- Filled from story.photos in data/config.js. Stays hidden if the
-           list is empty, so the text just takes the full width again. -->
-      <div class="carousel" id="story-photos" hidden></div>
+      </article>
+
+      <article class="trio__item">
+        <div class="trio__media frame frame--logo" id="logo-figure"></div>
+        <div class="trio__caption">
+          <p class="eyebrow">The two of them</p>
+          <h2 data-cfg="media.logoHeading"></h2>
+          <p data-cfg="media.logoBody"></p>
+        </div>
+      </article>
+
+      <article class="trio__item">
+        <div class="trio__media frame" id="video-figure"></div>
+        <div class="trio__caption">
+          <p class="eyebrow">Before all this</p>
+          <h2 data-cfg="media.videoHeading"></h2>
+          <p data-cfg="media.videoBody"></p>
+        </div>
+      </article>
+
     </div>
-  </section>
-
-  <!-- ---------- the logo, and where it came from ---------- -->
-  <section class="section shell">
-    <div class="media-block media-block--logo" id="logo-block"></div>
-  </section>
-
-  <!-- ---------- save the date ---------- -->
-  <section class="section shell">
-    <div class="media-block" id="video-block"></div>
   </section>
 
   <!-- ---------- sustainability ---------- -->
@@ -104,17 +117,22 @@
     <ul class="ticks grid grid--2" id="sustain-list"></ul>
   </section> -->
 
-  <!-- ---------- ask us ---------- -->
-  <section class="section shell">
-    <img class="eyes" src="assets/img/eyes.png" alt="" width="100" height="62" loading="lazy">
-    <div class="section__head" style="margin-bottom:1.2rem">
+  <!-- ---------- ask us, and the questions we already know ----------
+       The FAQ used to live at the bottom of events.html. It belongs with
+       the invitation to ask rather than under the four parties. -->
+  <section class="section shell snap-s">
+    <div class="section__head section__head--tight">
       <h2>Ask us anything</h2>
       <p class="lede" data-cfg="contact.helpText"></p>
     </div>
-    <p class="btn-row" style="justify-content:flex-start">
-      <a class="btn btn--gold" data-contact="email" data-contact-label>Email us</a>
-      <a class="btn btn--ghost" data-contact="whatsapp" data-contact-label>WhatsApp</a>
-    </p>
+    <div class="faq">
+      <details open><summary>Do I have to come to all four?</summary>
+        <div><p>No. You can come and leave whenever, just let us know beforehand.</p></div></details>
+      <details><summary>How serious is the dress code?</summary>
+        <div><p>Not at all, it is to help guide people make up their minds.</p></div></details>
+      <details><summary>Is there a gap between events?</summary>
+        <div><p>Yes and no. There will be rituals between events but you can choose to not attend them and rest or travel around.</p></div></details>
+    </div>
   </section>
 
 </main>
