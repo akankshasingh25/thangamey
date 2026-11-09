@@ -635,15 +635,17 @@ mark.todo{
   position:relative; flex:0 0 100%; aspect-ratio:9/16;
   scroll-snap-align:center; scroll-snap-stop:always; overflow:hidden;
 }
-/* The photographs are all different shapes. Rather than crop heads off to
-   force one ratio, each sits whole against a blurred copy of itself. */
+/* Only drawn behind a photo set to fit:"contain" — a cover-cropped one
+   fills the frame and would hide it anyway. */
 .slide__back{
   position:absolute; inset:0; background-size:cover; background-position:center;
   filter:blur(22px) saturate(.75) brightness(.5); transform:scale(1.2);
 }
 .slide img{
-  position:relative; display:block; width:100%; height:100%; object-fit:contain;
+  position:relative; display:block; width:100%; height:100%;
+  object-fit:cover;            /* fill the 9:16 frame, crop the overflow */
 }
+.slide img[data-fit="contain"]{ object-fit:contain; }
 
 .carousel__btn{
   position:absolute; top:50%; translate:0 -50%; z-index:2;

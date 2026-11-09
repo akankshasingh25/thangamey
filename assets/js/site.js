@@ -486,11 +486,21 @@
       '<ul class="carousel__track" id="story-track" tabindex="0" ' +
           'aria-label="Photographs of us, ' + shots.length + ' in all. Use the arrow keys.">' +
         shots.map(function (p, i) {
+          /* Default is to fill the 9:16 frame and crop whatever doesn't fit.
+             A photo that can't survive that — a wide one with someone at
+             each edge — can say fit: "contain" and keep its whole self
+             against a blurred copy of itself instead. */
+          var contain = p.fit === "contain";
           return '<li class="slide" aria-label="' + (i + 1) + " of " + shots.length + '">' +
-            /* A blurred copy of the same file fills the frame behind the
-               photo. Same URL, so the browser fetches it once. */
-            '<span class="slide__back" style="background-image:url(&quot;' + esc(p.src) + '&quot;)"></span>' +
+            (contain
+              /* Same URL as the photo, so the browser fetches it once. */
+              ? '<span class="slide__back" style="background-image:url(&quot;' +
+                  esc(p.src) + '&quot;)"></span>'
+              : "") +
             '<img src="' + esc(p.src) + '" alt="' + esc(p.alt || "") + '"' +
+              (contain ? ' data-fit="contain"' : "") +
+              /* Which part to keep when it crops. Default is the middle. */
+              (p.focus ? ' style="object-position:' + esc(p.focus) + '"' : "") +
               (i ? ' loading="lazy"' : "") + ' decoding="async">' +
           "</li>";
         }).join("") +

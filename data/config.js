@@ -31,11 +31,11 @@ window.WEDDING = {
     logoInspiration: "assets/photos/bully-dino.jpg",
     logoHeading: "About the logo",
     logoBody:
-      "That's us, more or less. Two crocheted animals — a dinosaur and a whale — who " +
-      "live on a sofa and, somewhere along the way, became the two people getting married. " +
-      "The illustrator took them entirely at their word.",
+      "Hum do, humare do. " +
+      "We got Dino Choudhary from an elderly Roman woman who sells crocheted plushies at Artjuna, Goa in 2023. And later in 2025 he found his sister, Bully. " +
+      "We think their names are obvious.",
     videoHeading: "Save the Date",
-    videoBody: "Before the website, before the invitations, there was this.",
+    videoBody: "We are too shy for pre-wedding photoshoots. Hope you enjoyed catching this STD.",
     video: "assets/video/save-the-date.mp4",
     videoPoster: "assets/art/save-the-date.jpg",  // the film's own closing frame
   },
@@ -80,7 +80,7 @@ window.WEDDING = {
     email:    "4b414b444159424b5943444d42181f474b5849426a4d474b434604494547",
     whatsapp: "01131b0a1d191f181d181f1b1a1a",
     helpText:
-      "Stuck on anything — what to pack, sweaters or beach clothes? how long can you perform? a dietary thing, a train that only runs on Tuesdays? Ask us. We genuinely do not mind.",
+      "Stuck on anything — what to pack, sweaters or beach clothes? how long can you perform? a dietary thing, a train that only runs on Tuesdays? Ask us. We do not mind.",
   },
 
   /* ---------- THE EVENTS ----------
@@ -131,7 +131,7 @@ window.WEDDING = {
       dress: "Traditional Partywear; Shades of Sunset",
       mapUrl: "https://maps.google.com/?q=Fortune+Beachfront+Puri",
       note:
-        "Performances are welcome, encouraged, and gently capped at five minutes. We love you. Five minutes.",
+        "Performances are welcome, encouraged, and gently capped at four minutes. We love you. Four minutes.",
       /* ---- An optional sign-up sheet, shown inside this event's panel ----
          Any event can have one: give it a `sheet` block like this and it
          appears; delete the block and it disappears. This points at the
@@ -147,8 +147,8 @@ window.WEDDING = {
         url: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?usp=sharing#gid=393904024",
         heading: "Pick a song, add your name",
         text:
-          "The running order lives in a spreadsheet. Add a song, put your name in the " +
-          "last column, and drop in one or two choreography links. No song twice \u2014 if " +
+          "We are trying to save everyone from some through this sheet. Add a song, put your name in the " +
+          "last column, and drop in a choreography link if there isn't any. No song twice \u2014 if " +
           "yours is already there, add your name to that row and dance together.",
         label: "Open the Sang-it sheet",
         note:
@@ -172,7 +172,7 @@ window.WEDDING = {
       dress: "Traditional Daywear; Tints of Sunflower",
       mapUrl: "https://maps.google.com/?q=The+Chanakya+BNR+Puri",
       note:
-        "Outdoors, bright, and messy on purpose. Wear nothing you love. Turmeric is forever (or not).",
+        "Outdoors, bright and will be competitive. Wear light, carry sunglasses, umbrella and a hankerchief.",
     },
     {
       slug: "wedding",
@@ -204,11 +204,11 @@ window.WEDDING = {
     intro:
       "Puri is on the Bay of Bengal, about two hours " +
       "down the coast from Bhubaneswar. Both venues are in Puri itself and about ten " +
-      "minutes apart, so once you have arrived you have effectively arrived at everything.",
+      "minutes apart, so once you have arrived you have arrived at everything.",
     air: {
       name: "Biju Patnaik International, Bhubaneswar (BBI)",
       note:
-        "The nearest airport, 60 km away and a little under two hours by road on a good " +
+        "The nearest airport, 60 km away and roughly two hours by road on a good " +
         "day. Direct flights from Delhi, Mumbai, Bengaluru, Hyderabad, Ranchi and Kolkata; from " +
         "anywhere else you will change at one of those. Aim to land by early morning on " +
         "8 December if you can — it makes the drive easier. " +
@@ -217,14 +217,13 @@ window.WEDDING = {
     rail: {
       name: "Puri Junction (PURI)",
       note:
-        "Puri is a terminus, so the train stops whether you are awake or not — which makes " +
-        "this the low-stress option. The station is 5–15 minutes from either hotel. " +
-        "Book early: December is high season here and AC berths go long before the date.",
+        "Puri is a terminus, so the train stops whether you are awake or not. The station is 5–15 minutes from either hotel. " +
+        "Book early: December is peak season here and AC berths go long before the date.",
     },
     hotels: [
       {
         name: "Fortune Beachfront, Puri",
-        note: "The first day is here — Daler Mehandi by the pool, Sang-it on Ikshana Lawn " +
+        note: "The first day is here, Daler Mehandi by the pool, Sang-it on Ikshana Lawn " +
               "after sunset. It sits right on the promenade, the best possible distance from " +
               "the city: close enough to commute, far enough for the peace. Rooms are blocked for " +
               "friends under 'Akanksha & Prateek' from 8 to 10 December 2026.",
@@ -292,24 +291,22 @@ window.WEDDING = {
      Do neither and the section politely says the list is still coming.     */
   gifts: {
     intro:
-      "The honest answer is that we don't need anything from our guests, except you coming all the way " +
-      "to Puri and having fun with us. But people keep asking, and we'd rather " +
+      "The honest answer is that we don't know the best practices. But people keep asking, and we'd rather " +
       "answer the question than be coy about it. So: here is a list.",
     ways: [
       {
         title: "Gift an item",
         body: "Pick something off the list and it's yours to give. Tell us which one " +
-              "so we can cross it off and nobody ends up with two.",
+              "so we can cross it off and we don't end up with two.",
       },
       {
         title: "Chip in towards one",
         body: "Some of the things on the list are bigger than one gift. Put in whatever " +
-              "you like towards one and we'll pool it — a fifth of a sofa is still a sofa.",
+              "you like towards one and we'll pool it",
       },
       {
         title: "Buy a gift card",
-        body: "If you'd rather not choose, a gift card for one of the shops below goes " +
-              "straight into the same pot and lets us finish the list ourselves.",
+        body: "If you'd rather not choose, a gift card for one of the brands.",
       },
     ],
 
@@ -334,8 +331,8 @@ window.WEDDING = {
     brands: [],
 
     closing:
-      "However you do it, message or email us so we can keep the list honest. " +
-      "And if you'd rather do none of this, that is a completely acceptable answer.",
+      "However you do it, WhatsApp DM us so we can keep the list updated. " +
+      "And if you'd rather do none of this and gift something else or not at all, that is absoluetely okay too.",
   },
 
   /* ---------- MISSIONS ----------
@@ -369,8 +366,8 @@ window.WEDDING = {
       eyebrow: "Mission one",
       heading: "Ten photographs",
       intro:
-        "There will be a photographer. He will be excellent, and he will miss " +
-        "all of this. Ten things to go and find over the two days — on your phone, " +
+        "There will be a photographer. They will be excellent, and they will miss " +
+        "all of this. Five things to go and find over day, on your phone, " +
         "badly lit, whatever. Attach what you get and send the lot.",
 
       /* Reorder, reword or cut a few — the form follows whatever is here.

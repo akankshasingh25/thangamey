@@ -400,9 +400,10 @@ serving it over http is closer to the real thing.
   section disappears.
 - **The story carousel** is a scroll-snap track in a 9:16 frame: a swipe is the
   browser's own scrolling, the arrows and dots only scroll it, and it wraps at
-  both ends. Photographs keep their own shape against a blurred copy of
-  themselves rather than being cropped, so a landscape one would letterbox
-  rather than lose its edges. Add or reorder them in `story.photos`. Put the
+  both ends. Photographs fill the frame and anything that doesn't fit is
+  cropped off the sides — `focus: "60% center"` on a photo moves which part
+  survives, and `fit: "contain"` on one that can't be cropped (someone at each
+  edge) keeps it whole against a blurred copy of itself. Put the
   files in `assets/photos/story/` at about 1400px on the long side; they were
   stripped of their camera metadata on the way in, which is worth repeating
   for any you add, since the repo is public.
