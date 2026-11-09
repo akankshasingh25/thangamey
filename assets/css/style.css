@@ -684,9 +684,13 @@ mark.todo{
    Three things in the same 9:16 frame — the carousel, the logo and the
    film — side by side with their captions underneath.
    ============================================================= */
+/* One per row or three across, never two and a stray. auto-fit used to
+   give 2+1 on any window between about 660 and 900px, which reads as a
+   broken layout rather than a narrow one. Three only when the page is
+   snapping, which is the only width they are designed for. */
 .trio{
   display:grid; gap:clamp(1.6rem,3.5vw,2.8rem);
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));
+  grid-template-columns:1fr;
   align-items:start;
 }
 .trio__item{ display:flex; flex-direction:column; gap:1rem; min-width:0; align-items:center; }
@@ -733,7 +737,10 @@ mark.todo{
      --portrait does it: the carousel, the film and the logo frame all
      follow without knowing anything about each other. Stacked on a phone
      they go back to the normal width. */
-  .trio{ --portrait: min(20rem, calc(54svh * 9 / 16)); }
+  .trio{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    --portrait: min(20rem, calc(54svh * 9 / 16));
+  }
   html.snap .snap-s{
     min-height:100svh; scroll-snap-align:start; scroll-snap-stop:always;
     display:grid; align-content:center;
