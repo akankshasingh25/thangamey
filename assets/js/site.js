@@ -710,13 +710,10 @@
     game.hidden = !on;
     if (gate) {
       gate.hidden = on;
-      var G = C.games || {};
       var when = qs("#game-open-label", gate);
-      if (when) when.innerHTML = todo(G.openLabel || "");
-      /* The names are the only thing given away in advance. */
-      setText("#gate-name-one", (G.photos || {}).heading);
-      setText("#gate-name-two", (G.quiz || {}).heading);
+      if (when) when.innerHTML = todo((C.games || {}).openLabel || "");
     }
+    missionBar(on);
     if (on && previewing() && !qs(".preview-flag", game)) {
       game.insertBefore(
         el("p", "preview-flag shell",
@@ -730,6 +727,24 @@
   function setText(sel, value) {
     var n = qs(sel);
     if (n && value) n.innerHTML = todo(value);
+  }
+
+  /* The two names head the page whether or not the missions are open —
+     they are the one thing disclosed in advance. Before the window they
+     are labels, because there is nothing yet to jump to. */
+  function missionBar(open) {
+    var bar = qs("#mission-bar");
+    if (!bar) return;
+    var G = C.games || {};
+    var two = [
+      { id: "i-spy", name: (G.photos || {}).heading || "Mission one" },
+      { id: "gather-intel", name: (G.quiz || {}).heading || "Mission two" },
+    ];
+    bar.innerHTML = two.map(function (m) {
+      return open
+        ? '<a href="#' + m.id + '">' + todo(m.name) + "</a>"
+        : "<span>" + todo(m.name) + "</span>";
+    }).join("");
   }
 
   function missions() {
@@ -746,7 +761,7 @@
     cards.innerHTML = [G.photos, G.quiz].map(function (m, i) {
       if (!m) return "";
       var url = cfgLink(i === 0 ? "collect.photos" : "collect.quiz");
-      return '<li class="card mission-card">' +
+      return '<li class="card mission-card" id="' + (i === 0 ? "i-spy" : "gather-intel") + '">' +
         '<p class="card__meta">' + todo(m.eyebrow || ("Mission " + (i + 1))) + "</p>" +
         "<h2>" + todo(m.heading || "") + "</h2>" +
         (m.intro ? "<p>" + todo(m.intro) + "</p>" : "") +

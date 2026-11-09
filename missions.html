@@ -29,25 +29,17 @@
 </header>
 
 <main id="main">
-  <section class="sky sky--band sky--scrim" data-sky="tints-of-sunflower" data-art="assets/art/haldi.jpg">
-    <div class="sky__in">
-      <p class="eyebrow">8 &amp; 9 December &middot; Puri</p>
-      <h1 id="missions-heading">Two missions</h1>
-      <p class="lede" id="missions-intro"></p>
-    </div>
-  </section>
+  <!-- No painted band: the page opens on the bar naming the two missions,
+       which is all it gives away before the window opens. -->
+  <h1 class="vh">Two missions</h1>
 
-  <!-- Before the window opens this is the whole page: the two names, when
-       they open, and nothing else. See `games` in data/config.js. -->
+  <nav class="event-jump" id="mission-bar" aria-label="The two missions"></nav>
+
+  <!-- Before the window opens this is the whole page. See `games` in
+       data/config.js. -->
   <section class="section shell" id="game-gate" hidden>
-    <ul class="mission-names">
-      <li><span class="mission-names__no">Mission one</span>
-          <span class="mission-names__name" id="gate-name-one"></span></li>
-      <li><span class="mission-names__no">Mission two</span>
-          <span class="mission-names__name" id="gate-name-two"></span></li>
-    </ul>
     <div class="callout">
-      <p><strong>Wait deer!.</strong> <span id="game-open-label"></span></p>
+      <p><strong>Not yet.</strong> <span id="game-open-label"></span></p>
       <p>That is all you get for now. Go and <a href="travel.html#plans">tell us your
       plans</a> instead.</p>
     </div>
@@ -57,6 +49,7 @@
        page's job is to name it and hand over the link. -->
   <div id="game" hidden>
     <section class="section shell">
+      <p class="lede" id="missions-intro"></p>
       <ul class="grid grid--2 mission-cards" id="mission-cards"></ul>
       <p class="mission-aside" id="missions-close"></p>
     </section>
