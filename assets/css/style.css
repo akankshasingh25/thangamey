@@ -689,8 +689,8 @@ mark.todo{
   grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));
   align-items:start;
 }
-.trio__item{ display:flex; flex-direction:column; gap:1rem; min-width:0; align-items:start; }
-.trio__caption{ max-width:26rem; }
+.trio__item{ display:flex; flex-direction:column; gap:1rem; min-width:0; align-items:center; }
+.trio__caption{ max-width:26rem; text-align:center; }
 .trio__caption h2{ font-size:clamp(1.15rem,1rem + .5vw,1.5rem); margin-bottom:.35em; }
 .trio__caption p, .trio__caption #story-body{ color:var(--fg-soft); font-size:.95rem; }
 .trio__caption p:last-child, .trio__caption #story-body p:last-child{ margin-bottom:0; }
@@ -710,7 +710,7 @@ mark.todo{
 /* The logo isn't 9:16 — nothing square is. It sits in a frame of that
    shape so it lines up with the carousel and the film either side. */
 .frame{
-  width:min(100%,var(--portrait)); aspect-ratio:9/16;
+  width:min(100%,var(--portrait)); aspect-ratio:9/16; margin-inline:auto;
   border-radius:14px; box-shadow:var(--shadow);
   display:grid; place-items:center; padding:1.2rem;
   background:var(--card); border:1px solid var(--card-edge);
@@ -719,8 +719,8 @@ mark.todo{
 .frame--logo{ background:var(--card); }
 /* The film is 9:16 already and brings its own rounded edge, so it needs no
    frame around it — just the same width as the two beside it. */
-.trio__media{ width:min(100%,var(--portrait)); }
-.trio .std, .trio .carousel{ margin-inline:0; justify-self:start; }
+.trio__media{ width:min(100%,var(--portrait)); margin-inline:auto; }
+.trio .std, .trio .carousel{ margin-inline:auto; justify-self:center; }
 
 /* ---- full-section scrolling ----
    One screen per section, on screens with the room for it. Below that it
