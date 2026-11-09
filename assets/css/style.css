@@ -753,6 +753,15 @@ mark.todo{
   html.snap .section.snap-s .card{ padding:1rem 1.2rem; }
   html.snap .section.snap-s .form-note{ font-size:.82rem; margin-top:.5rem; }
 
+  /* A page with a sticky jump bar has two things overlapping the top of
+     every screen, not one. Its own scroll-margin would double up on a
+     snap point, which honours it — so that goes to zero here. */
+  html.snap .section.snap-s--jump{ padding-block:7.5rem 1rem; scroll-margin-top:0; }
+  html.snap .section.snap-s--jump .section__head{ margin-bottom:.8rem; }
+  html.snap .section.snap-s--jump .card{ padding:.9rem 1.1rem; }
+  html.snap .section.snap-s--jump .lede{ font-size:1rem; }
+  html.snap .section.snap-s--jump #plans .section__head{ margin-bottom:.6rem; }
+
   /* A painted band brings its own generous padding. Inside a snapped
      screen the section supplies that, and both together overflow it. */
   html.snap .snap-s > .sky__in{ padding-block:0; }

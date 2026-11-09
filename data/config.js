@@ -201,6 +201,11 @@ window.WEDDING = {
      The airport and station are real. The times, the hotel list and
      the shuttle are «yours to confirm».                             */
   travel: {
+    /* NOT SHOWN ANYWHERE at the moment. It used to be the lede in the
+       painted band at the top of the page, and that band has gone in
+       favour of the Commute / Stay / Roam Around bar. Kept because it is
+       good copy — say the word and it can go under "Getting to Puri",
+       though that step is already a full screen's worth. */
     intro:
       "Puri is on the Bay of Bengal, about two hours " +
       "down the coast from Bhubaneswar. Both venues are in Puri itself and about ten " +
@@ -326,31 +331,31 @@ window.WEDDING = {
 
        `brand`, `price`, `note` and `url` are each optional.                 */
     items: [
-      { name: "Contribute towards a cause", brand: "Vespa",
+      { name: "Contribute Towards a Cause", brand: "Vespa",
         note: "Enable Akanksha. Highest contributor gets to decide a JHATANG colour. We accept UPI, don't feel shy." },
-      { name: "Non-toxic, gift-ready cookware", brand: "Cumin Co",
+      { name: "Non-toxic, Gift-ready Cookware", brand: "Cumin Co",
         note: "Enable Prateek." },
-      { name: "Air fryer", brand: "Cosori",
+      { name: "Air Fryer", brand: "Cosori",
         note: "We are only allowed 1 tsp oil per meal per person." },
       { name: "Aeropress", brand: "Aeropress",
         note: "In case there is an apocalypse." },
-      { name: "A trek voucher", brand: "Indiahikes",
+      { name: "Gift Card", brand: "Indiahikes",
         note: "To touch grass ;) ;)" },
-      { name: "Gift card", brand: "Cult.fit",
+      { name: "Gift Card", brand: "Cult.fit",
         note: "Can't touch grass unprepared, part one." },
-      { name: "Gift card", brand: "Decathlon / Trekkit India",
+      { name: "Gift Card", brand: "Decathlon / Trekkit India",
         note: "Can't touch grass unprepared, part two." },
-      { name: "Spa voucher", brand: "Meraki",
-        note: "Love language: physical touch." },
-      { name: "Gift card", brand: "Dyson",
+      { name: "Spa Voucher", brand: "Meraki",
+        note: "Love Language: physical touch." },
+      { name: "Gift Card", brand: "Dyson",
         note: "For Prateek or Akanksha, depends on what we buy." },
-      { name: "Gift card", brand: "Crossword",
+      { name: "Gift Card", brand: "Crossword",
         note: "Home decor." },
-      { name: "Gift card", brand: "Nike",
+      { name: "Gift Card", brand: "Nike",
         note: "Second only to samosa for Prateek." },
-      { name: "Annual membership", brand: "Spotify" },
-      { name: "Premium subscription", brand: "YouTube" },
-      { name: "Subscription", brand: "Netflix" },
+      { name: "Annual Membership", brand: "Spotify" },
+      { name: "Premium Subscription", brand: "YouTube" },
+      { name: "Annual Subscription", brand: "Netflix" },
     ],
 
     /* Gift-card shops, shown as chips. Empty hides the whole section —
@@ -383,25 +388,22 @@ window.WEDDING = {
     // live: true,
     liveFrom:  "2026-12-08T10:00:00+05:30",
     liveUntil: "2026-12-10T10:00:00+05:30",
-    openLabel: "Both missions open at 10am on 8 December and close at 10am on 10 December.",
-    closeLabel: "Both close at 10am on 10 December. Nothing sent after that counts, which is the only rule.",
+    openLabel: "Both missions open on 8 December 10 am and close at 10 December 10 am.",
+    closeLabel: "The couple makes the rules and their decision is binding." + "The winners will be annouched on Akanksha's Instagram or DMed to you/your WhatsApp groups.",
 
     navLabel: "Missions",
     heading: "Two missions",
     /* Only shown once the window is open — before that the page gives the
        two names and the opening time and nothing else. */
     intro:
-      "Both are open now, neither is compulsory, and both are scored. " +
-      "One needs your camera. The other needs you to have been paying attention.",
+      "Both are open NOW. We didn't tell you this before but there is an actual prize for the winners.",
 
     photos: {
-      eyebrow: "Mission one",
+      eyebrow: "Mission 1",
       heading: "I Spy",
       openLabel: "Open I Spy",
       intro:
-        "There will be a photographer. They will be excellent, and they will miss " +
-        "all of this. A list of things to go and find over the two days — on your " +
-        "phone, badly lit, whatever. The form takes them one at a time.",
+        "Something to keep you on your toes, either you click or get clicker.",
 
       /* Reorder, reword or cut a few — the form follows whatever is here.
          If you change the NUMBER of prompts, update the hidden detection
@@ -422,12 +424,11 @@ window.WEDDING = {
       /* Optional. A shared album for everything that isn't one of the ten. */
       albumUrl: "«https://photos.app.goo.gl/...»",
       albumNote:
-        "Everything else — the ordinary photographs, the ones that aren't on " +
-        "the list — can go straight into the shared album.",
+        "Use this shared album to get all your photos while you upload the ones on your phone.",
     },
 
     quiz: {
-      eyebrow: "Mission two",
+      eyebrow: "Mission 2",
       heading: "Gather Intel",
       openLabel: "Open Gather Intel",
       intro:
@@ -531,18 +532,18 @@ window.WEDDING = {
      A card whose link is missing or still in «guillemets» leaves itself
      out, and if all of them are missing the whole section disappears.   */
   quick: {
-    eyebrow: "If you do nothing else",
-    heading: "Three links and you're done",
+    eyebrow: "We made a webiste for this",
+    heading: "Your TO-DOs",
     items: [
       {
         title: "Tell us your travel plans",
-        body: "When you land, when you leave, and how. It is how we know who needs a car and when.",
+        body: "When you arrive, when you depart, and how. It is how we know who needs a car and when.",
         from: "collect.itinerary",
         label: "Open the form",
       },
       {
         title: "The gift registry",
-        body: "A list, not an expectation. Several of them are meant to be gone in on together.",
+        body: "A list to help you help us, not necessary to be followed.",
         from: "gifts.sheetUrl",
         label: "See the list",
       },
@@ -581,15 +582,15 @@ window.WEDDING = {
     rotateEvery: 5000,
     photos: [
       { src: "assets/photos/story/01.jpg",
-        alt: "Running a race hand in hand on a grey morning, numbers pinned on, both laughing" },
+        alt: "Ghent Half Marathon Ghent, Belgium, March 2026" },
       { src: "assets/photos/story/02.jpg",
-        alt: "Under festoon lights in a garden at night, leaning into each other" },
+        alt: "Under the Mango Tree Bhopal, March 2023" },
       { src: "assets/photos/story/03.jpg",
         alt: "Dressed up by a river with hills behind — one in a turban and cream kurta, one in a yellow saree" },
       { src: "assets/photos/story/04.jpg",
-        alt: "At a concert, song lyrics lit up on the screen behind the crowd" },
+        alt: "Hope on the Stage Concert Singapore, April 2025" },
       { src: "assets/photos/story/05.jpg",
-        alt: "A hug in a plant-filled café courtyard, both in off-white" },
+        alt: "Bungalow 12 Jodhpur, Jan 2024" },
     ],
   },
 
