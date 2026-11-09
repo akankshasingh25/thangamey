@@ -1,5 +1,5 @@
 /* =============================================================
-   BalleBalleTheWeeding.com — EDIT THIS FILE AND ALMOST NOTHING ELSE
+   Thangamey, The Weeding — EDIT THIS FILE AND ALMOST NOTHING ELSE
    -------------------------------------------------------------
    Names, dates, times, venues and dress codes below are taken
    verbatim from your invitation PDF and should be correct.
@@ -14,10 +14,12 @@ window.WEDDING = {
   couple: {
     one: "Akanksha",
     two: "Prateek",
-    siteTitle: "Balle Balle, The Weeding",
+    siteTitle: "Thangamey, The Weeding",
     tagline: "In the city of Lord Jagannath and by the coast of Puri. Two days, four parties. A respite from the cold.",
-    // gurmukhi: "ਬੱਲੇ ਬੱਲੇ",
-    // hashtag: "«#BalleBalleTheWeeding»",
+    /* The name in its own script, shown small beside the wordmark in the
+       header and footer. Uncomment to switch it on. Thangamey is Tamil. */
+    // script: "தங்கமே",
+    // hashtag: "«#ThangameyTheWeeding»",
   },
 
   /* ---------- ARTWORK, LOGO, VIDEO ----------

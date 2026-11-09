@@ -33,7 +33,7 @@ collect: {
 
 ## 1. Travel itinerary
 
-Title it something like **Balle Balle — your travel plans**.
+Title it something like **Thangamey — your travel plans**.
 
 | # | Question | Type | Notes |
 |---|---|---|---|
@@ -54,7 +54,7 @@ by a button through to this.
 
 ## 2. Mission one — the photographs
 
-Title it **Balle Balle — ten photographs**. This is the one that needs care,
+Title it **Thangamey — ten photographs**. This is the one that needs care,
 because the question titles become your folder names.
 
 Start with:
@@ -86,7 +86,7 @@ after the form. Each upload question then gets **its own subfolder inside it,
 named after the question**:
 
 ```
-Balle Balle — ten photographs (File responses)/
+Thangamey — ten photographs (File responses)/
   Someone you have only ever met in a family WhatsApp group/
   A pair of hands straight after Daler Mehandi…/
   The worst possible photograph of the bride…/
@@ -105,7 +105,7 @@ but worth watching, and worth not being at 14.8 GB already.
 
 ## 3. Mission two — the quiz
 
-Title it **Balle Balle — the scoreboard**. Short, because the quiz itself is
+Title it **Thangamey — the scoreboard**. Short, because the quiz itself is
 played on the website: it asks the questions and marks them in the browser, and
 this form only records the result.
 

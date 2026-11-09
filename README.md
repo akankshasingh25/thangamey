@@ -1,4 +1,4 @@
-# BalleBalleTheWeeding.com
+# Thangamey, The Weeding
 
 A wedding website for Akanksha & Prateek — Puri, 8 & 9 December 2026.
 
@@ -142,7 +142,7 @@ They go to a **Google Form with one file-upload question per prompt**, which is
 the only arrangement that gives you a folder per photograph:
 
 ```
-Balle Balle — ten photographs (File responses)/
+Thangamey — ten photographs (File responses)/
   Someone you have only ever met in a family WhatsApp group/
   A pair of hands straight after Daler Mehandi…/
   …
@@ -233,38 +233,47 @@ The site is plain files — 34 of them, 22 MB, 19 MB of which is
 **nothing posts to a server**. So any free static host will do, and you should
 pick the one with the most generous bandwidth, because of the video.
 
-### Cloudflare Pages — what this is set up for
+### GitHub Pages — where it actually lives
 
-The repo is **github.com/akankshasingh25/balleballe**, private. Cloudflare Pages is
-free, serves static files with unmetered bandwidth, and — unlike GitHub Pages
-on a free account — deploys from a private repo, so nothing about the wedding
-becomes searchable.
+**Live at [akankshasingh25.github.io/balleballe](https://akankshasingh25.github.io/balleballe/)**,
+served from `main` at the repo root. Every `git push` rebuilds it; allow a
+minute or two.
 
-**One-time setup:**
+The repo is **public**, because GitHub Pages on a free account will not serve a
+private one. That is why two things in here are the way they are:
 
-1. [dash.cloudflare.com](https://dash.cloudflare.com) → sign up (free, no card).
-2. **Compute (Workers & Pages) → Create → Pages → Connect to Git.**
-3. Authorise GitHub. When it asks which repositories, pick **balleballe** —
-   it has to be granted explicitly because the repo is private.
-4. Framework preset: **None**. Build command: **leave empty**. Build output
-   directory: **`/`**. Save and Deploy.
+- **The email address and the phone number are scrambled** in `config.js` and
+  never written into the page until a visitor reaches for them. See *The email
+  address and the phone number* above.
+- **Every page carries `<meta name="robots" content="noindex, nofollow">`.**
+  `robots.txt` only works at a domain root, and this site sits in a subfolder,
+  so the file in this repo is ignored — the one crawlers read belongs to
+  GitHub and allows everything. The meta tags are the only thing keeping the
+  site out of search results. **Don't remove them.**
 
-It goes live at `balleballe.pages.dev` in about a minute. Every `git push` to
-`main` redeploys it.
+**Three things GitHub Pages ignores**, which matter if you ever move hosts:
 
-**The custom domain**, once you're happy with it: Pages project → **Custom
-domains → Set up a domain** → `balleballetheweeding.com`. For a bare domain
-Cloudflare needs your nameservers pointed at it — it walks you through that at
-your registrar. HTTPS provisions itself.
+| File | Effect on GitHub Pages |
+|---|---|
+| `_headers` | Ignored. No CSP, no `nosniff`, no referrer policy. |
+| `netlify.toml` | Ignored. |
+| `_redirects` | Ignored — `/photos.html` 404s instead of forwarding. |
 
-**Two Cloudflare limits worth knowing:** 500 builds a month (you'll use a
-handful) and **25 MiB per file**. `save-the-date.mp4` is 19.4 MiB, so it fits,
-but a longer cut would not.
+It serves everything with a flat `cache-control: max-age=600`, so an edit can
+take ten minutes to reach somebody who visited recently. Cloudflare Pages
+honoured all three files; if you want the security headers and the cache rules
+back, that is where they work.
 
-`_headers` and `_redirects` in the repo root are the Cloudflare equivalents of
-`netlify.toml` — caching rules and the two redirects from the retired
-`photos.html` / `quiz.html`. All three files are kept so the site behaves the
-same wherever it lands; if you change one, change the others.
+### A custom domain
+
+Whatever domain you settle on — the old working name,
+`balleballetheweeding.com`, was never registered, and the site is called
+Thangamey now — the steps are: buy it, add a `CNAME` file to this repo
+containing just the domain, then Settings → Pages → Custom domain. GitHub
+issues the HTTPS certificate itself.
+
+Once a custom domain is in place the site is at a domain root, so `robots.txt`
+starts working again and becomes a second layer alongside the meta tags.
 
 ### Netlify — also fine
 

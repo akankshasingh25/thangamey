@@ -1,5 +1,5 @@
 /* =============================================================
-   Balle Balle, The Weeding — stylesheet
+   Thangamey, The Weeding — stylesheet
    One file. No preprocessor. Edit freely.
    ============================================================= */
 
@@ -28,7 +28,8 @@
      of their way and be read. No second display face, no webfonts. */
   --display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --body:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --gurmukhi:"Noto Sans Gurmukhi", "Gurmukhi MN", "Gurmukhi Sangam MN", var(--body);
+  /* The name in its own script. Tamil today; swap the stack if that changes. */
+  --script:  "Noto Sans Tamil", "Tamil MN", "Tamil Sangam MN", var(--body);
 
   --measure: 34rem;
   --gutter:  clamp(1.15rem, 4vw, 3rem);
@@ -107,7 +108,7 @@ p{ margin:0 0 1.1em; }
   font-size:.95rem; letter-spacing:normal; text-transform:none;
   font-weight:400; color:var(--fg-soft); margin:0 0 .35rem;
 }
-.gurmukhi{ font-family:var(--gurmukhi); }
+.script{ font-family:var(--script); }
 .skip{ position:absolute; left:-9999px; }
 .skip:focus{ left:1rem; top:1rem; z-index:99; background:var(--card);
              padding:.6rem 1rem; border-radius:8px; }
@@ -125,7 +126,7 @@ p{ margin:0 0 1.1em; }
 }
 .brand{ font-weight:700; font-size:1.02rem;
         text-decoration:none; display:flex; align-items:baseline; gap:.5rem; white-space:nowrap; }
-.brand em{ font-style:normal; color:var(--gold-deep); font-family:var(--gurmukhi); font-size:.92em; }
+.brand em{ font-style:normal; color:var(--gold-deep); font-family:var(--script); font-size:.92em; }
 .nav{ margin-left:auto; display:flex; gap:.15rem; align-items:center; flex-wrap:wrap; }
 .nav a{
   text-decoration:none; font-size:.87rem; font-weight:600; padding:.42rem .68rem;
