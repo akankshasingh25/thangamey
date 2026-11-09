@@ -845,12 +845,17 @@ mark.todo{
 .event-jump span{ padding:.42rem .85rem; font-weight:700; font-size:.9rem;
                   color:var(--fg-soft); }
 
-/* Once they are open: one card each, each one a link to its form. */
-.mission-cards{ list-style:none; margin:0; padding:0; align-items:start; }
+/* Once they are open: one card each, each one a link to its form. The
+   two blurbs are different lengths, so the cards stretch to match and the
+   buttons are pushed to a common bottom line rather than floating up
+   under whichever paragraph happened to be shorter. */
+.mission-cards{ list-style:none; margin:0; padding:0; }
+.mission-card{ display:flex; flex-direction:column; }
+.mission-card .btn-row{ margin-top:auto; }
 .mission-card{ scroll-margin-top:124px; }
 .mission-card h2{ font-size:clamp(1.3rem,1.1rem + 1vw,1.8rem); margin:.1rem 0 .4rem; }
 .mission-card p{ color:var(--fg-soft); }
-.mission-card .btn-row{ margin-bottom:0; }
+.mission-card .btn-row{ margin-bottom:0; padding-top:1.2rem; }
 .form--wide{ max-width:44rem; }
 .mission-aside{
   max-width:44rem; margin-top:2rem; padding-top:1.4rem;

@@ -33,7 +33,14 @@
        which is all it gives away before the window opens. -->
   <h1 class="vh">Two missions</h1>
 
-  <nav class="event-jump" id="mission-bar" aria-label="The two missions"></nav>
+  <!-- Written out here rather than built in JavaScript: the names are the
+       page's whole content before the window opens, and a bar that needs a
+       script to say anything is an empty strip if that script is slow, stale
+       or blocked. JS only turns them into links once the missions are open. -->
+  <nav class="event-jump" id="mission-bar" aria-label="The two missions">
+    <span data-mission="i-spy">I Spy</span>
+    <span data-mission="gather-intel">Gather Intel</span>
+  </nav>
 
   <!-- Before the window opens this is the whole page. See `games` in
        data/config.js. -->

@@ -729,22 +729,16 @@
     if (n && value) n.innerHTML = todo(value);
   }
 
-  /* The two names head the page whether or not the missions are open —
-     they are the one thing disclosed in advance. Before the window they
-     are labels, because there is nothing yet to jump to. */
+  /* The two names are already in the markup. Once the missions are open
+     each one becomes a link to its card; before that it stays a label,
+     because there is nothing yet to jump to. */
   function missionBar(open) {
-    var bar = qs("#mission-bar");
-    if (!bar) return;
-    var G = C.games || {};
-    var two = [
-      { id: "i-spy", name: (G.photos || {}).heading || "Mission one" },
-      { id: "gather-intel", name: (G.quiz || {}).heading || "Mission two" },
-    ];
-    bar.innerHTML = two.map(function (m) {
-      return open
-        ? '<a href="#' + m.id + '">' + todo(m.name) + "</a>"
-        : "<span>" + todo(m.name) + "</span>";
-    }).join("");
+    if (!open) return;
+    qsa("#mission-bar [data-mission]").forEach(function (span) {
+      var a = el("a", null, span.textContent);
+      a.href = "#" + span.getAttribute("data-mission");
+      span.parentNode.replaceChild(a, span);
+    });
   }
 
   function missions() {
@@ -766,7 +760,7 @@
         "<h2>" + todo(m.heading || "") + "</h2>" +
         (m.intro ? "<p>" + todo(m.intro) + "</p>" : "") +
         (url
-          ? '<p class="btn-row" style="justify-content:flex-start;margin-top:1.2rem">' +
+          ? '<p class="btn-row" style="justify-content:flex-start">' +
               '<a class="btn btn--gold" href="' + esc(url) + '" target="_blank" rel="noopener">' +
               esc(m.openLabel || "Open the form") + "</a></p>"
           : '<p class="form-note">The form for this one isn\'t up yet. ' +
