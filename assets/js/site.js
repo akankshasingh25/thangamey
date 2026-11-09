@@ -434,7 +434,12 @@
     var Q = C.quick || {};
     var cards = (Q.items || []).map(function (it) {
       var url = "";
-      if (it.event) {
+      /* A card can say it has nowhere to go. That is different from a card
+         whose link simply isn't filled in yet, which leaves itself out. */
+      var dead = it.link === false;
+      if (dead) {
+        url = "";
+      } else if (it.event) {
         /* By slug, not by position — reordering the events mustn't quietly
            point this at the wrong party. */
         var ev = (C.events || []).filter(function (e) { return slugOf(e) === it.event; })[0];
@@ -445,11 +450,16 @@
       } else if (it.url && String(it.url).indexOf("\u00ab") < 0) {
         url = String(it.url);
       }
-      if (!url) return "";                   /* no link yet: leave it out */
+      if (!url && !dead) return "";          /* no link yet: leave it out */
+      var inside =
+        "<h3>" + todo(it.title || "") + "</h3>" +
+        "<p>" + todo(it.body || "") + "</p>";
+      if (dead) {
+        return '<li class="quick-card quick-card--flat"><div>' + inside + "</div></li>";
+      }
       return '<li class="quick-card">' +
         '<a href="' + esc(url) + '" target="_blank" rel="noopener">' +
-          "<h3>" + todo(it.title || "") + "</h3>" +
-          "<p>" + todo(it.body || "") + "</p>" +
+          inside +
           '<span class="quick-card__go">' + todo(it.label || "Open") +
             '<span class="vh"> (opens in a new tab)</span></span>' +
         "</a></li>";

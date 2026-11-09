@@ -551,7 +551,7 @@ window.WEDDING = {
      A card whose link is missing or still in «guillemets» leaves itself
      out, and if all of them are missing the whole section disappears.   */
   quick: {
-    eyebrow: "We made a webiste for this",
+    eyebrow: "We made a website for this",
     heading: "Your TO-DOs",
     items: [
       {
@@ -571,6 +571,15 @@ window.WEDDING = {
         body: "Pick a song, add your name, leave a choreography link. No song gets danced twice.",
         event: "sangeet",
         label: "Open the sheet",
+      },
+      {
+        /* `link: false` means this one is deliberately a dead end, not a
+           card whose link hasn't been pasted in yet — so it shows without
+           a button instead of leaving itself out. */
+        title: "The two missions",
+        body: "They open on the morning of the 8th and nothing about them goes up before " +
+              "that. Come with your phone charged and some room on it.",
+        link: false,
       },
     ],
   },

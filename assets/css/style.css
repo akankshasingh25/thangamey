@@ -613,6 +613,12 @@ mark.todo{
   transition:transform .14s, border-color .14s;
 }
 .quick-card a:hover{ transform:translateY(-2px); border-color:var(--gold-deep); }
+/* A card with nowhere to go: same box, no lift, no pointer. */
+.quick-card--flat > div{
+  display:flex; flex-direction:column; gap:.45rem; height:100%;
+  padding:1.35rem 1.4rem; background:var(--card);
+  border:1px dashed var(--card-edge); border-radius:var(--radius);
+}
 .quick-card a:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; }
 .quick-card h3{ margin:0; font-size:1.06rem; }
 .quick-card p{ margin:0; flex:1; color:var(--fg-soft); font-size:.95rem; }
