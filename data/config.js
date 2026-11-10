@@ -391,7 +391,7 @@ window.WEDDING = {
     liveFrom:  "2026-12-08T10:00:00+05:30",
     liveUntil: "2026-12-10T10:00:00+05:30",
     openLabel: "Both missions open on 8 December 10 am and close at 10 December 10 am.",
-    closeLabel: "The couple makes the rules and their decision is binding." + " The winners will be annouched on Akanksha's Instagram or DMed to you/your WhatsApp groups.",
+    closeLabel: "The couple makes the rules and their decision is binding." + " The winners will be announced on Akanksha's Instagram or DMed to you/your WhatsApp groups.",
 
     navLabel: "Missions",
     heading: "Two missions",
