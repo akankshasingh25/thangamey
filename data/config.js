@@ -144,7 +144,7 @@ window.WEDDING = {
          the link -> Editor. That makes the gift registry tab editable by
          anyone too, so keep a copy if that worries you.                  */
       sheet: {
-        url: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?usp=sharing#gid=393904024",
+        url: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?gid=393904024#gid=393904024",
         heading: "Pick a song, add your name",
         text:
           "We are trying to save everyone from some anxiety through this sheet. Add a song, put your name in the " +
@@ -320,7 +320,7 @@ window.WEDDING = {
     /* Your registry sheet. Paste the share link here, set to "anyone with the
        link can view", and the "Open the full sheet" button appears. This is
        the quickest way to finish this page.                                 */
-    sheetUrl: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?usp=sharing",
+    sheetUrl: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?gid=0#gid=0",
 
     /* The list, copied from the Gift Registry tab of the sheet above. The
        sheet is still where people claim things — the Contribute and Buy Out
