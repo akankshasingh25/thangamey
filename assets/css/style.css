@@ -138,7 +138,25 @@ p{ margin:0 0 1.1em; }
 .brand{ font-weight:700; font-size:1.02rem;
         text-decoration:none; display:flex; align-items:baseline; gap:.5rem; white-space:nowrap; }
 .brand em{ font-style:normal; color:var(--gold-deep); font-family:var(--script); font-size:.92em; }
-.nav{ margin-left:auto; display:flex; gap:.15rem; align-items:center; flex-wrap:wrap; }
+/* The nav scrolls sideways rather than wrapping. Five links fit on one
+   phone and not the next, and a second row changes the header's height,
+   which everything sticky below it is measured against. */
+.nav{
+  margin-left:auto; display:flex; gap:.15rem; align-items:center;
+  flex-wrap:nowrap; min-width:0;
+  overflow-x:auto; overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch; scrollbar-width:none;
+}
+.nav::-webkit-scrollbar{ display:none; }
+/* Faded on whichever side has more links out of sight, so it reads as a
+   list that continues rather than one that ends. */
+.nav[data-more="end"]{ mask-image:linear-gradient(to right,#000 calc(100% - 1.8rem),transparent); }
+.nav[data-more="start"]{ mask-image:linear-gradient(to left,#000 calc(100% - 1.8rem),transparent); }
+.nav[data-more="both"]{
+  mask-image:linear-gradient(to right,transparent,#000 1.8rem,#000 calc(100% - 1.8rem),transparent);
+}
+/* The wordmark keeps its space; the nav is what gives. */
+.brand{ flex:none; }
 .nav a{
   text-decoration:none; font-size:.87rem; font-weight:600; padding:.42rem .68rem;
   border-radius:99px; color:var(--fg-soft); white-space:nowrap;

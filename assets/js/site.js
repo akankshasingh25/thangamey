@@ -986,8 +986,29 @@
     };
     set();
     window.addEventListener("resize", set);
-    /* The nav rewraps when the Missions link is added, and fonts land late. */
+    /* The nav changes when the Missions link is added, and fonts land late. */
     if (window.ResizeObserver) new ResizeObserver(set).observe(head);
+
+    /* The nav scrolls sideways when the links don't fit. Say which way
+       there is more to see, and start on the page you are actually on —
+       otherwise on a narrow phone the current page can be off-screen. */
+    var nav = qs(".nav", head);
+    if (!nav) return;
+    var edges = function () {
+      var slack = nav.scrollWidth - nav.clientWidth;
+      if (slack < 2) { nav.removeAttribute("data-more"); return; }
+      var atStart = nav.scrollLeft < 2;
+      var atEnd = nav.scrollLeft > slack - 2;
+      nav.setAttribute("data-more", atStart ? "end" : atEnd ? "start" : "both");
+    };
+    nav.addEventListener("scroll", edges, { passive: true });
+    window.addEventListener("resize", edges);
+    var here = qs('.nav a[aria-current="page"]', head);
+    if (here) {
+      var off = here.offsetLeft - (nav.clientWidth - here.offsetWidth) / 2;
+      nav.scrollLeft = Math.max(0, off);
+    }
+    edges();
   }
 
   /* ---------- 10. go ---------- */
@@ -995,10 +1016,12 @@
     document.title = (document.title ? document.title + " · " : "") +
       String((C.couple || {}).siteTitle || "").replace(/[«»]/g, "");
     bindConfig(document);
-    chrome();
     contacts();
     gamesNav();
     markNav();
+    /* After gamesNav and markNav: it measures the header once the Missions
+       link is in it, and scrolls the current page's link into view. */
+    chrome();
     countdown();
     eventPanels();
     dayList();
