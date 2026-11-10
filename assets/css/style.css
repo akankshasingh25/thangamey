@@ -32,6 +32,13 @@
   --script:  "Noto Sans Tamil", "Tamil MN", "Tamil Sangam MN", var(--body);
 
   --measure: 34rem;
+  /* The sticky header's height, and the jump bar's where a page has one.
+     site.js measures both and writes them here, because the header is one
+     line on a laptop and two or three on a phone — every offset that used
+     to be a guessed number now follows the real thing. These are only the
+     fallbacks for before the script runs. */
+  --head-h: 61px;
+  --bar-h:  0px;
   /* Every tall 9:16-ish block — the invitation postcards, the story
      carousel, the save-the-date film — is this wide, so they read as one
      family of objects rather than three different sizes. */
@@ -225,7 +232,7 @@ p{ margin:0 0 1.1em; }
              letter-spacing:normal; margin-bottom:.6rem; }
 
 /* Full-bleed event panels (events.html) */
-.ev-panel{ scroll-margin-top:72px; }
+.ev-panel{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
 .ev-panel .sky__in{ display:grid; gap:2rem;
                     grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr)); }
 .ev-panel h2{ margin-bottom:.1em; }
@@ -536,7 +543,7 @@ mark.todo{
 
 /* A jump bar, because four full-height panels is a lot of scrolling. */
 .event-jump{
-  position:sticky; top:60px; z-index:30;
+  position:sticky; top:var(--head-h); z-index:30;
   display:flex; gap:.4rem; flex-wrap:wrap; justify-content:center;
   padding:.7rem var(--gutter);
   background:color-mix(in srgb, var(--bg) 88%, transparent);
@@ -550,9 +557,9 @@ mark.todo{
 }
 .event-jump a:hover{ color:var(--fg); background:color-mix(in srgb,var(--gold) 20%,transparent); }
 @media (max-width:540px){
-  .event-jump{ top:104px; justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; }
+  .event-jump{ justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; }
 }
-.ev-panel{ scroll-margin-top:110px; }
+
 
 /* The photograph each painting came from. */
 .painted-from{
@@ -843,16 +850,16 @@ mark.todo{
    ============================================================= */
 /* The sticky header would otherwise eat the heading of whatever
    travel.html#plans lands on. */
-#plans{ scroll-margin-top:86px; }
+#plans{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
 
 /* =============================================================
    MISSION ONE — TEN PHOTOGRAPHS  (missions.html)
    ============================================================= */
-.mission{ scroll-margin-top:110px; }
+.mission{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
 
 /* A section a sticky jump bar points at has to clear the header and the
    bar, or its heading lands underneath them. */
-.jump-target{ scroll-margin-top:124px; }
+.jump-target{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
 
 /* Before the window the bar's two names are labels, not links. */
 .event-jump span{ padding:.42rem .85rem; font-weight:700; font-size:.9rem;
@@ -865,7 +872,7 @@ mark.todo{
 .mission-cards{ list-style:none; margin:0; padding:0; }
 .mission-card{ display:flex; flex-direction:column; }
 .mission-card .btn-row{ margin-top:auto; }
-.mission-card{ scroll-margin-top:124px; }
+.mission-card{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
 .mission-card h2{ font-size:clamp(1.3rem,1.1rem + 1vw,1.8rem); margin:.1rem 0 .4rem; }
 .mission-card p{ color:var(--fg-soft); }
 .mission-card .btn-row{ margin-bottom:0; padding-top:1.2rem; }

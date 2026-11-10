@@ -969,11 +969,33 @@
     });
   }
 
+  /* ---------- 9b. how tall the sticky chrome is ----------
+     The header is one line on a laptop and two or three on a phone, and
+     the jump bar has to sit directly under it rather than at a number
+     somebody typed. Publishing both heights as CSS variables keeps the
+     bar's `top` and every anchor's scroll-margin honest at any width. */
+  function chrome() {
+    var head = qs(".site-head");
+    var bar = qs(".event-jump");
+    if (!head) return;
+    var set = function () {
+      var root = document.documentElement.style;
+      root.setProperty("--head-h", Math.round(head.getBoundingClientRect().height) + "px");
+      /* Measured before it is pinned, so its own offset can't feed back. */
+      root.setProperty("--bar-h", bar ? Math.round(bar.getBoundingClientRect().height) + "px" : "0px");
+    };
+    set();
+    window.addEventListener("resize", set);
+    /* The nav rewraps when the Missions link is added, and fonts land late. */
+    if (window.ResizeObserver) new ResizeObserver(set).observe(head);
+  }
+
   /* ---------- 10. go ---------- */
   function init() {
     document.title = (document.title ? document.title + " · " : "") +
       String((C.couple || {}).siteTitle || "").replace(/[«»]/g, "");
     bindConfig(document);
+    chrome();
     contacts();
     gamesNav();
     markNav();

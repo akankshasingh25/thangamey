@@ -32,7 +32,7 @@ window.WEDDING = {
     logoHeading: "About the Logo",
     logoBody:
       "Hum do, humare do. " +
-      "We got Dino Choudhary from an elderly Roman woman who sells crocheted plushies at Artjuna, Goa in 2023. And later in 2025 he found his sister, Bully. " +
+      "We got Dino Choudhary from an elderly Russian woman who sells crocheted plushies at Artjuna, Goa in 2023. And later in 2025 he found his sister, Bully. " +
       "We think their names are obvious.",
     videoHeading: "Save the Date",
     videoBody: "We are too shy for pre-wedding photoshoots. Hope you enjoyed catching this STD.",
