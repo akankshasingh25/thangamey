@@ -34,8 +34,6 @@
      of their way and be read. No second display face, no webfonts. */
   --display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --body:    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  /* The name in its own script. Tamil today; swap the stack if that changes. */
-  --script:  "Noto Sans Tamil", "Tamil MN", "Tamil Sangam MN", var(--body);
 
   --measure: 34rem;
   /* The sticky header's height, and the jump bar's where a page has one.
@@ -122,12 +120,10 @@ p{ margin:0 0 1.1em; }
 .lede{ font-size:1.05em; color:var(--fg-soft); max-width:var(--measure); }
 
 .shell{ width:min(var(--shell),100% - var(--gutter)*2); margin-inline:auto; }
-.stack > * + *{ margin-top:1.5rem; }
 .eyebrow{
   font-size:.95rem; letter-spacing:normal; text-transform:none;
   font-weight:400; color:var(--fg-soft); margin:0 0 .35rem;
 }
-.script{ font-family:var(--script); }
 .skip{ position:absolute; left:-9999px; }
 .skip:focus{ left:1rem; top:1rem; z-index:99; background:var(--card);
              padding:.6rem 1rem; border-radius:8px; }
@@ -145,7 +141,6 @@ p{ margin:0 0 1.1em; }
 }
 .brand{ font-weight:700; font-size:1.02rem;
         text-decoration:none; display:flex; align-items:baseline; gap:.5rem; white-space:nowrap; }
-.brand em{ font-style:normal; color:var(--gold-deep); font-family:var(--script); font-size:.92em; }
 /* The nav scrolls sideways rather than wrapping. Five links fit on one
    phone and not the next, and a second row changes the header's height,
    which everything sticky below it is measured against. */
@@ -201,8 +196,6 @@ p{ margin:0 0 1.1em; }
 .hero__in{ text-align:center; }
 .hero h1{ font-size:clamp(2rem,1.4rem + 2.4vw,3rem); margin-bottom:.15em;
           text-shadow:0 2px 28px rgba(0,0,0,.35); }
-.hero .amp{ display:block; font-size:.42em; font-style:italic; opacity:.8;
-            font-weight:400; margin:.18em 0; letter-spacing:normal; }
 .hero__meta{
   display:flex; gap:.6rem 1.4rem; justify-content:center; flex-wrap:wrap;
   font-size:1rem; letter-spacing:normal; text-transform:none;
@@ -234,7 +227,6 @@ p{ margin:0 0 1.1em; }
 .btn--gold:hover{ background:#e58a60; }
 .btn--ghost{ border-color:currentColor; background:transparent; color:inherit; }
 .btn--ghost:hover{ background:color-mix(in srgb,currentColor 14%,transparent); }
-.btn--block{ width:100%; text-align:center; padding-block:.95rem; font-size:1rem; }
 .btn-row{ display:flex; gap:.7rem; flex-wrap:wrap; justify-content:center; margin-top:2rem; }
 
 /* ---------- 7. SECTIONS & CARDS ---------- */
@@ -270,76 +262,9 @@ p{ margin:0 0 1.1em; }
               font-weight:600; opacity:.7; margin-bottom:.15rem; }
 .ev-facts dd{ margin:0; font-size:1rem; }
 
-/* ---------- 9. FORMS ---------- */
-.form{ max-width:38rem; }
-.field{ margin-bottom:1.3rem; }
-.field > label, .fieldset > legend{
-  display:block; font-weight:700; font-size:.9rem; margin-bottom:.4rem;
-}
-.field .hint{ font-size:.82rem; color:var(--fg-soft); margin:.25rem 0 .5rem; }
-input[type=text],input[type=email],input[type=tel],input[type=date],
-input[type=number],input[type=datetime-local],select,textarea{
-  width:100%; font:inherit; font-size:1rem; color:var(--fg);
-  background:var(--card); border:1.5px solid var(--rule);
-  border-radius:10px; padding:.68rem .8rem;
-}
-textarea{ min-height:7rem; resize:vertical; }
-input:focus,select:focus,textarea:focus{ border-color:var(--gold-deep); }
-select{ appearance:none;
-  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),
-                   linear-gradient(135deg,currentColor 50%,transparent 50%);
-  background-position:calc(100% - 20px) calc(50% + 1px), calc(100% - 14px) calc(50% + 1px);
-  background-size:6px 6px; background-repeat:no-repeat; padding-right:2.4rem; }
-
-.fieldset{ border:1px solid var(--rule); border-radius:var(--radius);
-           padding:1.15rem 1.25rem; margin:0 0 1.15rem; background:var(--card); }
-.fieldset > legend{ padding-inline:.45rem; margin-bottom:0; }
-.fieldset .ev-when{ font-size:.82rem; color:var(--fg-soft); margin:-.1rem 0 .8rem; }
-
-.choices{ display:flex; gap:.5rem; flex-wrap:wrap; }
-.choice{ position:relative; }
-.choice input{ position:absolute; opacity:0; width:100%; height:100%;
-               top:0; left:0; margin:0; cursor:pointer; }
-.choice span{
-  display:block; padding:.5rem 1rem; border-radius:99px; font-size:.9rem;
-  font-weight:600; border:1.5px solid var(--rule); background:var(--bg);
-}
-.choice input:checked + span{ background:var(--gold); border-color:var(--gold-deep);
-                              color:var(--on-accent); }
-.choice input:focus-visible + span{ outline:2.5px solid var(--gold-deep); outline-offset:3px; }
-
-.check{ display:flex; gap:.6rem; align-items:flex-start; font-size:.95rem; }
-.check input{ margin-top:.3rem; width:1.05rem; height:1.05rem; flex:none; accent-color:var(--gold-deep); }
-
+/* ---------- 9. SMALL TEXT ---------- */
 .form-note{ font-size:.85rem; color:var(--fg-soft); }
-.hp{ position:absolute; left:-9999px; }
-
-.form-status{ border-radius:var(--radius); padding:1.1rem 1.25rem; margin-bottom:1.3rem;
-              border:1.5px solid; font-size:.95rem; }
-.form-status[data-tone="ok"]{ border-color:#2f7d4f; background:rgba(47,125,79,.1); }
-.form-status[data-tone="bad"]{ border-color:#b23b3b; background:rgba(178,59,59,.1); }
-.form-status[data-tone="info"]{ border-color:var(--gold-deep); background:color-mix(in srgb,var(--gold) 16%,transparent); }
-.form-status p:last-child{ margin-bottom:0; }
 [hidden]{ display:none !important; }
-
-/* ---------- 10. FEED ---------- */
-.feed{ display:grid; gap:2.2rem; max-width:44rem; }
-.post{ border-top:1px solid var(--rule); padding-top:2rem; }
-.post:first-child{ border-top:0; padding-top:0; }
-.post__date{ font-size:.88rem; letter-spacing:normal; text-transform:none;
-             font-weight:600; color:var(--fg-soft); margin-bottom:.4rem; }
-.post__body{ max-width:var(--measure); }
-.post__body p:last-child{ margin-bottom:0; }
-.post__strip{
-  display:grid; gap:.6rem; margin:1.2rem 0;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));
-}
-.post__strip img{ border-radius:10px; aspect-ratio:4/3; object-fit:cover;
-                  width:100%; background:var(--cream-2); }
-.post__strip--1{ grid-template-columns:1fr; }
-.post__strip--1 img{ aspect-ratio:3/2; }
-.post__seal{ width:2.6rem; height:2.6rem; border-radius:50%; float:right;
-             margin:0 0 .5rem 1rem; }
 
 /* ---------- 11. MISC ---------- */
 .ticks{ list-style:none; padding:0; margin:0; display:grid; gap:1.2rem; }
@@ -353,8 +278,6 @@ select{ appearance:none;
 
 /* The to-do list: closer set than the tick lists elsewhere, because each
    line is a sentence rather than a heading and a paragraph. */
-.todo-list{ max-width:var(--measure); gap:.75rem; font-size:1rem; }
-
 .faq{ max-width:var(--measure); }
 .faq__head{ font-size:.82rem; letter-spacing:.12em; text-transform:uppercase;
             color:var(--fg-soft); margin:0 0 .4rem; }
@@ -374,7 +297,6 @@ select{ appearance:none;
 }
 .site-foot__in{ display:flex; gap:1rem 2rem; flex-wrap:wrap; align-items:baseline; }
 .site-foot a{ font-weight:600; }
-.site-foot .tag{ margin-left:auto; font-size:.95rem; color:var(--fg); }
 
 @media (prefers-reduced-motion:reduce){
   *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
@@ -413,44 +335,14 @@ mark.todo{
 }
 @media (max-width:480px){ .hero__names{ width:min(100%,20rem); } }
 
-/* ---------- the two days ---------- */
-.days{ display:grid; gap:1.15rem; grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr)); }
-.day{ background:var(--card); border:1px solid var(--card-edge); border-radius:var(--radius);
-      padding:1.4rem 1.5rem; box-shadow:var(--shadow); }
-.day__label{ font-weight:700; font-size:1.15rem; margin:0 0 1rem;
-             display:flex; justify-content:space-between; align-items:baseline; gap:1rem; }
-.day__label span{ font-family:var(--body); font-size:.9rem; font-weight:400;
-                  letter-spacing:normal; text-transform:none; color:var(--fg-soft); }
-.day ul{ list-style:none; margin:0; padding:0; display:grid; gap:.1rem; }
-.day li + li{ border-top:1px solid var(--rule); }
-.day a{ display:flex; flex-direction:column; gap:.1rem; padding:.7rem 0; text-decoration:none; }
-.day a:hover b{ color:var(--gold-deep); }
-.day a b{ font-size:1.02rem; }
-.day a span{ font-size:.85rem; color:var(--fg-soft); }
-
 /* ---------- event cards & panels ---------- */
 .ev-panel__logo{ width:min(100%,17rem); height:auto; margin-bottom:1rem;
                  filter:drop-shadow(0 8px 24px rgba(0,0,0,.35)); }
 .sky[data-sky="tints-of-sunflower"] .ev-panel__logo,
 .sky[data-sky="shades-of-sunset"] .ev-panel__logo{ filter:drop-shadow(0 8px 20px rgba(0,0,0,.25)); }
 
-/* ---------- split / illustration ---------- */
-.split{ display:grid; gap:2rem; align-items:center;
-        grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr)); }
-.couple{ width:min(100%,22rem); justify-self:center; height:auto; }
-.eyes{ width:5rem; height:auto; margin-bottom:1.2rem; opacity:.9; }
-@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .eyes{ opacity:1; } }
-
-/* ---------- forms layout ---------- */
+/* ---------- callouts ---------- */
 .form-wrap{ max-width:38rem; }
-.form-h{ font-size:1.15rem; margin:2.4rem 0 1rem; padding-top:1.4rem;
-         border-top:1px solid var(--rule); }
-.fieldset .ev-when{ font-size:.84rem; color:var(--fg-soft); margin:.1rem 0 .9rem; line-height:1.5; }
-.fieldset .dress{ color:var(--gold-deep); font-weight:600; }
-.aside-note{ max-width:38rem; margin-top:3rem; padding:1.4rem 1.5rem;
-             border:1px dashed var(--rule); border-radius:var(--radius); }
-.aside-note h2{ font-size:1.05rem; }
-.aside-note p:last-child{ margin-bottom:0; }
 .callout{ margin-top:1.6rem; padding:1.3rem 1.5rem; border-radius:var(--radius);
           background:color-mix(in srgb, var(--gold) 13%, transparent);
           border:1px solid color-mix(in srgb, var(--gold) 36%, transparent); }
@@ -458,12 +350,6 @@ mark.todo{
 .callout strong{ color:var(--gold-deep); }
 
 .site-foot__in p{ margin:0; }
-
-/* A shorter painted band for the pages that aren't the home page. */
-.sky--band .sky__in{ padding-block:clamp(2.6rem,7vw,4.6rem); }
-.sky--band .eyebrow{ color:inherit; opacity:.8; }
-.sky--band .lede{ color:inherit; opacity:.92; }
-.sky--band h1{ text-shadow:0 2px 20px rgba(0,0,0,.28); }
 
 /* A wash between the paint and the words. Each sky says how dark or
    light its own wash should be, so text stays legible on a turquoise
@@ -475,8 +361,6 @@ mark.todo{
 @media (max-width:760px){
   .sky--scrim::before{ background:linear-gradient(to top, var(--s-scrim), var(--s-scrim) 42%, transparent 92%); }
 }
-
-.feed-empty{ color:var(--fg-soft); font-style:italic; max-width:var(--measure); }
 
 /* =============================================================
    13. THE ARTWORK
@@ -591,7 +475,6 @@ mark.todo{
   .event-jump{ justify-content:flex-start; overflow-x:auto; flex-wrap:nowrap; }
 }
 
-
 /* The photograph each painting came from. */
 .painted-from{
   margin:1.8rem 0 0; display:flex; gap:1rem; align-items:center;
@@ -614,13 +497,6 @@ mark.todo{
 /* =============================================================
    14. LOGO + SAVE THE DATE
    ============================================================= */
-.media-block{
-  display:grid; gap:clamp(1.5rem,4vw,3rem); align-items:center;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));
-}
-.media-block h2{ margin-bottom:.4rem; }
-.media-block p{ margin-bottom:0; color:var(--fg-soft); max-width:var(--measure); }
-
 .std{
   display:block; width:min(100%,var(--portrait)); height:auto; border-radius:14px;
   aspect-ratio:1080/1920; background:var(--ink); object-fit:cover;
@@ -629,12 +505,6 @@ mark.todo{
 
 .logo-mark{ width:min(100%,14rem); height:auto; }
 
-/* Text one side, something to look at on the other. Same shape as
-   .media-block, kept separate so its paragraph rules stay out of the way. */
-.split{
-  display:grid; gap:clamp(1.5rem,4vw,3rem); align-items:center;
-  grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));
-}
 .section__head--tight{ margin-bottom:1rem; }
 
 /* =============================================================
@@ -860,34 +730,25 @@ mark.todo{
 .gift{ display:list-item; padding:.45rem 0; }
 .gift::marker{ color:var(--gold-deep); }
 .gift__name{ font-weight:700; font-size:1.05rem; }
-.gift__name a{ font-weight:600; font-size:.85rem; margin-left:.5rem; color:var(--gold-deep); }
 /* Inline beside the name now — on its own line every bullet was three
    deep and the list stopped looking like a list. */
 .gift__brand{ font-weight:400; font-size:.85rem; color:var(--fg-soft);
               letter-spacing:.02em; }
 .gift__brand::before{ content:" · "; }
-.gift__price{ font-variant-numeric:tabular-nums; color:var(--fg-soft);
-              font-weight:600; white-space:nowrap; margin-left:.5rem; }
 .gift__note{ display:block; color:var(--fg-soft); font-size:.92rem; margin-top:.15rem; }
 
-.brand-list{ list-style:none; margin:0; padding:0; display:flex; gap:.6rem; flex-wrap:wrap; }
-.brand-chip{
-  padding:.55rem 1.1rem; border-radius:99px; font-weight:600; font-size:.95rem;
-  border:1.5px solid var(--rule); background:var(--card);
+/* The sticky header would otherwise eat the heading of whatever
+   travel.html#plans lands on. The top margin is the breathing room under
+   the two cards that an empty heading used to provide by accident: half
+   an h2, which is the margin an h2 carries. */
+#plans{
+  scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem);
+  margin-top:calc(clamp(1.4rem,1.2rem + .8vw,1.8rem) * .5);
 }
 
 /* =============================================================
-   THE ITINERARY ANCHOR
+   THE MISSIONS PAGE
    ============================================================= */
-/* The sticky header would otherwise eat the heading of whatever
-   travel.html#plans lands on. */
-#plans{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
-
-/* =============================================================
-   MISSION ONE — TEN PHOTOGRAPHS  (missions.html)
-   ============================================================= */
-.mission{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
-
 /* A section a sticky jump bar points at has to clear the header and the
    bar, or its heading lands underneath them. */
 .jump-target{ scroll-margin-top:calc(var(--head-h) + var(--bar-h) + .6rem); }
@@ -907,86 +768,8 @@ mark.todo{
 .mission-card h2{ font-size:clamp(1.3rem,1.1rem + 1vw,1.8rem); margin:.1rem 0 .4rem; }
 .mission-card p{ color:var(--fg-soft); }
 .mission-card .btn-row{ margin-bottom:0; padding-top:1.2rem; }
-.form--wide{ max-width:44rem; }
-.mission-aside{
-  max-width:44rem; margin-top:2rem; padding-top:1.4rem;
-  border-top:1px solid var(--rule); font-size:.92rem; color:var(--fg-soft);
-}
-.mission-aside a{ font-weight:600; white-space:nowrap; }
-
-.shot-count{
-  margin:0 0 1.3rem; font-weight:700; color:var(--gold-deep);
-  font-variant-numeric:tabular-nums;
-}
-.shots{ list-style:none; margin:0 0 2.2rem; padding:0; display:grid; gap:.7rem; max-width:44rem; }
-.shot{
-  background:var(--card); border:1px solid var(--card-edge);
-  border-radius:var(--radius); box-shadow:var(--shadow);
-  padding:1rem 1.2rem; display:grid; gap:.8rem;
-}
-.shot__head{ display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:center; }
-.shot__no{
-  display:grid; place-items:center; width:2.4rem; height:2.4rem;
-  border-radius:50%; border:1.5px solid var(--rule);
-  font-weight:700; font-size:.95rem; color:var(--fg-soft);
-  font-variant-numeric:tabular-nums;
-  transition:background .15s,color .15s,border-color .15s;
-}
-.shot__text{ font-size:1rem; line-height:1.5; }
-.shot__drop{ display:flex; gap:.8rem; align-items:center; flex-wrap:wrap; padding-left:3.4rem; }
-@media (max-width:480px){ .shot__drop{ padding-left:0; } }
-
-/* The real input is only hidden visually — it still takes focus and the
-   label is its button, so tab and space work the way they should. */
-.shot__input{ position:absolute; opacity:0; width:1px; height:1px; }
-.shot__btn{
-  cursor:pointer; font-size:.85rem; font-weight:600; white-space:nowrap;
-  padding:.42rem .9rem; border-radius:99px;
-  border:1px solid var(--gold-deep); color:var(--gold-deep); background:transparent;
-}
-.shot__btn:hover{ background:color-mix(in srgb,var(--gold) 18%,transparent); }
-.shot__input:focus-visible + .shot__btn{ outline:2.5px solid var(--gold-deep); outline-offset:3px; }
-.shot__name{
-  font-size:.85rem; color:var(--fg-soft); overflow-wrap:anywhere; min-width:0;
-}
-.shot--done .shot__no{ background:var(--gold); border-color:var(--gold-deep); color:var(--on-accent); }
-.shot--done .shot__btn{ border-color:var(--rule); color:var(--fg-soft); }
-.shot--done .shot__name{ color:var(--fg); font-weight:600; }
-
-/* =============================================================
-   MISSION TWO — THE QUIZ  (missions.html)
-   ============================================================= */
-.q-list{ list-style:none; margin:0 0 2.2rem; padding:0; display:grid; gap:1.5rem; max-width:44rem; }
-.quiz{ max-width:44rem; }
-.quiz-sent{ margin:.6rem 0 0; font-size:.88rem; color:var(--fg-soft); }
-.quiz-sent[data-ok="0"]{ color:#b23b3b; font-weight:600; }
-.q{
-  background:var(--card); border:1px solid var(--card-edge);
-  border-left:4px solid var(--rule); border-radius:var(--radius);
-  padding:1.3rem 1.4rem; box-shadow:var(--shadow);
-}
-.q__text{ font-weight:700; font-size:1.05rem; margin:0 0 .9rem; }
-.q .choices{ gap:.45rem; }
-.q .choice span{ font-size:.92rem; }
-.q__why{ margin:.9rem 0 0; font-size:.9rem; line-height:1.55; color:var(--fg-soft); }
-
-/* After marking. The right answer is ringed whether or not it was picked. */
-.q[data-mark="right"]{ border-left-color:#2f7d4f; }
-.q[data-mark="wrong"]{ border-left-color:#b23b3b; }
-.choice--answer span{ box-shadow:inset 0 0 0 2px var(--gold-deep); }
-.q[data-mark="wrong"] .choice input:checked + span{
-  box-shadow:inset 0 0 0 2px #b23b3b; background:transparent; border-color:#b23b3b;
-  color:var(--fg);
-}
-.q[data-mark] .choice input:disabled + span{ cursor:default; }
-
-.quiz-score{ margin:0 0 .3rem; }
-.quiz-score b{
-  font-size:1.9rem; color:var(--gold-deep); font-variant-numeric:tabular-nums;
-}
-
-/* The ?preview banner on photos.html / quiz.html, so a preview is never
-   mistaken for the page as guests will see it. */
+/* The ?preview banner, so a preview is never mistaken for the page as
+   guests will see it. */
 .preview-flag{
   margin:1.8rem auto 0; padding:.7rem 1rem; max-width:44rem;
   border:1px dashed var(--gold-deep); border-radius:var(--radius);
@@ -997,10 +780,6 @@ mark.todo{
   font-size:.95em; background:color-mix(in srgb,var(--gold) 26%,transparent);
   padding:.1em .35em; border-radius:4px; color:var(--fg);
 }
-
-/* With submitTo: "google" the ten are still listed, just without the
-   attach buttons, so there is nothing below the prompt to make room for. */
-.shot--plain{ padding-block:.85rem; }
 
 /* Contact links carry no address until someone reaches for one, so they
    still have to look and behave like links before that happens. */

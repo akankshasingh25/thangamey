@@ -1,11 +1,8 @@
 /* =============================================================
-   Thangamey, The Weeding — EDIT THIS FILE AND ALMOST NOTHING ELSE
+   Thangamey — EDIT THIS FILE AND ALMOST NOTHING ELSE
    -------------------------------------------------------------
-   Names, dates, times, venues and dress codes below are taken
-   verbatim from your invitation PDF and should be correct.
-
-   Anything still wrapped in «guillemets» is a guess or a blank
-   that needs you. Search this file for «  to find them all.
+   Anything wrapped in «guillemets» is a blank that still needs
+   filling in; the site highlights it in gold so it can't be missed.
    ============================================================= */
 
 window.WEDDING = {
@@ -16,10 +13,6 @@ window.WEDDING = {
     two: "Prateek",
     siteTitle: "Thangamey",
     tagline: "In the city of Lord Jagannath and by the coast of Puri. Two days, four parties. A respite from the cold.",
-    /* The name in its own script, shown small beside the wordmark in the
-       header and footer. Uncomment to switch it on. Thangamey is Tamil. */
-    // script: "தங்கமே",
-    // hashtag: "«#ThangameyTheWeeding»",
   },
 
   /* ---------- ARTWORK, LOGO, VIDEO ----------
@@ -28,7 +21,6 @@ window.WEDDING = {
   media: {
     cover: "assets/art/cover.jpg",          // the invitation's first page — the hero
     logo: "assets/img/logo.png",
-    logoInspiration: "assets/photos/bully-dino.jpg",
     logoHeading: "About the Logo",
     logoBody:
       "Hum do, humare do. " +
@@ -46,21 +38,13 @@ window.WEDDING = {
   mainCityLabel: "Puri, Odisha",
 
   /* ---------- WHERE THE ANSWERS GO ----------
-     Everything this site collects goes to Google, which costs nothing and
-     which you already have. Three forms and one sheet:
+     Everything this site collects goes to Google, which costs nothing.
+     Paste each form's share link below. While a line is still wrapped in
+     «guillemets» the button for it simply doesn't appear.
 
-       collect.itinerary   travel plans          -> a Sheet
-       collect.photos      mission one           -> a Sheet + one Drive
-                                                    folder per photograph
-       collect.quiz        mission two's scores  -> a Sheet
-       gifts.sheetUrl      the registry          -> a Sheet people read
-
-     GOOGLE-SETUP.md has the questions to put in each form, in order.
-
-     Paste each form's share link here. While a line is still wrapped in
-     «guillemets» the site falls back: the itinerary shows its own built-in
-     form, and the missions just don't offer anywhere to send things. So you
-     can fill these in one at a time.                                       */
+       itinerary   travel plans        (Travel & Stay)
+       photos      mission one, I Spy
+       quiz        mission two, Gather Intel                                */
   collect: {
     itinerary: "https://forms.gle/oRqP1xSoYq6crHvU7",
     photos:    "https://forms.gle/LU5mbAN6VAecZZWn6",
@@ -190,28 +174,14 @@ window.WEDDING = {
       dress: "Traditional; Reverie of Lotus and Rajanigandha",
       mapUrl: "https://maps.google.com/?q=The+Chanakya+BNR+Puri",
       note: "The main event, under an actual sky, which we have been assured will cooperate.",
-      /* Nothing reads this any more — the panel counter just says which
-         of four it is. Left in case the distinction is wanted again. */
-      isMain: true,
     },
   ],
 
   /* Every dress code on the invite is prefixed "Optional Dress Code". */
   dressCodeIsOptional: true,
 
-  /* ---------- TRAVEL & STAY ----------
-     The airport and station are real. The times, the hotel list and
-     the shuttle are «yours to confirm».                             */
+  /* ---------- TRAVEL & STAY ---------- */
   travel: {
-    /* NOT SHOWN ANYWHERE at the moment. It used to be the lede in the
-       painted band at the top of the page, and that band has gone in
-       favour of the Commute / Stay / Roam Around bar. Kept because it is
-       good copy — say the word and it can go under "Getting to Puri",
-       though that step is already a full screen's worth. */
-    intro:
-      "Puri is on the Bay of Bengal, about two hours " +
-      "down the coast from Bhubaneswar. Both venues are in Puri itself and about ten " +
-      "minutes apart, so once you have arrived you have arrived at everything.",
     air: {
       name: "Biju Patnaik International, Bhubaneswar (BBI)",
       note:
@@ -247,55 +217,12 @@ window.WEDDING = {
     ],
     shuttle:
       "We are running cabs between the two hotels for the events.",
-    // visaNote:
-    //   "«Need a signed invitation letter for a visa application? Tick the box on the form " +
-    //   "and we will send one. Please give us six weeks.»",
   },
 
-  /* ---------- SUSTAINABILITY ----------
-     Switched off: the whole block is commented out, so the "Big party, small
-     footprint" section on the home page hides itself. Uncomment it and the
-     section comes back exactly as it was.                                  */
-  // sustainable: {
-  //   intro:
-  //     "We're trying to throw a two-day wedding on the Odisha coast without it costing the earth quite so literally. None of this is a rule. All of it helps.",
-  //   points: [
-  //     {
-  //       title: "Wear something you already own",
-  //       body:
-  //         "Every dress code on the invitation says Optional, and we meant it. Borrow, rent, or raid your parents' almirah. The best-dressed person at every wedding we've been to was wearing something with a story.",
-  //     },
-  //     {
-  //       title: "Share the ride from Bhubaneswar",
-  //       body:
-  //         "It's 60 km from the airport, and cars are the one of the biggest line in the footprint of a wedding people fly to. Tell us your arrival time and we'll put six of you in one car instead of six separate ones.",
-  //     },
-  //     {
-  //       title: "Use the gift registry to help us",
-  //       body:
-  //         "You can help us fulfill our wishes — contribute towards an item, buy gift cards for brands we use, or gift something outright. Or if you really know us and what we might appreciate, we absolutely adore thoughtful gifts. Or nothing at all — you came to Puri, that's the gift.",
-  //     },
-  //     {
-  //       title: "No floral foam, nothing binned",
-  //       body:
-  //         "Local and seasonal flowers, no imported blooms, no floral foam, and everything composted the morning after rather than thrown.",
-  //     },
-  //     {
-  //       title: "A website that weighs nothing",
-  //       body:
-  //         "No tracking, no analytics, no cookie banner because there are no cookies. It will still load on a 3G signal in Puri.",
-  //     },
-  //   ],
-  // },
-
   /* ---------- GIFT REGISTRY ----------
-     This page is live. Three ways to give, then the list.
-
-     The list can come from either place and the page works out which:
-       • paste your sheet into `sheetUrl` and the page sends people there
-       • or type the rows into `items` below and the page shows them
-     Do both and you get both — the rows, with the sheet as a button under them.
-     Do neither and the section politely says the list is still coming.     */
+     Three ways to give, then the list. The list below is a copy of the
+     Gift Registry tab of the sheet at `sheetUrl`; the sheet is where people
+     claim things, so when you change a row there, change it here too.     */
   gifts: {
     intro:
       "The honest answer is that we don't know the best practices. But people keep asking, and we'd rather " +
@@ -317,21 +244,8 @@ window.WEDDING = {
       },
     ],
 
-    /* Your registry sheet. Paste the share link here, set to "anyone with the
-       link can view", and the "Open the full sheet" button appears. This is
-       the quickest way to finish this page.                                 */
     sheetUrl: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?gid=0#gid=0",
 
-    /* The list, copied from the Gift Registry tab of the sheet above. The
-       sheet is still where people claim things — the Contribute and Buy Out
-       columns are there and this page can't be written to — so when you add
-       or change a row there, change it here too or the two drift apart.
-
-         { name: "Cast iron kadhai", brand: "Meyer", price: "₹3,400",
-           note: "The big one. We will use it twice a week.",
-           url: "https://..." },
-
-       `brand`, `price`, `note` and `url` are each optional.                 */
     items: [
       { name: "Contribute Towards a Cause", brand: "Vespa",
         note: "Enable Akanksha. Highest contributor gets to decide a JHATANG colour. We accept UPI, don't feel shy." },
@@ -360,64 +274,28 @@ window.WEDDING = {
       { name: "Annual Subscription", brand: "Netflix" },
     ],
 
-    /* Gift-card shops, shown as chips. Empty hides the whole section —
-       add names like: ["Fabindia", "IKEA", "Amazon"]                        */
-    brands: [],
-
     closing:
       "However you do it, update the sheet with your name, your group you'd pool to gift or WhatsApp DM us so we can keep the list updated. " +
       "And if you'd rather do none of this and gift something else or not at all, that is absoluetely okay too.",
   },
 
   /* ---------- MISSIONS ----------
-     One page, missions.html, with two missions on it: a photo hunt and a
-     quiz about the two of you. Both are forms — the answers come back to you.
-
-       live: true     up now, linked in the nav              <- currently this
-       live: "auto"   appears on its own between the dates below
-       live: false    off, whatever the dates say
-
-     Whatever the setting, adding ?preview to the URL always opens the page
-     for you, so you can check it while it is switched off.
-
-     Worth knowing: this is a static site, so "off" means hidden, not locked,
-     and the quiz answers sit in this file where anyone can read them. For a
-     wedding game that is the right trade — it is not a sealed exam. */
+     missions.html names two Google Forms and hands over the links, but only
+     between `liveFrom` and `liveUntil`. Before that it says "not yet" and
+     gives nothing else away. Add ?preview to the URL to see it open early. */
   games: {
-    /* `live` overrides the window: true forces them open, false forces them
-       shut, and leaving it out — as it is now — lets the two dates decide.
-       Add ?preview to the URL to see them open before the window. */
-    // live: true,
+    /* `live: true` forces them open and `live: false` forces them shut,
+       whatever the dates say. Leave it out and the dates decide.         */
     liveFrom:  "2026-12-08T10:00:00+05:30",
     liveUntil: "2026-12-10T10:00:00+05:30",
     openLabel: "Both missions open on 8 December 10 am and close at 10 December 10 am.",
     closeLabel: "The couple makes the rules and their decision is binding." + " The winners will be announced on Akanksha's Instagram or DMed to you/your WhatsApp groups.",
 
     navLabel: "Missions",
-    heading: "Two missions",
     /* Only shown once the window is open — before that the page gives the
        two names and the opening time and nothing else. */
     intro:
       "Both are open NOW. We didn't tell you this before but there is are actual prizes for the winners.",
-
-    /* ---- Your TO-DOs ----
-       NOT SHOWN ANYWHERE at the moment. It was built onto the missions
-       page and taken off again — the home page is where it belongs. Say
-       where it should sit there and it can go back up; nothing renders
-       `todos` until it does. */
-    todos: {
-      heading: "Your TO-DOs",
-      intro:
-        "We are not telling you what the missions are. We are telling you how " +
-        "not to be caught out by them.",
-      items: [
-        "Clear a gigabyte on your phone. You will want the room.",
-        "Charge it overnight. Charge it again at lunch.",
-        "Sit with the people you have only ever heard about.",
-        "Listen to the aunties, particularly when they are talking about us.",
-        "Set one alarm earlier than you would like.",
-      ],
-    },
 
     photos: {
       eyebrow: "Mission 1",
@@ -426,23 +304,8 @@ window.WEDDING = {
       intro:
         "Something to keep you on your toes, either you click or get clicker.",
 
-      /* Reorder, reword or cut a few — the form follows whatever is here.
-         If you change the NUMBER of prompts, update the hidden detection
-         form at the top of missions.html to match (it is commented there). */
-      // prompts: [
-      //   "Someone you have only ever met in a family WhatsApp group.",
-      //   "A pair of hands straight after Daler Mehandi. The messier the better.",
-      //   "The worst possible photograph of the bride. One of the groom too. We will be judging.",
-      //   "Sunrise over the Bay of Bengal. You will have to actually get up.",
-      //   "Turmeric in mid-air.",
-      //   "Somebody asleep in a chair between two and five in the afternoon.",
-      //   "Four generations in one frame.",
-      //   "Whatever was on the plate that you went back for twice.",
-      //   "A stranger in Puri who made your day — ask them first.",
-      //   "The last song of Sang-it, from the middle of the floor and not the edge.",
-      // ],
-
-      /* Optional. A shared album for everything that isn't one of the ten. */
+      /* The shared Google Photos album. Not shown on the page yet — paste the
+         link here and wire it in when it exists. */
       albumUrl: "«https://photos.app.goo.gl/...»",
       albumNote:
         "Use this shared album to get all your photos while you upload the ones on your phone.",
@@ -454,88 +317,6 @@ window.WEDDING = {
       openLabel: "Open Gather Intel",
       intro:
         "Questions about the two of us. You get your score when you send it, and so do we.",
-
-      /* `answer` is the position of the right option, counting from 0.
-         The four still in «guillemets» need real answers from you — write the
-         question, the four options, and point `answer` at the right one.
-
-         If you change the NUMBER of questions, update the hidden detection
-         form at the top of missions.html to match.                        */
-      // questions: [
-      //   {
-      //     q: "The two animals on our logo are…",
-      //     options: ["A dragon and a whale", "A dinosaur and a shark",
-      //               "A lion and a fish", "Two slightly different bears"],
-      //     answer: 0,
-      //     because: "Both crocheted, both live on a sofa, both predate the wedding.",
-      //   },
-      //   {
-      //     q: "Which of the four events involves actual turmeric?",
-      //     options: ["Daler Mehandi", "Sang-it", "Vicco Turmeric", "The Weeding"],
-      //     answer: 2,
-      //     because: "The clue was generous.",
-      //   },
-      //   {
-      //     q: "The Daler Mehandi painting was made from a photograph taken where?",
-      //     options: ["Goa", "Wayanad, Kerala", "Tromsø, Norway", "Puri"],
-      //     answer: 1,
-      //     because: "Sunrise from the base of Chembra Peak, out of a hostel that used to be a colonial hospital.",
-      //   },
-      //   {
-      //     q: "And the one on The Weeding card?",
-      //     options: ["The Northern Lights over Tromsø", "A Goan sunset",
-      //               "The Bay of Bengal", "The Algarve coast"],
-      //     answer: 0,
-      //     because: "After days of rain and snow, on what should rightly be called a Series of Fortunate Events.",
-      //   },
-      //   {
-      //     q: "Performances at Sang-it are capped at…",
-      //     options: ["Three minutes", "Five minutes", "Ten minutes", "There is no cap"],
-      //     answer: 1,
-      //     because: "We love you. Five minutes.",
-      //   },
-      //   {
-      //     q: "Why does a train to Puri never leave you asleep past your stop?",
-      //     options: ["There is a guard who checks", "It is a terminus — the line ends there",
-      //               "It only runs in daylight", "It is the first stop out of Bhubaneswar"],
-      //     answer: 1,
-      //     because: "Puri is the end of the line in every sense.",
-      //   },
-      //   {
-      //     q: "«Where did the two of us actually meet?»",
-      //     options: ["«Option one»", "«Option two»", "«Option three»", "«Option four»"],
-      //     answer: 0,
-      //     because: "«One line of explanation, if it is a good story.»",
-      //   },
-      //   {
-      //     q: "«Who said it first?»",
-      //     options: ["«Akanksha»", "«Prateek»", "«Both, at once, awkwardly»", "«Nobody has yet»"],
-      //     answer: 0,
-      //     because: "«»",
-      //   },
-      //   {
-      //     q: "«Which one of us is going to be late to their own wedding?»",
-      //     options: ["«Akanksha»", "«Prateek»", "«Both»", "«Neither, somehow»"],
-      //     answer: 0,
-      //     because: "«»",
-      //   },
-      //   {
-      //     q: "«Your fourth question — make it one only four people could get right.»",
-      //     options: ["«Option one»", "«Option two»", "«Option three»", "«Option four»"],
-      //     answer: 0,
-      //     because: "«»",
-      //   },
-      // ],
-
-      /* What we say at the end, worst to best. The last one is kept for a
-         perfect score. */
-    //   verdicts: [
-    //     "You came for the food. Entirely respectable.",
-    //     "You know us about as well as our bank does.",
-    //     "Solid. You have been paying attention at the family lunches.",
-    //     "Suspiciously good. Either you listen, or you have been through a phone.",
-    //     "Flawless. You are either family or you have read the whole website.",
-    //   ],
     },
   },
 
@@ -603,11 +384,9 @@ window.WEDDING = {
        crop at all. `alt` is read aloud to anyone using a screen reader, and
        shows if the photo fails to load — describe it, don't label it.     */
     /* How long each photograph holds before the next one slides in, in
-       milliseconds. Set it to 0 to switch the rotation off and leave the
-       arrows and dots to do the work. It pauses while the pointer is over
-       it, while it is off screen, and for anyone whose system asks for
-       less motion — and it stops for good the moment a guest touches the
-       arrows, the dots or the photographs themselves.                     */
+       milliseconds. Set it to 0 to switch the rotation off. It holds still
+       under the pointer, while off screen, for 15 seconds after a guest
+       moves it, and for anyone whose system asks for less motion.        */
     rotateEvery: 5000,
     photos: [
       { src: "assets/photos/story/01.jpg",
@@ -622,16 +401,4 @@ window.WEDDING = {
         alt: "Bungalow 12 Jodhpur, Jan 2024" },
     ],
   },
-
-  /* ---------- FORM BACKEND ----------
-     Only used by the built-in itinerary form, which is itself only shown
-     while `collect.itinerary` above is still a placeholder. Once that is a
-     real Google Form link, nothing on this site posts anywhere and none of
-     this matters.
-
-     "netlify"   zero config if you host on Netlify (see README)
-     "formspree" set formspreeId below
-     "demo"      no backend — submissions stay in your browser only  */
-  formBackend: "netlify",
-  formspreeId: "",
 };

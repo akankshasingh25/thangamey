@@ -1,6 +1,6 @@
 /* =============================================================
-   site.js — wiring. Reads data/config.js and data/posts.js and
-   fills the pages in. You should rarely need to open this file.
+   site.js — wiring. Reads data/config.js and fills the pages in.
+   You should rarely need to open this file.
    ============================================================= */
 (function () {
   "use strict";
@@ -9,19 +9,9 @@
 
   function qs(s, r) { return (r || document).querySelector(s); }
   function qsa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
-  /* "travel.air.name" walks objects. A "#id" segment finds an entry in an
-     array by its id instead of its position, so commenting out one bullet
-     doesn't silently point a page at the bullet below it. */
+  /* "travel.air.name" walks objects. */
   function dig(path) {
-    return path.split(".").reduce(function (o, k) {
-      if (o == null) return o;
-      if (k.charAt(0) === "#") {
-        return Array.isArray(o)
-          ? o.filter(function (x) { return x && x.id === k.slice(1); })[0]
-          : null;
-      }
-      return o[k];
-    }, C);
+    return path.split(".").reduce(function (o, k) { return o == null ? o : o[k]; }, C);
   }
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
@@ -49,8 +39,7 @@
   }
 
   /* ---------- 1. config binding ----------
-     <span data-cfg="couple.one"></span>  → Akanksha
-     Add data-cfg-attr="href" to write an attribute instead.        */
+     <span data-cfg="couple.one"></span>  → Akanksha */
   function bindConfig(root) {
     qsa("[data-cfg]", root).forEach(function (n) {
       var v = dig(n.getAttribute("data-cfg"));
@@ -63,9 +52,6 @@
         return;
       }
       n.hidden = false;
-      var attr = n.getAttribute("data-cfg-attr");
-      var clean = String(v).replace(/[«»]/g, "");
-      if (attr) { n.setAttribute(attr, clean); return; }
       n.innerHTML = todo(v);
     });
 
@@ -137,7 +123,6 @@
         shown = true;
         a.setAttribute("href", href);
         /* Show the real thing too, so it can be read and copied. */
-        if (a.hasAttribute("data-contact-label")) return;
         a.textContent = raw;
       };
       /* pointerdown fires before click, so one tap still follows the link. */
@@ -200,9 +185,8 @@
   }
 
   /* ---------- 4. events ---------- */
-  /* The anchor in the URL. It used to be called rsvpSlug, back when there
-     was an RSVP page for it to point at. Old configs still work. */
-  function slugOf(e) { return e.slug || e.rsvpSlug || ""; }
+  /* The anchor in the URL: events.html#sangeet. */
+  function slugOf(e) { return e.slug || ""; }
 
   function dressLabel() {
     return C.dressCodeIsOptional ? "Optional dress code" : "Dress code";
@@ -262,7 +246,6 @@
               "<div><dt>When</dt><dd>" + esc(e.day) + ", " + esc(e.date) +
                 "<br>" + esc(e.time) + "</dd></div>" +
               "<div><dt>Where</dt><dd>" + esc(e.venue) +
-                (e.city ? "<br>" + esc(e.city) : "") +
                 (e.mapUrl && e.mapUrl.indexOf("\u00ab") < 0
                   ? '<br><a href="' + esc(e.mapUrl) + '" rel="noopener">Open in Maps</a>' : "") +
               "</dd></div>" +
@@ -290,29 +273,6 @@
     }
   }
 
-  /* Day-grouped summary. Nothing renders it at the moment — the "Here is the
-     whole thing" section was taken off the home page — but it is left wired so
-     dropping <div id="day-list" class="days"></div> back in brings it back. */
-  function dayList() {
-    var box = qs("#day-list");
-    if (!box) return;
-    var days = [];
-    (C.events || []).forEach(function (e) {
-      var d = days.filter(function (x) { return x.date === e.date; })[0];
-      if (!d) { d = { date: e.date, day: e.day, events: [] }; days.push(d); }
-      d.events.push(e);
-    });
-    box.innerHTML = days.map(function (d) {
-      return '<div class="day">' +
-        '<p class="day__label">' + esc(d.day) + "<span>" + esc(d.date) + "</span></p>" +
-        "<ul>" + d.events.map(function (e) {
-          return "<li><a href='events.html#" + esc(slugOf(e)) + "'>" +
-            "<b>" + esc(e.name) + "</b>" +
-            "<span>" + esc(e.time) + " &middot; " + esc(e.venue) + "</span></a></li>";
-        }).join("") + "</ul></div>";
-    }).join("");
-  }
-
   /* ---------- 5. gift registry ---------- */
   function gifts() {
     var G = C.gifts || {};
@@ -329,48 +289,21 @@
 
     var list = qs("#gift-list");
     if (list) {
-      var items = G.items || [];
-      list.innerHTML = items.length
-        ? items.map(function (it) {
-            var link = it.url && it.url.indexOf("\u00ab") < 0
-              ? ' <a href="' + esc(it.url) + '" rel="noopener">see it</a>' : "";
-            return '<li class="gift">' +
-              '<span class="gift__name">' + todo(it.name) +
-                (it.brand ? '<span class="gift__brand">' + todo(it.brand) + "</span>" : "") +
-                link + "</span>" +
-              (it.price ? '<span class="gift__price">' + todo(it.price) + "</span>" : "") +
-              (it.note && it.note.replace(/[\u00ab\u00bb]/g, "").trim()
-                ? '<span class="gift__note">' + todo(it.note) + "</span>" : "") +
-              "</li>";
-          }).join("")
-        : "";
-
-      /* Nothing to show and no sheet to point at yet — say that plainly
-         rather than leaving a heading above an empty space. */
-      var pending = qs("#gift-pending");
-      if (pending) pending.hidden = !!(items.length || haveSheet);
-      var blurb = qs("#gift-list-blurb");
-      if (blurb) blurb.hidden = !items.length;
-    }
-
-    var brands = qs("#gift-brands");
-    if (brands) {
-      var b = (G.brands || []).filter(function (x) { return x; });
-      if (!b.length) { var sec = brands.closest("[data-cfg-row]"); if (sec) sec.hidden = true; }
-      else brands.innerHTML = b.map(function (x) {
-        return '<li class="brand-chip">' + todo(x) + "</li>";
+      list.innerHTML = (G.items || []).map(function (it) {
+        return '<li class="gift">' +
+          '<span class="gift__name">' + todo(it.name) +
+            (it.brand ? '<span class="gift__brand">' + todo(it.brand) + "</span>" : "") +
+          "</span>" +
+          (it.note && it.note.replace(/[\u00ab\u00bb]/g, "").trim()
+            ? '<span class="gift__note">' + todo(it.note) + "</span>" : "") +
+          "</li>";
       }).join("");
     }
 
     var sheet = qs("#gift-sheet");
     if (sheet) {
       sheet.hidden = !haveSheet;
-      if (haveSheet) {
-        sheet.href = sheetUrl;
-        /* With rows on the page the sheet is the long version; without them
-           it is the only version, so it stops being the quiet second button. */
-        sheet.className = (G.items || []).length ? "btn btn--ghost" : "btn btn--gold";
-      }
+      if (haveSheet) sheet.href = sheetUrl;
     }
   }
 
@@ -378,12 +311,9 @@
   function travel() {
     var t = C.travel || {};
 
-    /* The itinerary goes to a Google Form once there is one. Until then the
-       page keeps its own form, so this is never a dead end. */
+    /* The itinerary is a Google Form; the button appears once there is a link. */
     var url = cfgLink("collect.itinerary");
-    var own = qs("#plans-form");
     var away = qs("#plans-elsewhere");
-    if (own) own.hidden = !!url;
     if (away) {
       away.hidden = !url;
       var a = qs("#plans-link", away);
@@ -393,32 +323,12 @@
     var hotels = qs("#hotel-grid");
     if (hotels && t.hotels) {
       hotels.innerHTML = t.hotels.map(function (h) {
-        var isMap = /maps\.google|google\.[a-z.]+\/maps|maps\.app\.goo\.gl/.test(h.url || "");
         var link = h.url && h.url.indexOf("«") < 0
-          ? '<p><a href="' + esc(h.url) + '" rel="noopener">' +
-            (isMap ? "Map Location" : "Book direct") + "</a></p>" : "";
+          ? '<p><a href="' + esc(h.url) + '" rel="noopener">Map Location</a></p>' : "";
         return '<div class="card"><h3>' + todo(h.name) + "</h3>" +
-          (h.price ? '<p class="card__meta">' + todo(h.price) + "</p>" : "") +
           "<p>" + todo(h.note) + "</p>" + link + "</div>";
       }).join("");
     }
-  }
-
-  /* ---------- 7. sustainability ---------- */
-  function sustain() {
-    var box = qs("#sustain-list");
-    if (!box) return;
-    var points = (C.sustainable || {}).points || [];
-    /* Comment the block out of config.js and the section goes with it,
-       rather than leaving a heading over an empty list. */
-    if (!points.length) {
-      var sec = box.closest("section");
-      if (sec) sec.hidden = true;
-      return;
-    }
-    box.innerHTML = points.map(function (p) {
-      return "<li><h3>" + todo(p.title) + "</h3><p>" + todo(p.body) + "</p></li>";
-    }).join("");
   }
 
   /* ---------- 6b. the short version ---------- */
@@ -671,16 +581,14 @@
     }
   }
 
-  /* The feed is switched off for now — feed.html is gone and nothing loads
-     data/posts.js. Put the page and the <script> back and this returns. */
-
   /* ---------- 8. the missions ----------
-     missions.html: a photo hunt and a quiz, both of them forms. Hidden
-     behind the same date gate unless `live` says otherwise.
+     missions.html names two Google Forms and hands over the links, but only
+     between `liveFrom` and `liveUntil` in data/config.js. Before that the
+     page says "not yet" and gives nothing away.
 
-     This is a static site. "Off" means hidden, not locked — the prompts and
-     the quiz answers sit in data/config.js, which anyone can open. For a
-     wedding game that is the right trade; it is not an exam. */
+     This is a static site: "off" means hidden, not locked. The form links
+     sit in data/config.js, which anyone can open. For a wedding game that
+     is the right trade; it is not an exam. */
   function previewing() {
     return /(^|[?&])preview(=|&|$)/.test(location.search);
   }
@@ -754,7 +662,6 @@
     var G = C.games || {};
     var cards = qs("#mission-cards");
 
-    setText("#missions-heading", G.heading);
     setText("#missions-intro", G.intro);
     if (!cards) return;
 
@@ -780,195 +687,7 @@
     setText("#missions-close", G.closeLabel);
   }
 
-  /* ---------- 9. forms ---------- */
-  function encode(data) {
-    return Object.keys(data).map(function (k) {
-      return encodeURIComponent(k) + "=" + encodeURIComponent(data[k]);
-    }).join("&");
-  }
-
-  /* A form with files has to go as multipart, and empty file inputs are
-     dropped so a half-finished mission isn't padded with blank parts. */
-  function collectFiles(form) {
-    var fd = new FormData();
-    qsa("input,select,textarea", form).forEach(function (f) {
-      var n = f.name;
-      if (!n || n === "bot-field") return;
-      if (f.type === "file") {
-        if (f.files && f.files[0]) fd.append(n, f.files[0], f.files[0].name);
-        return;
-      }
-      if ((f.type === "radio" || f.type === "checkbox") && !f.checked) return;
-      fd.append(n, f.value);
-    });
-    return fd;
-  }
-
-  function fdSummary(fd) {
-    var out = {};
-    fd.forEach(function (v, k) {
-      out[k] = (v && v.name) ? "[file] " + v.name : v;
-    });
-    return out;
-  }
-
-  /* Post a form's data wherever config says. Resolves to
-     { ok: true } | { ok: true, demo: true } | { ok: false, msg: "…" }. */
-  function sendTo(form, data) {
-    var backend = C.formBackend || "netlify";
-    var name = form.getAttribute("name");
-    var isFD = typeof FormData !== "undefined" && data instanceof FormData;
-
-    if (backend === "demo" || location.protocol === "file:") {
-      try {
-        var key = "bb-" + name;
-        var all = JSON.parse(localStorage.getItem(key) || "[]");
-        all.push({ at: new Date().toISOString(), data: isFD ? fdSummary(data) : data });
-        localStorage.setItem(key, JSON.stringify(all));
-      } catch (e) { /* private browsing — nothing to do */ }
-      return Promise.resolve({ ok: true, demo: true });
-    }
-
-    if (isFD) data.set("form-name", name); else data["form-name"] = name;
-
-    if (backend === "formspree") {
-      return fetch("https://formspree.io/f/" + C.formspreeId, {
-        method: "POST",
-        headers: isFD ? { Accept: "application/json" }
-                      : { "Content-Type": "application/json", Accept: "application/json" },
-        body: isFD ? data : JSON.stringify(data),
-      }).then(function (r) {
-        return r.ok ? { ok: true } : { ok: false, msg: "Formspree said no (" + r.status + ")." };
-      }).catch(function () { return { ok: false, msg: "We couldn't reach the server." }; });
-    }
-
-    /* Netlify Forms: post back to the page itself. With files, hand fetch the
-       FormData untouched so the browser writes the multipart boundary. */
-    return fetch(form.getAttribute("action") || location.pathname, isFD
-      ? { method: "POST", body: data }
-      : { method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode(data) }
-    ).then(function (r) {
-      return r.ok ? { ok: true } : { ok: false, msg: "The server returned " + r.status + "." };
-    }).catch(function () { return { ok: false, msg: "We couldn't reach the server." }; });
-  }
-
-  /* Turn a form into a flat object; checkbox groups become "a, b, c". */
-  function collect(form) {
-    var out = {};
-    new FormData(form).forEach(function (v, k) {
-      if (k === "bot-field") return;
-      out[k] = out[k] ? out[k] + ", " + v : v;
-    });
-    return out;
-  }
-
-  function status(form, tone, html) {
-    var box = qs(".form-status", form.parentNode) || (function () {
-      var b = el("div", "form-status");
-      form.parentNode.insertBefore(b, form);
-      return b;
-    })();
-    box.setAttribute("data-tone", tone);
-    box.innerHTML = html;
-    box.hidden = false;
-    box.setAttribute("role", "status");
-    box.scrollIntoView({ block: "center", behavior: "smooth" });
-  }
-
-  function wireForms() {
-    qsa("form[data-ajax]").forEach(function (form) {
-      form.addEventListener("submit", function (ev) {
-        if (qs('[name="bot-field"]', form) && qs('[name="bot-field"]', form).value) {
-          ev.preventDefault(); return;                       // a bot filled the honeypot
-        }
-        if (!form.reportValidity()) return;
-        ev.preventDefault();
-
-        var files = form.hasAttribute("data-files");
-        var btn = qs('[type="submit"]', form);
-        var label = btn ? btn.textContent : "";
-
-        var done = function () {
-          if (btn) { btn.disabled = false; btn.textContent = label; }
-        };
-        var bad = function (msg) {
-          done();
-          status(form, "bad",
-            "<p><strong>That didn't send.</strong> " + esc(msg) + "</p>" +
-            "<p>Please email us instead: " +
-            '<a data-contact="email" data-contact-label>email us</a></p>');
-          contacts();
-        };
-
-        if (files) {
-          var picked = qsa('input[type="file"]', form)
-            .filter(function (i) { return i.files.length; });
-
-          /* An upload form with nothing attached is an empty submission. */
-          if (!picked.length) {
-            status(form, "bad", "<p><strong>Nothing attached yet.</strong> " +
-              "Add at least one photograph before you send it.</p>");
-            return;
-          }
-
-          /* Netlify refuses a form request over 8 MB outright. Three photos off
-             a modern phone can pass that, so say so here rather than letting
-             them watch a progress bar end in a server error. Sending in
-             batches works: every submission is kept. */
-          var LIMIT = 7.5 * 1024 * 1024;
-          var total = picked.reduce(function (n, i) { return n + i.files[0].size; }, 0);
-          if (total > LIMIT) {
-            var mb = function (b) { return (b / 1048576).toFixed(1) + " MB"; };
-            status(form, "bad",
-              "<p><strong>That's " + mb(total) + " \u2014 too much to send in one go.</strong> " +
-              "The limit is 8 MB a time.</p>" +
-              "<p>Take a few off and send them, then attach the rest and send again. " +
-              "Nothing is lost \u2014 we get every batch, and we'll put them back together.</p>");
-            return;
-          }
-        }
-
-        if (btn) { btn.disabled = true; btn.textContent = files ? "Uploading…" : "Sending…"; }
-
-        sendTo(form, files ? collectFiles(form) : collect(form)).then(function (r) {
-          if (!r.ok) { bad(r.msg); return; }
-          done();
-          form.hidden = true;
-          if (r.demo) {
-            status(form, "info",
-              "<p><strong>Saved locally — nothing was actually sent.</strong></p>" +
-              "<p>The site is running without a form backend (either <code>formBackend: \"demo\"</code> " +
-              "in <code>data/config.js</code>, or you opened the file directly instead of over http). " +
-              "Deploy it and this becomes a real submission.</p>");
-            return;
-          }
-          status(form, "ok", qs("[data-thanks]", form.parentNode)
-            ? qs("[data-thanks]", form.parentNode).innerHTML
-            : "<p><strong>Got it — thank you.</strong> We'll be in touch.</p>");
-        });
-      });
-    });
-
-    /* "Coming to this one?" toggles reveal the per-event extras. */
-    qsa("[data-reveal]").forEach(function (input) {
-      var target = qs(input.getAttribute("data-reveal"));
-      if (!target) return;
-      var sync = function () {
-        var on = qsa('input[name="' + input.name + '"]')
-          .filter(function (i) { return i.checked; })
-          .some(function (i) { return i.hasAttribute("data-reveal"); });
-        target.hidden = !on;
-      };
-      qsa('input[name="' + input.name + '"]').forEach(function (i) {
-        i.addEventListener("change", sync);
-      });
-      sync();
-    });
-  }
-
-  /* ---------- 9b. how tall the sticky chrome is ----------
+  /* ---------- 9. how tall the sticky chrome is ----------
      The header is one line on a laptop and two or three on a phone, and
      the jump bar has to sit directly under it rather than at a number
      somebody typed. Publishing both heights as CSS variables keeps the
@@ -1023,16 +742,13 @@
     chrome();
     countdown();
     eventPanels();
-    dayList();
     gifts();
     travel();
-    sustain();
     quick();
     story();
     storyPhotos();
     media();
     if (gameGate()) missions();
-    wireForms();
     paintAll(document);
   }
 

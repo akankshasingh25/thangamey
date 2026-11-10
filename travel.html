@@ -12,13 +12,13 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#main">Skip to Content</a>
 
 <header class="site-head">
   <div class="site-head__in">
     <a class="brand" href="index.html">
       <img class="brand__logo" src="assets/img/logo.png" alt="" width="720" height="676">
-      Thangamey <em class="script" data-cfg="couple.script"></em>
+      Thangamey
     </a>
     <nav class="nav" aria-label="Main">
       <a href="index.html">Home</a>
@@ -60,116 +60,20 @@
       </div>
     </div>
 
-    <!-- The itinerary used to be a step of its own at the bottom of the
-         page. It belongs with getting here: by the time you have read the
-         two cards you know what you are going to tell us. -->
     <div id="plans">
-<div class="form-wrap">
-      <div class="section__head">
-        <h2></h2>
-        <p class="lede">The link below opens a Google Form. Let us know your travel itinerary so we can do a lot of host things with it.</p>
+      <div class="form-wrap">
+        <div class="section__head">
+          <p class="lede">The link below opens a Google Form. Let us know your travel itinerary so we can do a lot of host things with it.</p>
+        </div>
+
+        <!-- Appears once `collect.itinerary` in config.js is a real link. -->
+        <div id="plans-elsewhere" hidden>
+          <p class="btn-row" style="justify-content:flex-start;margin-top:0">
+            <a class="btn btn--gold" id="plans-link" href="#" rel="noopener">Send Us Your Plans</a>
+          </p>
+        </div>
       </div>
-
-      <!-- Shown only until `collect.itinerary` in config.js is a real link. -->
-      <div id="plans-elsewhere" hidden>
-        <p class="btn-row" style="justify-content:flex-start;margin-top:0">
-          <a class="btn btn--gold" id="plans-link" href="#" rel="noopener">Send Us Your Plans</a>
-        </p>
-      </div>
-
-      <!-- <div id="plans-form">
-      <form id="travel-form" class="form" name="travel" method="POST" action="/"
-            data-netlify="true" netlify-honeypot="bot-field" data-ajax>
-        <input type="hidden" name="form-name" value="travel">
-        <p class="hp"><label>Leave this Empty <input name="bot-field"></label></p>
-
-        <div class="field">
-          <label for="t-name">Your Name</label>
-          <input id="t-name" name="guest_name" type="text" autocomplete="name" required>
-        </div>
-
-        <div class="field">
-          <label for="t-email">Email</label>
-          <input id="t-email" name="email" type="email" autocomplete="email" required>
-        </div>
-
-        <fieldset class="fieldset">
-          <legend>How are you getting here?</legend>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="arriving_by" value="Flight to Bhubaneswar" required data-reveal="#arrival-detail"><span>Flying</span></label>
-            <label class="choice"><input type="radio" name="arriving_by" value="Train to Puri" data-reveal="#arrival-detail"><span>Train</span></label>
-            <label class="choice"><input type="radio" name="arriving_by" value="Driving"><span>Driving</span></label>
-            <label class="choice"><input type="radio" name="arriving_by" value="Already in Odisha"><span>Already nearby</span></label>
-          </div>
-        </fieldset>
-
-        <div id="arrival-detail" hidden>
-          <div class="field">
-            <label for="t-num">Flight or train number</label>
-            <input id="t-num" name="arrival_number" type="text" placeholder="e.g. 6E 6383, or 12801 Purushottam Express">
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="t-in">Arriving</label>
-          <input id="t-in" name="arrival_at" type="datetime-local">
-          <p class="hint">Date and time you land or pull in. This is the field that does all the work.</p>
-        </div>
-
-        <div class="field">
-          <label for="t-out">Leaving</label>
-          <input id="t-out" name="departure_at" type="datetime-local">
-        </div>
-
-        <div class="field">
-          <label for="t-stay">Where are you staying?</label>
-          <select id="t-stay" name="staying_at">
-            <option value="">Not booked yet</option>
-            <option>Fortune Beachfront, Puri</option>
-            <option>The Chanakya BNR, Puri</option>
-            <option>Somewhere else in Puri</option>
-            <option>With family</option>
-          </select>
-        </div>
-
-        <fieldset class="fieldset">
-          <legend>Sharing a car from the airport</legend>
-          <p class="ev-when">The single biggest thing that cuts the footprint of a wedding
-          people fly to. We'll match you with someone landing within the hour.</p>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="carpool" value="Happy to share" checked><span>Happy to share</span></label>
-            <label class="choice"><input type="radio" name="carpool" value="Rather not"><span>Rather not</span></label>
-            <label class="choice"><input type="radio" name="carpool" value="Own transport"><span>I have my own</span></label>
-          </div>
-        </fieldset>
-
-        <div class="field">
-          <label class="check">
-            <input type="checkbox" name="visa_letter" value="Yes">
-            <span>I need a signed invitation letter for a visa application.</span>
-          </label>
-        </div>
-
-        <div class="field">
-          <label for="t-msg">Anything else</label>
-          <textarea id="t-msg" name="message" rows="3"
-                    placeholder="Mobility needs, a toddler, an 04:40 landing you'd like to complain about…"></textarea>
-        </div>
-
-        <button class="btn btn--gold btn--block" type="submit">Send our plans</button>
-        <p class="form-note">You can send this more than once — the latest one wins.</p>
-      </form>
-
-      </div> -->
-
-      <!-- <div data-thanks hidden>
-        <p><strong>Thank you — that's genuinely useful.</strong></p>
-        <p>We'll come back to you with a car share if we find a match, and the shuttle
-        times land in your inbox nearer the date.</p>
-      </div> -->
-
-    </div><!-- /form-wrap -->
-    </div><!-- /plans -->
+    </div>
   </section>
 
   <!-- ---------- 2. where to stay ---------- -->
@@ -182,7 +86,6 @@
     <div class="grid grid--2" id="hotel-grid"></div>
     <div class="callout" data-cfg-box>
       <p data-cfg-row><strong>How to commute between them?</strong> <span data-cfg="travel.shuttle"></span></p>
-      <!-- <p data-cfg-row><strong>Visas.</strong> <span data-cfg="travel.visaNote"></span></p> -->
     </div>
   </section>
 
@@ -211,7 +114,6 @@
   <div class="shell site-foot__in">
     <p>Akanksha &amp; Prateek &middot; <span data-cfg="mainDateLabel"></span> &middot; <span data-cfg="mainCityLabel"></span></p>
     <p><a data-contact="email">Email</a> &middot; <a data-contact="whatsapp">WhatsApp</a></p>
-    <p class="tag script" data-cfg="couple.script"></p>
   </div>
 </footer>
 

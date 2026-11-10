@@ -1,3 +1,0 @@
-# A wedding is not for the open internet.
-User-agent: *
-Disallow: /
