@@ -147,7 +147,7 @@ window.WEDDING = {
         url: "https://docs.google.com/spreadsheets/d/1eoR7vcG-116Bj16PCG8OXJWA5SulURvqJSYK3P2WYdI/edit?usp=sharing#gid=393904024",
         heading: "Pick a song, add your name",
         text:
-          "We are trying to save everyone from some through this sheet. Add a song, put your name in the " +
+          "We are trying to save everyone from some anxiety through this sheet. Add a song, put your name in the " +
           "last column, and drop in a choreography link if there isn't any. No song twice \u2014 if " +
           "yours is already there, add your name to that row and dance together.",
         label: "Open the Sang-it sheet",
@@ -427,18 +427,18 @@ window.WEDDING = {
       /* Reorder, reword or cut a few — the form follows whatever is here.
          If you change the NUMBER of prompts, update the hidden detection
          form at the top of missions.html to match (it is commented there). */
-      prompts: [
-        "Someone you have only ever met in a family WhatsApp group.",
-        "A pair of hands straight after Daler Mehandi. The messier the better.",
-        "The worst possible photograph of the bride. One of the groom too. We will be judging.",
-        "Sunrise over the Bay of Bengal. You will have to actually get up.",
-        "Turmeric in mid-air.",
-        "Somebody asleep in a chair between two and five in the afternoon.",
-        "Four generations in one frame.",
-        "Whatever was on the plate that you went back for twice.",
-        "A stranger in Puri who made your day — ask them first.",
-        "The last song of Sang-it, from the middle of the floor and not the edge.",
-      ],
+      // prompts: [
+      //   "Someone you have only ever met in a family WhatsApp group.",
+      //   "A pair of hands straight after Daler Mehandi. The messier the better.",
+      //   "The worst possible photograph of the bride. One of the groom too. We will be judging.",
+      //   "Sunrise over the Bay of Bengal. You will have to actually get up.",
+      //   "Turmeric in mid-air.",
+      //   "Somebody asleep in a chair between two and five in the afternoon.",
+      //   "Four generations in one frame.",
+      //   "Whatever was on the plate that you went back for twice.",
+      //   "A stranger in Puri who made your day — ask them first.",
+      //   "The last song of Sang-it, from the middle of the floor and not the edge.",
+      // ],
 
       /* Optional. A shared album for everything that isn't one of the ten. */
       albumUrl: "«https://photos.app.goo.gl/...»",
@@ -576,8 +576,8 @@ window.WEDDING = {
         /* `link: false` means this one is deliberately a dead end, not a
            card whose link hasn't been pasted in yet — so it shows without
            a button instead of leaving itself out. */
-        title: "Sssh Secret Missions",
-        body: "They open on when the times up." + "Keep an eye out for the details.",
+        title: "Secret Missions",
+        body: "They open on when the times up." + " Keep an eye out for the details.",
         link: false,
       },
     ],
