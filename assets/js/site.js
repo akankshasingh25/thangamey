@@ -253,8 +253,7 @@
             '" width="681" height="1150" loading="lazy" decoding="async">' +
           "</figure>" +
           '<div class="ev-panel__body">' +
-            '<p class="ev-panel__no">' + (i + 1) + " of " + (C.events || []).length +
-              (e.isMain ? ' &middot; <b>the main event</b>' : "") + "</p>" +
+            '<p class="ev-panel__no">' + (i + 1) + " of " + (C.events || []).length + "</p>" +
             (e.logo ? '<img class="ev-panel__logo" src="' + esc(e.logo) + '" alt="' + esc(e.name) +
                       '" loading="lazy" decoding="async"><h2 class="vh">' + esc(e.name) + "</h2>"
                     : "<h2>" + esc(e.name) + "</h2>") +

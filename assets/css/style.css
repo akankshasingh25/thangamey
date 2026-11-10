@@ -528,7 +528,6 @@ mark.todo{
   font-size:.88rem; letter-spacing:normal; text-transform:none;
   font-weight:400; opacity:.72; margin:0 0 .9rem;
 }
-.ev-panel__no b{ color:var(--s-light); }
 .ev-panel__note{ font-size:1.08rem; max-width:32rem; opacity:.93; }
 .ev-panel .ev-facts{
   display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));

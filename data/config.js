@@ -190,6 +190,8 @@ window.WEDDING = {
       dress: "Traditional; Reverie of Lotus and Rajanigandha",
       mapUrl: "https://maps.google.com/?q=The+Chanakya+BNR+Puri",
       note: "The main event, under an actual sky, which we have been assured will cooperate.",
+      /* Nothing reads this any more — the panel counter just says which
+         of four it is. Left in case the distinction is wanted again. */
       isMain: true,
     },
   ],
