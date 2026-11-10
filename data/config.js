@@ -232,7 +232,7 @@ window.WEDDING = {
               "after sunset. It sits right on the promenade, the best possible distance from " +
               "the city: close enough to commute, far enough for the peace. Rooms are blocked for " +
               "friends under 'Akanksha & Prateek' from 8 to 10 December 2026.",
-        url: "https://www.google.com/search?q=Fortune%20Beachfront%2C%20Puri",
+        url: "https://maps.google.com/?q=Fortune+Beachfront+Puri",
       },
       {
         name: "The Chanakya BNR, Puri",
@@ -240,7 +240,7 @@ window.WEDDING = {
               "back one. A colonial-era hotel now owned by railways with very large rooms and very slow " +
               "ceiling fans, close to both the station and the beach. This is where " +
               "the family will be. Rooms blocked under the 'Akanksha & Prateek' from 8 to 10 December 2026.",
-        url: "https://www.google.com/search?q=chanakya+bnr+puri",
+        url: "https://maps.google.com/?q=The+Chanakya+BNR+Puri",
       },
     ],
     shuttle:

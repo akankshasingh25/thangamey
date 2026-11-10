@@ -397,7 +397,7 @@
         var isMap = /maps\.google|google\.[a-z.]+\/maps|maps\.app\.goo\.gl/.test(h.url || "");
         var link = h.url && h.url.indexOf("«") < 0
           ? '<p><a href="' + esc(h.url) + '" rel="noopener">' +
-            (isMap ? "Open in Maps" : "Book direct") + "</a></p>" : "";
+            (isMap ? "Map Location" : "Book direct") + "</a></p>" : "";
         return '<div class="card"><h3>' + todo(h.name) + "</h3>" +
           (h.price ? '<p class="card__meta">' + todo(h.price) + "</p>" : "") +
           "<p>" + todo(h.note) + "</p>" + link + "</div>";
