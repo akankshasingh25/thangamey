@@ -29,7 +29,7 @@ window.WEDDING = {
     cover: "assets/art/cover.jpg",          // the invitation's first page — the hero
     logo: "assets/img/logo.png",
     logoInspiration: "assets/photos/bully-dino.jpg",
-    logoHeading: "About the logo",
+    logoHeading: "About the Logo",
     logoBody:
       "Hum do, humare do. " +
       "We got Dino Choudhary from an elderly Roman woman who sells crocheted plushies at Artjuna, Goa in 2023. And later in 2025 he found his sister, Bully. " +
@@ -131,7 +131,7 @@ window.WEDDING = {
       dress: "Traditional Partywear; Shades of Sunset",
       mapUrl: "https://maps.google.com/?q=Fortune+Beachfront+Puri",
       note:
-        "Performances are welcome, encouraged, and gently capped at four minutes. We love you. Four minutes.",
+        "Performances are welcome, encouraged, and gently capped at 2 songs. We love you. 2 songs.",
       /* ---- An optional sign-up sheet, shown inside this event's panel ----
          Any event can have one: give it a `sheet` block like this and it
          appears; delete the block and it disappears. This points at the
@@ -172,7 +172,7 @@ window.WEDDING = {
       dress: "Traditional Daywear; Tints of Sunflower",
       mapUrl: "https://maps.google.com/?q=The+Chanakya+BNR+Puri",
       note:
-        "Outdoors, bright and will be competitive. Wear light, carry sunglasses, umbrella and a hankerchief.",
+        "Outdoors, bright and a little competitive. Wear light, carry sunglasses, umbrella and a hankerchief.",
     },
     {
       slug: "wedding",
@@ -244,7 +244,7 @@ window.WEDDING = {
       },
     ],
     shuttle:
-      "We are running cabs between the two hotels and every event. ",
+      "We are running cabs between the two hotels for the events.",
     // visaNote:
     //   "«Need a signed invitation letter for a visa application? Tick the box on the form " +
     //   "and we will send one. Please give us six weeks.»",
@@ -297,7 +297,7 @@ window.WEDDING = {
   gifts: {
     intro:
       "The honest answer is that we don't know the best practices. But people keep asking, and we'd rather " +
-      "answer the question than be coy about it. So: here is a list.",
+      "answer the question than be coy about it. So, here is a list.",
     ways: [
       {
         title: "Gift an item",
@@ -363,7 +363,7 @@ window.WEDDING = {
     brands: [],
 
     closing:
-      "However you do it, WhatsApp DM us so we can keep the list updated. " +
+      "However you do it, update the sheet with your name, your group you'd pool to gift or WhatsApp DM us so we can keep the list updated. " +
       "And if you'd rather do none of this and gift something else or not at all, that is absoluetely okay too.",
   },
 
@@ -396,7 +396,7 @@ window.WEDDING = {
     /* Only shown once the window is open — before that the page gives the
        two names and the opening time and nothing else. */
     intro:
-      "Both are open NOW. We didn't tell you this before but there is an actual prize for the winners.",
+      "Both are open NOW. We didn't tell you this before but there is are actual prizes for the winners.",
 
     /* ---- Your TO-DOs ----
        NOT SHOWN ANYWHERE at the moment. It was built onto the missions
@@ -459,81 +459,81 @@ window.WEDDING = {
 
          If you change the NUMBER of questions, update the hidden detection
          form at the top of missions.html to match.                        */
-      questions: [
-        {
-          q: "The two animals on our logo are…",
-          options: ["A dragon and a whale", "A dinosaur and a shark",
-                    "A lion and a fish", "Two slightly different bears"],
-          answer: 0,
-          because: "Both crocheted, both live on a sofa, both predate the wedding.",
-        },
-        {
-          q: "Which of the four events involves actual turmeric?",
-          options: ["Daler Mehandi", "Sang-it", "Vicco Turmeric", "The Weeding"],
-          answer: 2,
-          because: "The clue was generous.",
-        },
-        {
-          q: "The Daler Mehandi painting was made from a photograph taken where?",
-          options: ["Goa", "Wayanad, Kerala", "Tromsø, Norway", "Puri"],
-          answer: 1,
-          because: "Sunrise from the base of Chembra Peak, out of a hostel that used to be a colonial hospital.",
-        },
-        {
-          q: "And the one on The Weeding card?",
-          options: ["The Northern Lights over Tromsø", "A Goan sunset",
-                    "The Bay of Bengal", "The Algarve coast"],
-          answer: 0,
-          because: "After days of rain and snow, on what should rightly be called a Series of Fortunate Events.",
-        },
-        {
-          q: "Performances at Sang-it are capped at…",
-          options: ["Three minutes", "Five minutes", "Ten minutes", "There is no cap"],
-          answer: 1,
-          because: "We love you. Five minutes.",
-        },
-        {
-          q: "Why does a train to Puri never leave you asleep past your stop?",
-          options: ["There is a guard who checks", "It is a terminus — the line ends there",
-                    "It only runs in daylight", "It is the first stop out of Bhubaneswar"],
-          answer: 1,
-          because: "Puri is the end of the line in every sense.",
-        },
-        {
-          q: "«Where did the two of us actually meet?»",
-          options: ["«Option one»", "«Option two»", "«Option three»", "«Option four»"],
-          answer: 0,
-          because: "«One line of explanation, if it is a good story.»",
-        },
-        {
-          q: "«Who said it first?»",
-          options: ["«Akanksha»", "«Prateek»", "«Both, at once, awkwardly»", "«Nobody has yet»"],
-          answer: 0,
-          because: "«»",
-        },
-        {
-          q: "«Which one of us is going to be late to their own wedding?»",
-          options: ["«Akanksha»", "«Prateek»", "«Both»", "«Neither, somehow»"],
-          answer: 0,
-          because: "«»",
-        },
-        {
-          q: "«Your fourth question — make it one only four people could get right.»",
-          options: ["«Option one»", "«Option two»", "«Option three»", "«Option four»"],
-          answer: 0,
-          because: "«»",
-        },
-      ],
+      // questions: [
+      //   {
+      //     q: "The two animals on our logo are…",
+      //     options: ["A dragon and a whale", "A dinosaur and a shark",
+      //               "A lion and a fish", "Two slightly different bears"],
+      //     answer: 0,
+      //     because: "Both crocheted, both live on a sofa, both predate the wedding.",
+      //   },
+      //   {
+      //     q: "Which of the four events involves actual turmeric?",
+      //     options: ["Daler Mehandi", "Sang-it", "Vicco Turmeric", "The Weeding"],
+      //     answer: 2,
+      //     because: "The clue was generous.",
+      //   },
+      //   {
+      //     q: "The Daler Mehandi painting was made from a photograph taken where?",
+      //     options: ["Goa", "Wayanad, Kerala", "Tromsø, Norway", "Puri"],
+      //     answer: 1,
+      //     because: "Sunrise from the base of Chembra Peak, out of a hostel that used to be a colonial hospital.",
+      //   },
+      //   {
+      //     q: "And the one on The Weeding card?",
+      //     options: ["The Northern Lights over Tromsø", "A Goan sunset",
+      //               "The Bay of Bengal", "The Algarve coast"],
+      //     answer: 0,
+      //     because: "After days of rain and snow, on what should rightly be called a Series of Fortunate Events.",
+      //   },
+      //   {
+      //     q: "Performances at Sang-it are capped at…",
+      //     options: ["Three minutes", "Five minutes", "Ten minutes", "There is no cap"],
+      //     answer: 1,
+      //     because: "We love you. Five minutes.",
+      //   },
+      //   {
+      //     q: "Why does a train to Puri never leave you asleep past your stop?",
+      //     options: ["There is a guard who checks", "It is a terminus — the line ends there",
+      //               "It only runs in daylight", "It is the first stop out of Bhubaneswar"],
+      //     answer: 1,
+      //     because: "Puri is the end of the line in every sense.",
+      //   },
+      //   {
+      //     q: "«Where did the two of us actually meet?»",
+      //     options: ["«Option one»", "«Option two»", "«Option three»", "«Option four»"],
+      //     answer: 0,
+      //     because: "«One line of explanation, if it is a good story.»",
+      //   },
+      //   {
+      //     q: "«Who said it first?»",
+      //     options: ["«Akanksha»", "«Prateek»", "«Both, at once, awkwardly»", "«Nobody has yet»"],
+      //     answer: 0,
+      //     because: "«»",
+      //   },
+      //   {
+      //     q: "«Which one of us is going to be late to their own wedding?»",
+      //     options: ["«Akanksha»", "«Prateek»", "«Both»", "«Neither, somehow»"],
+      //     answer: 0,
+      //     because: "«»",
+      //   },
+      //   {
+      //     q: "«Your fourth question — make it one only four people could get right.»",
+      //     options: ["«Option one»", "«Option two»", "«Option three»", "«Option four»"],
+      //     answer: 0,
+      //     because: "«»",
+      //   },
+      // ],
 
       /* What we say at the end, worst to best. The last one is kept for a
          perfect score. */
-      verdicts: [
-        "You came for the food. Entirely respectable.",
-        "You know us about as well as our bank does.",
-        "Solid. You have been paying attention at the family lunches.",
-        "Suspiciously good. Either you listen, or you have been through a phone.",
-        "Flawless. You are either family or you have read the whole website.",
-      ],
+    //   verdicts: [
+    //     "You came for the food. Entirely respectable.",
+    //     "You know us about as well as our bank does.",
+    //     "Solid. You have been paying attention at the family lunches.",
+    //     "Suspiciously good. Either you listen, or you have been through a phone.",
+    //     "Flawless. You are either family or you have read the whole website.",
+    //   ],
     },
   },
 
@@ -576,9 +576,8 @@ window.WEDDING = {
         /* `link: false` means this one is deliberately a dead end, not a
            card whose link hasn't been pasted in yet — so it shows without
            a button instead of leaving itself out. */
-        title: "The two missions",
-        body: "They open on the morning of the 8th and nothing about them goes up before " +
-              "that. Come with your phone charged and some room on it.",
+        title: "Sssh Secret Missions",
+        body: "They open on when the times up." + "Keep an eye out for the details.",
         link: false,
       },
     ],
@@ -586,7 +585,7 @@ window.WEDDING = {
 
   /* ---------- THE STORY ---------- */
   story: {
-    heading: "How this happened",
+    heading: "How this Happened?",
     paragraphs: [
       "Depends on who is asking. Maybe ask us at the wedding and we will let you know",
     ],
