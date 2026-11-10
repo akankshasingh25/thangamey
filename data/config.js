@@ -341,7 +341,7 @@ window.WEDDING = {
         note: "We are only allowed 1 tsp oil per meal per person." },
       { name: "Aeropress", brand: "Aeropress",
         note: "In case there is an apocalypse." },
-      { name: "Gift Card", brand: "Indiahikes",
+      { name: "Trek Voucher", brand: "Indiahikes",
         note: "To touch grass ;) ;)" },
       { name: "Gift Card", brand: "Cult.fit",
         note: "Can't touch grass unprepared, part one." },
