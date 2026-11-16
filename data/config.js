@@ -310,11 +310,11 @@ window.WEDDING = {
       heading: "I Spy",
       openLabel: "Open I Spy",
       intro:
-        "Something to keep you on your toes, either you click or get clicker.",
+        "Something to keep you on your toes, either you click or get clicked.",
 
       /* The shared Google Photos album. Not shown on the page yet — paste the
          link here and wire it in when it exists. */
-      albumUrl: "«https://photos.app.goo.gl/...»",
+      albumUrl: "https://drive.google.com/drive/folders/1gMnhNqFPij4eSTFJ_leL3ZhaWfxyIp6q?usp=drive_link",
       albumNote:
         "Use this shared album to get all your photos while you upload the ones on your phone.",
     },
@@ -324,7 +324,7 @@ window.WEDDING = {
       heading: "Recce Recce",
       openLabel: "Open Recce Recce",
       intro:
-        "Questions about the two of us. You get your score when you send it, and so do we.",
+        "Questions about the two of us. We surely won't keeping a count",
     },
   },
 
