@@ -288,14 +288,16 @@ window.WEDDING = {
   },
 
   /* ---------- MISSIONS ----------
-     missions.html names two Google Forms and hands over the links, but only
-     between `liveFrom` and `liveUntil`. Before that it says "not yet" and
-     gives nothing else away. Add ?preview to the URL to see it open early. */
+     missions.html names two Google Forms and hands over the links from
+     `liveFrom` onwards. Before that it says "not yet" and gives nothing
+     else away. Add ?preview to the URL to see it open early.
+     There is deliberately no closing time: the page stays exactly as it is
+     after 10 December, and the forms are closed in Google Forms instead.
+     (A `liveUntil` date here would hide the page again at that moment.) */
   games: {
     /* `live: true` forces them open and `live: false` forces them shut,
        whatever the dates say. Leave it out and the dates decide.         */
     liveFrom:  "2026-12-08T10:00:00+05:30",
-    liveUntil: "2026-12-10T10:00:00+05:30",
     openLabel: "Both missions open on 8 December 10 am and close at 10 December 10 am.",
     closeLabel: "The couple makes the rules and their decision is binding." + " The winners will be announced on Akanksha's Instagram or DMed to you/your WhatsApp groups.",
 
@@ -312,8 +314,9 @@ window.WEDDING = {
       intro:
         "Something to keep you on your toes, either you click or get clicked.",
 
-      /* The shared Google Photos album. Not shown on the page yet — paste the
-         link here and wire it in when it exists. */
+      /* The shared photos folder. It appears on the I Spy card, as a second
+         button beside the form, only once the missions are open. */
+      albumLabel: "Shared Photos",
       albumUrl: "https://drive.google.com/drive/folders/1gMnhNqFPij4eSTFJ_leL3ZhaWfxyIp6q?usp=drive_link",
       albumNote:
         "Use this shared album to get all your photos while you upload the ones on your phone.",

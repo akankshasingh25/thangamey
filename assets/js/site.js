@@ -582,9 +582,10 @@
   }
 
   /* ---------- 8. the missions ----------
-     missions.html names two Google Forms and hands over the links, but only
-     between `liveFrom` and `liveUntil` in data/config.js. Before that the
-     page says "not yet" and gives nothing away.
+     missions.html names two Google Forms and hands over the links from
+     `liveFrom` in data/config.js (and until `liveUntil`, if one is set —
+     at the moment it isn't, so the page stays open). Before that the page
+     says "not yet" and gives nothing away.
 
      This is a static site: "off" means hidden, not locked. The form links
      sit in data/config.js, which anyone can open. For a wedding game that
@@ -671,15 +672,22 @@
     cards.innerHTML = [G.photos, G.quiz].map(function (m, i) {
       if (!m) return "";
       var url = cfgLink(i === 0 ? "collect.photos" : "collect.quiz");
+      /* I Spy also hands over the shared photos folder, beside its form. */
+      var album = cfgLink("games." + (i === 0 ? "photos" : "quiz") + ".albumUrl");
       return '<li class="card mission-card" id="' + (i === 0 ? "i-spy" : "recce-recce") + '">' +
         '<p class="card__meta">' + todo(m.eyebrow || ("Mission " + (i + 1))) + "</p>" +
         "<h2>" + todo(m.heading || "") + "</h2>" +
         (m.intro ? "<p>" + todo(m.intro) + "</p>" : "") +
-        (url
+        (album && m.albumNote ? "<p>" + todo(m.albumNote) + "</p>" : "") +
+        (url || album
           ? '<p class="btn-row" style="justify-content:flex-start">' +
-              '<a class="btn btn--gold" href="' + esc(url) + '" target="_blank" rel="noopener">' +
-              esc(m.openLabel || "Open the form") + "</a></p>"
-          : '<p class="form-note">The form for this one isn\'t up yet. ' +
+              (url ? '<a class="btn btn--gold" href="' + esc(url) + '" target="_blank" rel="noopener">' +
+                esc(m.openLabel || "Open the form") + "</a>" : "") +
+              (album ? '<a class="btn btn--ghost" href="' + esc(album) + '" target="_blank" rel="noopener">' +
+                esc(m.albumLabel || "Shared photos") + "</a>" : "") +
+            "</p>"
+          : "") +
+        (url ? "" : '<p class="form-note">The form for this one isn\'t up yet. ' +
             "Ask us and we will send it to you.</p>") +
         "</li>";
     }).join("");
@@ -732,10 +740,10 @@
   /* ---------- 9b. our song ----------
      A sound-wave button beside the name. Nothing from YouTube is loaded
      until it is pressed. The player is YouTube's own embed, kept out of
-     sight, and loops. Pages are separate loads, so the choice (and the
-     place in the song) is remembered for the visit and picked up again on
-     the next page; if the browser refuses to start sound by itself the
-     button simply shows "off" and one press resumes it. */
+     sight, and loops. It never starts by itself, not even on the next
+     page after someone was listening: every page begins silent. What is
+     remembered for the visit is the place in the song, so pressing play
+     on another page carries on from there rather than from the top. */
   function music() {
     var m = C.music || {};
     var head = qs(".site-head__in");
@@ -775,7 +783,6 @@
       if (player && ready && player.getCurrentTime) {
         try { saved.t = Math.floor(player.getCurrentTime()); } catch (e) {}
       }
-      saved.on = want;
       save();
     };
     function build() {
@@ -824,7 +831,6 @@
     window.addEventListener("pagehide", remember);
     /* Where the song left off, in case the visitor changes page. */
     tick = setInterval(function () { if (want) remember(); }, 3000);
-    if (saved.on) set(true);
   }
 
   /* ---------- 10. go ---------- */
