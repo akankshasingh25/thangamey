@@ -740,10 +740,12 @@
   /* ---------- 9b. our song ----------
      A sound-wave button beside the name. Nothing from YouTube is loaded
      until it is pressed. The player is YouTube's own embed, kept out of
-     sight, and loops. It never starts by itself, not even on the next
-     page after someone was listening: every page begins silent. What is
-     remembered for the visit is the place in the song, so pressing play
-     on another page carries on from there rather than from the top. */
+     sight, and plays once through: it doesn't loop, and it never starts on
+     a first visit until someone presses it. Pages are separate loads, so
+     while it is playing the choice and the place in the song are
+     remembered for the visit, and the next page carries on from there. If
+     the browser refuses to start sound by itself the button just shows
+     "off" and one press resumes it. When the song ends, that's it. */
   function music() {
     var m = C.music || {};
     var head = qs(".site-head__in");
@@ -781,8 +783,12 @@
     var player = null, ready = false, want = false, tick = null;
     var remember = function () {
       if (player && ready && player.getCurrentTime) {
-        try { saved.t = Math.floor(player.getCurrentTime()); } catch (e) {}
+        try {
+          saved.t = player.getPlayerState() === window.YT.PlayerState.ENDED
+            ? 0 : Math.floor(player.getCurrentTime());
+        } catch (e) {}
       }
+      saved.on = want;
       save();
     };
     function build() {
@@ -796,13 +802,19 @@
         player = new window.YT.Player(slot, {
           host: "https://www.youtube-nocookie.com",
           videoId: id, width: 200, height: 200,
-          playerVars: { playsinline: 1, loop: 1, playlist: id, rel: 0, controls: 0,
+          playerVars: { playsinline: 1, rel: 0, controls: 0,
                         disablekb: 1, start: saved.t || 0 },
           events: {
             onReady: function () { ready = true; if (want) player.playVideo(); },
             onStateChange: function (e) {
               var S = window.YT.PlayerState;
               if (e.data === S.PLAYING) { paint(true); }
+              /* Played to the end: switch off, and a later press starts
+                 it again from the top. */
+              else if (e.data === S.ENDED) {
+                want = false; paint(false);
+                saved.t = 0; saved.on = false; save();
+              }
               else if (e.data === S.PAUSED || e.data === S.CUED || e.data === S.UNSTARTED) {
                 if (!want) paint(false);
               }
@@ -823,7 +835,13 @@
     function set(on) {
       want = on;
       paint(on);
-      if (on) { build(); if (ready) player.playVideo(); }
+      if (on) {
+        build();
+        if (ready) {
+          if (player.getPlayerState() === window.YT.PlayerState.ENDED) player.seekTo(0, true);
+          player.playVideo();
+        }
+      }
       else if (ready) player.pauseVideo();
       remember();
     }
@@ -831,6 +849,7 @@
     window.addEventListener("pagehide", remember);
     /* Where the song left off, in case the visitor changes page. */
     tick = setInterval(function () { if (want) remember(); }, 3000);
+    if (saved.on) set(true);
   }
 
   /* ---------- 10. go ---------- */
