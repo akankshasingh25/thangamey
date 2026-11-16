@@ -30,13 +30,14 @@
     return n;
   }
 
-  /* A link out of config, or "" while it is still in «guillemets». Every
-     hand-off to Google goes through here, so a form you haven't made yet
-     never turns into a dead button. */
-  function cfgLink(path) {
-    var v = String(dig(path) || "");
-    return v && v.indexOf("«") < 0 ? v : "";
+  /* A value that is really filled in, or "" while it is still in
+     «guillemets». Every link goes through here, so a form or sheet you
+     haven't made yet never turns into a dead button. */
+  function filled(v) {
+    v = String(v || "");
+    return v.indexOf("\u00ab") < 0 ? v : "";
   }
+  function cfgLink(path) { return filled(dig(path)); }
 
   /* ---------- 1. config binding ----------
      <span data-cfg="couple.one"></span>  → Akanksha */
@@ -62,9 +63,9 @@
     });
   }
 
-  /* The artwork does the job the generated skies used to do: a soft,
-     scaled-up copy sits behind the words for colour, and a crisp copy
-     of the same file is shown whole as a postcard. One download, twice. */
+  /* A soft, scaled-up copy of the artwork sits behind the words for colour,
+     and a crisp copy of the same file is shown whole as a postcard. One
+     download, used twice. */
   function backdrop(src, alt) {
     return '<img class="sky__art" src="' + esc(src) + '" alt="' + (alt || "") +
            '" aria-hidden="true" loading="lazy" decoding="async">';
@@ -137,9 +138,8 @@
 
   /* ---------- 2. nav ---------- */
   function markNav() {
-    /* Cloudflare Pages serves /events for events.html, and some hosts add a
-       trailing slash. Compare both sides stripped down to a bare name, or
-       the "you are here" marker never fires once it's deployed. */
+    /* Compare both sides stripped down to a bare name, so /events,
+       /events.html and a trailing slash all count as the same page. */
     function bare(u) {
       var v = String(u || "").split(/[?#]/)[0];
       /* A path ending in "/" is a directory index — "/thangamey/" on a
@@ -197,8 +197,8 @@
      nothing, so this is safe to leave switched on for all four. */
   function evSheet(e) {
     var s = e.sheet || {};
-    var url = String(s.url || "");
-    if (!url || url.indexOf("\u00ab") > -1) return "";
+    var url = filled(s.url);
+    if (!url) return "";
     return '<div class="ev-sheet">' +
       (s.heading ? "<h3>" + todo(s.heading) + "</h3>" : "") +
       (s.text ? "<p>" + todo(s.text) + "</p>" : "") +
@@ -246,7 +246,7 @@
               "<div><dt>When</dt><dd>" + esc(e.day) + ", " + esc(e.date) +
                 "<br>" + esc(e.time) + "</dd></div>" +
               "<div><dt>Where</dt><dd>" + esc(e.venue) +
-                (e.mapUrl && e.mapUrl.indexOf("\u00ab") < 0
+                (filled(e.mapUrl)
                   ? '<br><a href="' + esc(e.mapUrl) + '" rel="noopener">Open in Maps</a>' : "") +
               "</dd></div>" +
               "<div><dt>" + dressLabel() + "</dt><dd>" + esc(e.dress) + "</dd></div>" +
@@ -284,8 +284,7 @@
       }).join("");
     }
 
-    var sheetUrl = String(G.sheetUrl || "");
-    var haveSheet = !!sheetUrl && sheetUrl.indexOf("\u00ab") < 0;
+    var sheetUrl = filled(G.sheetUrl);
 
     var list = qs("#gift-list");
     if (list) {
@@ -302,8 +301,8 @@
 
     var sheet = qs("#gift-sheet");
     if (sheet) {
-      sheet.hidden = !haveSheet;
-      if (haveSheet) sheet.href = sheetUrl;
+      sheet.hidden = !sheetUrl;
+      if (sheetUrl) sheet.href = sheetUrl;
     }
   }
 
@@ -323,7 +322,7 @@
     var hotels = qs("#hotel-grid");
     if (hotels && t.hotels) {
       hotels.innerHTML = t.hotels.map(function (h) {
-        var link = h.url && h.url.indexOf("«") < 0
+        var link = filled(h.url)
           ? '<p><a href="' + esc(h.url) + '" rel="noopener">Map Location</a></p>' : "";
         return '<div class="card"><h3>' + todo(h.name) + "</h3>" +
           "<p>" + todo(h.note) + "</p>" + link + "</div>";
@@ -332,7 +331,7 @@
   }
 
   /* ---------- 6b. the short version ---------- */
-  /* Three cards under the hero that jump straight to the things we actually
+  /* The cards under the hero that jump straight to the things we actually
      need from people. Every link already exists somewhere else on the site;
      this just saves a guest the scroll. */
   function quick() {
@@ -352,12 +351,11 @@
         /* By slug, not by position — reordering the events mustn't quietly
            point this at the wrong party. */
         var ev = (C.events || []).filter(function (e) { return slugOf(e) === it.event; })[0];
-        var raw = String((ev && ev.sheet && ev.sheet.url) || "");
-        if (raw && raw.indexOf("\u00ab") < 0) url = raw;
+        url = filled(ev && ev.sheet && ev.sheet.url);
       } else if (it.from) {
         url = cfgLink(it.from);
-      } else if (it.url && String(it.url).indexOf("\u00ab") < 0) {
-        url = String(it.url);
+      } else {
+        url = filled(it.url);
       }
       if (!url && !dead) return "";          /* no link yet: leave it out */
       var inside =
@@ -396,7 +394,7 @@
     if (!box) return;
 
     var shots = (((C.story || {}).photos) || []).filter(function (p) {
-      return p && p.src && p.src.indexOf("\u00ab") < 0;
+      return p && filled(p.src);
     });
     if (!shots.length) return;            /* stays hidden, text goes full width */
     box.hidden = false;
@@ -552,11 +550,9 @@
     }
 
     /* index.html carries the hero image statically so it loads first and
-       still shows without JavaScript. That used to mean editing media.cover
-       did nothing at all, so: if the config disagrees with the markup, the
-       config wins. */
-    /* #hero-cover, not .hero — 404.html is a hero too, and it has its own
-       painting. This used to overwrite it with the home page's cover. */
+       still shows without JavaScript; if media.cover disagrees with the
+       markup, the config wins. #hero-cover, not .hero, because 404.html is
+       a hero too and keeps its own painting. */
     if (M.cover) {
       var heroCard = qs("#hero-cover .postcard img");
       if (heroCard && heroCard.getAttribute("src") !== M.cover) heroCard.src = M.cover;
@@ -607,11 +603,11 @@
     return !isNaN(from) || !isNaN(till);
   }
 
-  /* The nav is plain HTML on every page, so the link is put in here — which
-     means it genuinely isn't in the page until the missions are on. */
+  /* The Missions link is added to every page's nav from here, so the label
+     lives in one place. It is there before the missions open too: the page
+     says "not yet", and a nav item that appears overnight is stranger
+     than one that waits. */
   function gamesNav() {
-    /* The link is always there. Before the window opens the page says so;
-       a nav item that appears overnight is stranger than one that waits. */
     var nav = qs(".nav");
     if (!nav || qs('.nav a[href^="missions.html"]')) return;
     var a = el("a", null, esc((C.games || {}).navLabel || "Missions"));
@@ -626,11 +622,7 @@
     var gate = qs("#game-gate");
     var on = gamesLive();
     game.hidden = !on;
-    if (gate) {
-      gate.hidden = on;
-      var when = qs("#game-open-label", gate);
-      if (when) when.innerHTML = todo((C.games || {}).openLabel || "");
-    }
+    if (gate) gate.hidden = on;
     missionBar(on);
     if (on && previewing() && !qs(".preview-flag", game)) {
       game.insertBefore(
@@ -673,7 +665,7 @@
       if (!m) return "";
       var url = cfgLink(i === 0 ? "collect.photos" : "collect.quiz");
       /* I Spy also hands over the shared photos folder, beside its form. */
-      var album = cfgLink("games." + (i === 0 ? "photos" : "quiz") + ".albumUrl");
+      var album = filled(m.albumUrl);
       return '<li class="card mission-card" id="' + (i === 0 ? "i-spy" : "recce-recce") + '">' +
         '<p class="card__meta">' + todo(m.eyebrow || ("Mission " + (i + 1))) + "</p>" +
         "<h2>" + todo(m.heading || "") + "</h2>" +
@@ -780,7 +772,7 @@
     var brand = qs(".brand", head);
     head.insertBefore(btn, brand ? brand.nextSibling : head.firstChild);
 
-    var player = null, ready = false, want = false, tick = null;
+    var player = null, ready = false, want = false;
     var remember = function () {
       if (player && ready && player.getCurrentTime) {
         try {
@@ -848,7 +840,7 @@
     btn.addEventListener("click", function () { set(!want); });
     window.addEventListener("pagehide", remember);
     /* Where the song left off, in case the visitor changes page. */
-    tick = setInterval(function () { if (want) remember(); }, 3000);
+    setInterval(function () { if (want) remember(); }, 3000);
     if (saved.on) set(true);
   }
 
@@ -860,9 +852,10 @@
     contacts();
     gamesNav();
     markNav();
-    /* After gamesNav and markNav: it measures the header once the Missions
-       link is in it, and scrolls the current page's link into view. */
     music();
+    /* After gamesNav, markNav and music: it measures the header once the
+       Missions link and the song button are in it, and scrolls the current
+       page's link into view. */
     chrome();
     countdown();
     eventPanels();

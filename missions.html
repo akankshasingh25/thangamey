@@ -31,11 +31,11 @@
 
 <main id="main">
   <!-- No painted band: the page opens on the bar naming the two missions,
-       which is all it gives away before the window opens. -->
+       which is all it gives away before the missions open. -->
   <h1 class="vh">Two Missions</h1>
 
   <!-- Written out here rather than built in JavaScript: the names are the
-       page's whole content before the window opens, and a bar that needs a
+       page's whole content before the missions open, and a bar that needs a
        script to say anything is an empty strip if that script is slow, stale
        or blocked. JS only turns them into links once the missions are open. -->
   <nav class="event-jump" id="mission-bar" aria-label="The two missions">
@@ -43,18 +43,19 @@
     <span data-mission="recce-recce">Recce Recce</span>
   </nav>
 
-  <!-- Before the window opens this is the whole page. See `games` in
+  <!-- Before the missions open this is the whole page. See `games` in
        data/config.js. -->
   <section class="section shell" id="game-gate" hidden>
     <div class="callout">
-      <p><strong>No, not yet.</strong> </p>
+      <p><strong>No, not yet.</strong></p>
       <p>That is all you get for now. Go and <a href="travel.html#plans">tell us your
       plans</a> instead.</p>
     </div>
   </section>
 
-  <!-- Open only inside the window. Each mission is one Google Form, so the
-       page's job is to name it and hand over the link. -->
+  <!-- Shown from the moment the missions open, and left up afterwards.
+       Each mission is one Google Form, so the page's job is to name it and
+       hand over the link. -->
   <div id="game" hidden>
     <section class="section shell">
       <p class="lede" id="missions-intro"></p>

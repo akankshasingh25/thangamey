@@ -284,7 +284,7 @@ window.WEDDING = {
 
     closing:
       "However you do it, update the sheet with your name, your group you'd pool to gift or WhatsApp DM us so we can keep the list updated. " +
-      "And if you'd rather do none of this and gift something else or not at all, that is absoluetely okay too.",
+      "And if you'd rather do none of this and gift something else or not at all, that is absolutely okay too.",
   },
 
   /* ---------- MISSIONS ----------
@@ -298,14 +298,13 @@ window.WEDDING = {
     /* `live: true` forces them open and `live: false` forces them shut,
        whatever the dates say. Leave it out and the dates decide.         */
     liveFrom:  "2026-12-08T10:00:00+05:30",
-    openLabel: "Both missions open on 8 December 10 am and close at 10 December 10 am.",
-    closeLabel: "The couple makes the rules and their decision is binding." + " The winners will be announced on Akanksha's Instagram or DMed to you/your WhatsApp groups.",
+    closeLabel: "The couple makes the rules and their decision is binding. We will announce the winners, don't ask when. We will find you and give you your coveted prize.",
 
     navLabel: "Missions",
-    /* Only shown once the window is open — before that the page gives the
-       two names and the opening time and nothing else. */
+    /* Only shown once the missions are open — before that the page gives
+       the two names and "not yet", and nothing else. */
     intro:
-      "Both are open NOW. We didn't tell you this before but there are actual prizes for the winners.",
+      "Both are open NOW. We didn't tell you this before but there are actual prizes for the winners. Oops, we haven't decided the deadline yet.",
 
     photos: {
       eyebrow: "Mission 1",
@@ -327,7 +326,7 @@ window.WEDDING = {
       heading: "Recce Recce",
       openLabel: "Open Recce Recce",
       intro:
-        "Questions about the two of us. We surely won't keeping a count",
+        "Questions about the two of us. We surely won't be keeping a count",
     },
   },
 
