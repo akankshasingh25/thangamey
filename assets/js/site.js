@@ -671,7 +671,7 @@
     cards.innerHTML = [G.photos, G.quiz].map(function (m, i) {
       if (!m) return "";
       var url = cfgLink(i === 0 ? "collect.photos" : "collect.quiz");
-      return '<li class="card mission-card" id="' + (i === 0 ? "i-spy" : "gather-intel") + '">' +
+      return '<li class="card mission-card" id="' + (i === 0 ? "i-spy" : "recce-recce") + '">' +
         '<p class="card__meta">' + todo(m.eyebrow || ("Mission " + (i + 1))) + "</p>" +
         "<h2>" + todo(m.heading || "") + "</h2>" +
         (m.intro ? "<p>" + todo(m.intro) + "</p>" : "") +

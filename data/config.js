@@ -54,7 +54,7 @@ window.WEDDING = {
 
        itinerary   travel plans        (Travel & Stay)
        photos      mission one, I Spy
-       quiz        mission two, Gather Intel                                */
+       quiz        mission two, Recce Recce                                */
   collect: {
     itinerary: "https://forms.gle/oRqP1xSoYq6crHvU7",
     photos:    "https://forms.gle/LU5mbAN6VAecZZWn6",
@@ -303,7 +303,7 @@ window.WEDDING = {
     /* Only shown once the window is open — before that the page gives the
        two names and the opening time and nothing else. */
     intro:
-      "Both are open NOW. We didn't tell you this before but there is are actual prizes for the winners.",
+      "Both are open NOW. We didn't tell you this before but there are actual prizes for the winners.",
 
     photos: {
       eyebrow: "Mission 1",
@@ -321,8 +321,8 @@ window.WEDDING = {
 
     quiz: {
       eyebrow: "Mission 2",
-      heading: "Gather Intel",
-      openLabel: "Open Gather Intel",
+      heading: "Recce Recce",
+      openLabel: "Open Recce Recce",
       intro:
         "Questions about the two of us. You get your score when you send it, and so do we.",
     },
