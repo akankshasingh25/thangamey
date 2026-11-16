@@ -15,6 +15,16 @@ window.WEDDING = {
     tagline: "In the city of Lord Jagannath and by the coast of Puri. Two days, four parties. A respite from the cold.",
   },
 
+  /* ---------- OUR SONG ----------
+     The little sound-wave button beside the name in the header plays this
+     YouTube video, and only after someone presses it. Leave `youtubeId`
+     empty to remove the button.                                          */
+  music: {
+    youtubeId: "fv-4okrCbLA",
+    playLabel: "Play our song",
+    pauseLabel: "Pause our song",
+  },
+
   /* ---------- ARTWORK, LOGO, VIDEO ----------
      The paintings are your invitation. The photographs are what each one
      was painted from. Swap a path here and the whole site follows.       */

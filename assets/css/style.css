@@ -785,3 +785,23 @@ mark.todo{
    still have to look and behave like links before that happens. */
 [data-contact]{ cursor:pointer; overflow-wrap:anywhere; }
 .site-foot [data-contact]{ font-weight:600; }
+
+/* ---------- our song: the sound-wave button beside the name ---------- */
+.wave{
+  flex:none; display:inline-grid; place-items:center; width:2.15rem; height:2.15rem;
+  padding:0; border-radius:50%; cursor:pointer; color:var(--gold-deep);
+  background:color-mix(in srgb,var(--gold) 12%,transparent);
+  border:1px solid color-mix(in srgb,var(--gold) 38%,transparent);
+  transition:background .2s, box-shadow .2s;
+}
+.wave:hover{ background:color-mix(in srgb,var(--gold) 24%,transparent); }
+.wave:focus-visible{ outline:2px solid var(--gold-deep); outline-offset:2px; }
+.wave svg{ width:1.35rem; height:auto; display:block; }
+.wave__b{ fill:currentColor; transform-box:fill-box; transform-origin:center; }
+.wave.is-on{ box-shadow:0 0 0 3px color-mix(in srgb,var(--gold) 22%,transparent); }
+.wave.is-on .wave__b{ animation:wave 1s ease-in-out infinite alternate; animation-delay:calc(var(--i) * -.17s); }
+@keyframes wave{ from{ transform:scaleY(.45); } to{ transform:scaleY(1.45); } }
+@media (prefers-reduced-motion: reduce){ .wave.is-on .wave__b{ animation:none; } }
+/* The embed is YouTube's own player; it just isn't something to look at. */
+.wave__player{ position:fixed; left:-9999px; top:0; width:200px; height:200px; overflow:hidden; }
+@media print{ .wave{ display:none !important; } }

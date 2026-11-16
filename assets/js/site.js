@@ -729,6 +729,104 @@
     edges();
   }
 
+  /* ---------- 9b. our song ----------
+     A sound-wave button beside the name. Nothing from YouTube is loaded
+     until it is pressed. The player is YouTube's own embed, kept out of
+     sight, and loops. Pages are separate loads, so the choice (and the
+     place in the song) is remembered for the visit and picked up again on
+     the next page; if the browser refuses to start sound by itself the
+     button simply shows "off" and one press resumes it. */
+  function music() {
+    var m = C.music || {};
+    var head = qs(".site-head__in");
+    var id = String(m.youtubeId || "");
+    if (!head || !/^[\w-]{6,20}$/.test(id)) return;
+
+    var KEY = "song";
+    var saved = {};
+    try { saved = JSON.parse(sessionStorage.getItem(KEY) || "{}"); } catch (e) {}
+    var save = function () {
+      try { sessionStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    };
+
+    var bars = [0.18, 0.3, 0.46, 0.7, 1, 0.7, 0.46, 0.3, 0.18];
+    var svg = '<svg viewBox="0 0 36 24" aria-hidden="true" focusable="false">' +
+      bars.map(function (h, i) {
+        var ht = Math.max(3, Math.round(h * 20)), x = 2 + i * 3.8;
+        return '<rect class="wave__b" style="--i:' + i + '" x="' + x.toFixed(1) +
+          '" y="' + (12 - ht / 2) + '" width="2.4" height="' + ht + '" rx="1.2"/>';
+      }).join("") + "</svg>";
+    var btn = el("button", "wave", svg);
+    btn.type = "button";
+    btn.setAttribute("aria-pressed", "false");
+    var paint = function (on) {
+      btn.classList.toggle("is-on", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+      var label = on ? (m.pauseLabel || "Pause our song") : (m.playLabel || "Play our song");
+      btn.setAttribute("aria-label", label);
+      btn.title = label;
+    };
+    paint(false);
+    var brand = qs(".brand", head);
+    head.insertBefore(btn, brand ? brand.nextSibling : head.firstChild);
+
+    var player = null, ready = false, want = false, tick = null;
+    var remember = function () {
+      if (player && ready && player.getCurrentTime) {
+        try { saved.t = Math.floor(player.getCurrentTime()); } catch (e) {}
+      }
+      saved.on = want;
+      save();
+    };
+    function build() {
+      if (player) return;
+      var hold = el("div", "wave__player");
+      hold.setAttribute("aria-hidden", "true");
+      var slot = el("div");
+      hold.appendChild(slot);
+      document.body.appendChild(hold);
+      var make = function () {
+        player = new window.YT.Player(slot, {
+          host: "https://www.youtube-nocookie.com",
+          videoId: id, width: 200, height: 200,
+          playerVars: { playsinline: 1, loop: 1, playlist: id, rel: 0, controls: 0,
+                        disablekb: 1, start: saved.t || 0 },
+          events: {
+            onReady: function () { ready = true; if (want) player.playVideo(); },
+            onStateChange: function (e) {
+              var S = window.YT.PlayerState;
+              if (e.data === S.PLAYING) { paint(true); }
+              else if (e.data === S.PAUSED || e.data === S.CUED || e.data === S.UNSTARTED) {
+                if (!want) paint(false);
+              }
+            },
+            onAutoplayBlocked: function () { want = false; paint(false); remember(); },
+            onError: function () { want = false; paint(false); },
+          },
+        });
+      };
+      if (window.YT && window.YT.Player) { make(); return; }
+      var prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = function () { if (prev) prev(); make(); };
+      var s = document.createElement("script");
+      s.src = "https://www.youtube.com/iframe_api";
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    function set(on) {
+      want = on;
+      paint(on);
+      if (on) { build(); if (ready) player.playVideo(); }
+      else if (ready) player.pauseVideo();
+      remember();
+    }
+    btn.addEventListener("click", function () { set(!want); });
+    window.addEventListener("pagehide", remember);
+    /* Where the song left off, in case the visitor changes page. */
+    tick = setInterval(function () { if (want) remember(); }, 3000);
+    if (saved.on) set(true);
+  }
+
   /* ---------- 10. go ---------- */
   function init() {
     document.title = (document.title ? document.title + " · " : "") +
@@ -739,6 +837,7 @@
     markNav();
     /* After gamesNav and markNav: it measures the header once the Missions
        link is in it, and scrolls the current page's link into view. */
+    music();
     chrome();
     countdown();
     eventPanels();
