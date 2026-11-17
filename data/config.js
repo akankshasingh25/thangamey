@@ -276,10 +276,7 @@ window.WEDDING = {
       { name: "Gift Card", brand: "Crossword",
         note: "Home decor." },
       { name: "Gift Card", brand: "Nike",
-        note: "Second only to Samosa for Prateek." },
-      { name: "Annual Membership", brand: "Spotify" },
-      { name: "Premium Subscription", brand: "YouTube" },
-      { name: "Subscription", brand: "Netflix" },
+        note: "Second only to Samosa for Prateek." }
     ],
 
     closing:
@@ -326,7 +323,7 @@ window.WEDDING = {
       heading: "Recce Recce",
       openLabel: "Open Recce Recce",
       intro:
-        "Questions about the two of us. We surely won't be keeping a count",
+        "Questions about the two of us. We surely won't be keeping a count.",
     },
   },
 
